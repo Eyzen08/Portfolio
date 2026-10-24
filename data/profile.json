@@ -1,0 +1,256 @@
+{
+  "name": "EJ Christian Medilo",
+  "shortName": "EJ Medilo",
+  "role": "Software Developer",
+  "location": "Taguig City, Philippines",
+  "email": "ejchristianmedilo12@gmail.com",
+  "github": "Eyzen08",
+  "aboutSummary": "I’m EJ Christian Medilo, a software developer and BSIT student at STI College Global City. I enjoy turning ideas into practical software systems that solve real problems.",
+  "aiApproach": "I use AI tools to support planning, development, and problem-solving. Building systems with AI assistance helps me explore approaches, understand unfamiliar concepts, and learn throughout the development process.",
+  "aiLearning": "I’m currently studying AI Engineering to strengthen my technical foundation and learn how to apply AI effectively in useful software.",
+  "intro": "I build full-stack web and native Android applications, connecting clear interfaces, reliable APIs, and data. I’m continuing to grow as a software developer and explore AI engineering.",
+  "summary": "Software Developer and BSIT student at STI College Global City, with hands-on experience in frontend and backend development, REST API integration, database management, and application security. I build practical web and Android applications while continuing to develop my software engineering skills and explore AI engineering.",
+  "goal": "I’m strengthening my full-stack development practice: designing clear interfaces, building reliable APIs, and deploying applications that solve practical problems. I’m also exploring how AI can support useful software experiences.",
+  "interests": "I’m interested in AI and emerging technologies: discovering new tools, experimenting with AI-assisted development, and understanding how technology can improve software and user experiences.",
+  "hobbies": "Outside development, I enjoy online games, movies, and anime. Gaming gives me a mix of competitive and collaborative experiences; movies and anime let me explore different stories, characters, and creative worlds.",
+  "workWithMe": "I’m open to software development opportunities and collaboration on practical web and Android projects. I enjoy working with other developers, learning through real problems, and exploring emerging technology.",
+  "portrait": "/assets/personal/ej-portrait.webp",
+  "resumePdf": "/assets/resume/ej-christian-medilo-resume.pdf",
+  "contentApproved": true,
+  "contactVerified": true,
+  "formspree": "https://formspree.io/f/xnjekjdq",
+  "socials": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/Eyzen08"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ej-christian-medilo-a09049426/"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://www.instagram.com/ej.eyzen/"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/share/19J8Z4wfW6/?mibextid=wwXIfr"
+    }
+  ],
+  "strengths": [
+    {
+      "title": "Ownership",
+      "text": "Led full-stack system development for STI Vio-Log within a team capstone."
+    },
+    {
+      "title": "Collaboration",
+      "text": "Led development in academic teams while distinguishing engineering responsibilities from the wider team’s work."
+    },
+    {
+      "title": "Problem Solving",
+      "text": "Worked across interfaces, APIs, data, and application workflows rather than stopping at a single screen."
+    }
+  ],
+  "experience": [
+    {
+      "title": "NSTP OJT Trainee — Admission Office",
+      "organization": "Moreh Academy",
+      "period": "2024",
+      "location": "Upper Bicutan, Taguig City",
+      "bullets": [
+        "Completed 54 hours of NSTP on-the-job training in the Admission Office, assisting school personnel with administrative tasks and day-to-day operations.",
+        "Provided basic technical assistance and coordinated equipment preparation with staff for school and office activities."
+      ]
+    },
+    {
+      "title": "Work Immersion Trainee",
+      "organization": "BCiS Power Technologies Corp.",
+      "period": "2023",
+      "location": "South Cembo, Makati City",
+      "bullets": [
+        "Completed 80 hours of Work Immersion, performing administrative and routine IT-support tasks to maintain organized office operations.",
+        "Collaborated with supervisors on technical requests and daily responsibilities, supporting timely completion of assigned work and team coordination."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "BS in Information Technology (BSIT)",
+      "organization": "STI College Global City",
+      "period": "2023–Present",
+      "preview": {
+        "src": "/assets/education/sti-global-city.jpg",
+        "width": 1200,
+        "height": 825,
+        "alt": "STI College Global City Academic Center campus building",
+        "sourceUrl": "https://www.sti.edu/campuses-details.asp?campus_id=R0xP",
+        "credit": "STI College · official Global City campus photograph",
+        "description": "Official STI College Global City campus photograph."
+      }
+    },
+    {
+      "title": "ICT Strand, Senior High School",
+      "organization": "Moreh Academy",
+      "period": "2021–2023"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Code to Success: Mastering Software Development Cycle for IS Professionals",
+      "organization": "JPCS Clarendon College",
+      "period": "2026",
+      "preview": {
+        "src": "/assets/certifications/code-to-success.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Code to Success: Mastering Software Development Cycle for IS Professionals certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/code-to-success.jpg"
+    },
+    {
+      "title": "Introduction to Modern AI",
+      "organization": "Cisco Networking Academy",
+      "period": "2026"
+    },
+    {
+      "title": "Cyber Threat Management",
+      "organization": "Cisco Networking Academy",
+      "period": "2026",
+      "preview": {
+        "src": "/assets/certifications/cyber-threat-management.webp",
+        "width": 1100,
+        "height": 850,
+        "alt": "Cyber Threat Management certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/cyber-threat-management.pdf"
+    },
+    {
+      "title": "Cybersecurity Quality Assurance: Detect, Test, Secure",
+      "organization": "Ethel Programming Computer Programming Services",
+      "period": "2026",
+      "preview": {
+        "src": "/assets/certifications/cybersecurity-quality-assurance.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Cybersecurity Quality Assurance: Detect, Test, Secure certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/cybersecurity-quality-assurance.png"
+    },
+    {
+      "title": "LEGO Educational Robotics and Computer Technical Training",
+      "organization": "University of the East Manila",
+      "period": "2018",
+      "preview": {
+        "src": "/assets/certifications/lego-robotics-training.webp",
+        "width": 1100,
+        "height": 871,
+        "alt": "LEGO Educational Robotics and Computer Technical Training certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/lego-robotics-training.jpg"
+    }
+  ],
+  "hobbyCards": [
+    {
+      "id": "naruto",
+      "label": "Naruto / Naruto Uzumaki",
+      "category": "Anime",
+      "description": "Naruto Uzumaki is my favorite anime character.",
+      "src": "/assets/hobbies/naruto.webp",
+      "width": 454,
+      "height": 640,
+      "alt": "Naruto Uzumaki with Team 7 in official Naruto promotional artwork",
+      "credit": "NARUTO official site · Masashi Kishimoto / Shueisha / TV Tokyo / Pierrot",
+      "sourceUrl": "https://naruto-official.com/en/anime/naruto1"
+    },
+    {
+      "id": "mlbb",
+      "label": "Mobile Legends: Bang Bang",
+      "category": "Mobile Gaming",
+      "description": "Mobile gaming is one of the ways I unwind.",
+      "src": "/assets/hobbies/mlbb.webp",
+      "width": 480,
+      "height": 252,
+      "alt": "Mobile Legends: Bang Bang official gold emblem on a blue background",
+      "credit": "MOONTON · Mobile Legends: Bang Bang",
+      "sourceUrl": "https://www.mobilelegends.com/gallery"
+    },
+    {
+      "id": "valorant",
+      "label": "Valorant",
+      "category": "PC Gaming",
+      "description": "Competitive PC gaming, teamwork, and a change of pace.",
+      "src": "/assets/hobbies/valorant.webp",
+      "width": 480,
+      "height": 270,
+      "alt": "Official Valorant promotional wallpaper featuring an agent",
+      "credit": "Riot Games · VALORANT media",
+      "sourceUrl": "https://playvalorant.com/en-us/media/"
+    },
+    {
+      "id": "spiderman",
+      "label": "Spider-Man",
+      "category": "Movies",
+      "description": "I enjoy Spider-Man and the stories around the character.",
+      "src": "/assets/hobbies/spiderman.webp",
+      "width": 427,
+      "height": 640,
+      "alt": "Official Spider-Man theatrical poster featuring Spider-Man",
+      "credit": "Sony Pictures / Marvel · representative franchise artwork",
+      "sourceUrl": "https://www.sonypictures.com/movies/spiderman"
+    },
+    {
+      "id": "thrillers",
+      "label": "Thrillers",
+      "category": "Movie Genre",
+      "description": "Suspense, mystery, and stories that keep me guessing.",
+      "src": "/assets/hobbies/thrillers.webp",
+      "width": 467,
+      "height": 640,
+      "alt": "Illustrative thriller artwork: The Lodger 1927 theatrical poster",
+      "credit": "E. McKnight Kauffer · public domain via Wikimedia Commons; genre illustration, not a claimed favorite film",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Lodger_(1927_film_poster).jpg"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "portrait",
+      "label": "EJ Christian Medilo",
+      "description": "My portrait, wearing a cap and black hoodie.",
+      "src": "/assets/personal/ej-portrait.webp",
+      "width": 800,
+      "height": 1067,
+      "alt": "EJ Christian Medilo wearing a cap and black hoodie",
+      "credit": "Personal photograph supplied by EJ Christian Medilo"
+    }
+  ],
+  "aiTools": [
+    {
+      "name": "Google Gemini",
+      "logo": "/assets/icons/gemini.svg",
+      "category": "AI Research and Technical Learning",
+      "description": "I use Gemini to explore technical concepts, research potential solutions, learn new technologies, and generate ideas for development tasks."
+    },
+    {
+      "name": "ChatGPT",
+      "logo": "/assets/icons/chatgpt.svg",
+      "category": "Development Planning and Technical Assistance",
+      "description": "I use ChatGPT to plan features, understand code, troubleshoot issues, organize documentation, and evaluate different implementation approaches."
+    },
+    {
+      "name": "OpenAI Codex",
+      "logo": "/assets/icons/codex.png",
+      "category": "AI-Assisted Coding and Development",
+      "description": "I use Codex to assist with repository analysis, code implementation, debugging, reviewing changes, and development workflows."
+    },
+    {
+      "name": "Claude",
+      "logo": "/assets/icons/claude.svg",
+      "category": "Code Analysis and Technical Reasoning",
+      "description": "I use Claude to analyze code, explore alternative solutions, reason through technical problems, and assist with documentation."
+    }
+  ]
+}

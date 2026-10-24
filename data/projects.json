@@ -1,0 +1,444 @@
+[
+  {
+    "id": "sti-vio-log",
+    "title": "STI Vio-Log",
+    "platform": "Web",
+    "year": 2026,
+    "summary": "A student discipline system for managing violations, community service, QR attendance, and clearance.",
+    "role": "Sole System Developer · Full-Stack Lead",
+    "roleDetail": "A team capstone project for the Discipline Office at STI College Global City, where I was the sole system developer and full-stack lead.",
+    "sourceUrl": "https://github.com/Eyzen08/STI-Vio-Log",
+    "liveUrl": "https://sti-vio-log.vercel.app",
+    "status": "Live web platform",
+    "technologies": [
+      "javascript",
+      "react",
+      "vite",
+      "nodejs",
+      "express",
+      "postgresql",
+      "supabase",
+      "socketio",
+      "git"
+    ],
+    "sections": [
+      {
+        "id": "context",
+        "title": "One Connected Disciplinary Workflow",
+        "paragraphs": [
+          "STI Vio-Log brings the student discipline workflow into a shared application for the Discipline Office at STI College Global City. A case can involve a violation record, an assigned service requirement, supervised attendance, hour calculations, communication, and a clearance decision. Keeping these steps connected gives each record a traceable path through the process.",
+          "The application provides separate views for students, Department Accounts, Discipline Office staff, and Discipline Administrators. The intended benefit is clearer record access and coordination; the repository does not establish a measured reduction in processing time or institutional adoption."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "contribution",
+        "title": "My Contribution",
+        "paragraphs": [
+          "I was the sole system developer within the capstone team and led the full-stack implementation. That responsibility covered connecting the React interface, Express API, PostgreSQL data model, authentication, permissions, and deployment configuration into one system.",
+          "The scope includes attendance rules, student self-service, staff operations, reports, and audit history, with frontend and backend access boundaries."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "features",
+        "title": "From a Violation to Clearance",
+        "paragraphs": [
+          "The core workflow has four connected stages. Staff manage cases and service requirements; authorized supervisors record attendance; students can review their own history and progress."
+        ],
+        "bullets": [
+          "01 · Record the violation: authorized discipline staff create and manage a student's case and its lifecycle.",
+          "02 · Assign community service: staff connect the case to a service requirement and responsible department.",
+          "03 · Scan and credit attendance: an authorized supervisor uses QR Time In and Time Out; the server calculates eligible service credit.",
+          "04 · Review DTR and clearance: recorded attendance and credited hours feed the daily time record, while staff manage clearance decisions and certificates."
+        ]
+      },
+      {
+        "id": "supporting-features",
+        "title": "Tools around the Core Workflow",
+        "paragraphs": [
+          "Student views include their profile, QR code, violations, attendance, messages, notifications, and clearance history. Staff tools include student provisioning, guardian-contact logs, reporting, and reasoned corrections to service credit. Logging a guardian-contact attempt records a manual action; it does not send an SMS.",
+          "Certificates use electronic signature images and retain a PDF snapshot. Public verification reports the recorded certificate status. These are application records, without a claim of cryptographic PDF signing."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "architecture",
+        "title": "Browser, API, Database",
+        "paragraphs": [
+          "React and Vite serve the interface on Vercel. A same-origin proxy forwards API requests to Express on Render, which validates the request and queries Supabase PostgreSQL through the pg driver. Supabase is the database host; the application does not use Supabase Auth, Storage, or Realtime.",
+          "Authentication uses opaque cookie sessions. The API checks current permissions, ownership, and department scope. Authenticated Socket.IO signals tell clients to refresh authoritative REST data; production uses HTTP polling through the proxy. Google identity verification and Brevo email are separate integrations."
+        ],
+        "bullets": [
+          "Interface · React, Vite, custom CSS, browser routing, and native fetch.",
+          "Application · Express routes, authorization, controllers, services, and scoped refresh events.",
+          "Persistence · PostgreSQL queries, transactions, schema migrations, and audit records."
+        ]
+      },
+      {
+        "id": "process",
+        "title": "Implementation Map",
+        "paragraphs": [
+          "These stages map implementation dependencies as a conceptual build sequence; historical milestone dates are not documented."
+        ],
+        "bullets": [
+          "Foundation · Define accounts, roles, student records, and the case and assignment data model.",
+          "Workflow · Connect case management, QR attendance, server timing, service credit, and DTR views.",
+          "Coordination · Add messages, notifications, corrections, reports, and clearance records around the shared workflow.",
+          "Operations · Maintain migrations, automated checks, production configuration, release checks, and acceptance documentation."
+        ]
+      },
+      {
+        "id": "challenges",
+        "title": "Time and Permissions Must Agree",
+        "paragraphs": [
+          "Attendance is a shared state problem: simultaneous scans, changing assignments, remaining hours, and day boundaries can affect the same student. The implementation uses server timestamps, transaction checks, and one active attendance session per student. Credit is capped by the remaining requirement, a daily allowance, and the session cutoff.",
+          "Corrections preserve attendance and append a separate reasoned adjustment. Department Accounts receive scoped operational access, while private guardian details and clearance controls remain restricted. These rules keep displayed progress tied to authorized, recorded actions."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "testing",
+        "title": "Documented Verification",
+        "paragraphs": [
+          "The repository's October 10, 2026 testing record reports passing backend and frontend suites, frontend lint, a production build, and an asset budget check. A disposable PostgreSQL run passed 48 of 49 tests; the remaining failure is documented as a stale migration-list expectation.",
+          "Those results are recorded project evidence, not application tests rerun for this portfolio. They cover bounded logic and integration scenarios. Physical cameras, full authenticated production journeys, load testing, email delivery, and recovery exercises remain separate checks."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "deployment",
+        "title": "Deployment and Handover",
+        "paragraphs": [
+          "The production guide records a Vercel frontend, Render API, and Supabase database release verified on October 13, 2026. Public route, health, proxy, and unauthenticated access checks are documented. The guide also records an unresolved automatic Vercel Git deployment path and missing isolated preview services.",
+          "A reachable deployment is one part of handover. Authenticated role acceptance, identity and email completion, camera behavior, and backup restoration still need controlled verification. Institutional approval and acceptance are not claimed by the case study."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "outcomes",
+        "title": "What the Project Demonstrates",
+        "paragraphs": [
+          "The source demonstrates a connected full-stack workflow spanning records, supervised service, attendance credit, communication, and clearance. Public documentation distinguishes implementation, recorded tests, and remaining acceptance work. Measured user outcomes are not established."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "takeaways",
+        "title": "Design Takeaways",
+        "paragraphs": [
+          "The central lesson is to keep business rules authoritative on the server and carry permissions through every layer. For a record-based system, preserving why a value changed matters alongside the value itself. Release evidence and acceptance evidence also need distinct, explicit records."
+        ],
+        "bullets": []
+      }
+    ],
+    "cardTechnologies": [
+      "react",
+      "nodejs",
+      "express",
+      "postgresql",
+      "socketio"
+    ],
+    "previewScreens": [
+      {
+        "id": "dashboard",
+        "label": "Dashboard",
+        "src": "/assets/projects/sti-vio-log-dashboard.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-dashboard-small.webp",
+        "smallWidth": 960,
+        "width": 1905,
+        "height": 994,
+        "kind": "desktop",
+        "deviceFrame": false,
+        "alt": "STI Vio-Log Discipline Office dashboard showing attendance, service progress, and case summaries.",
+        "caption": "Supplied application screenshot · identifying details redacted.",
+        "explanation": "Discipline Office dashboard showing attendance, service progress, and case summaries."
+      },
+      {
+        "id": "attendance",
+        "label": "QR Attendance",
+        "src": "/assets/projects/sti-vio-log-attendance.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-attendance-small.webp",
+        "smallWidth": 960,
+        "width": 1919,
+        "height": 994,
+        "kind": "desktop",
+        "deviceFrame": false,
+        "alt": "STI Vio-Log QR scanning and student verification interface before a code is entered.",
+        "caption": "Supplied application screenshot · identifying details redacted.",
+        "explanation": "QR scanning and student verification interface before a code is entered."
+      },
+      {
+        "id": "student",
+        "label": "Student Portal",
+        "src": "/assets/projects/sti-vio-log-student-cropped.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-student-cropped.webp",
+        "smallWidth": 398,
+        "width": 398,
+        "height": 847,
+        "kind": "mobile",
+        "deviceFrame": true,
+        "alt": "STI Vio-Log mobile student portal showing attendance and service progress.",
+        "caption": "Supplied application screenshot · identifying details redacted.",
+        "explanation": "Mobile student portal showing attendance and service progress."
+      },
+      {
+        "id": "navigation",
+        "label": "Mobile Navigation",
+        "src": "/assets/projects/sti-vio-log-navigation-cropped.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-navigation-cropped.webp",
+        "smallWidth": 401,
+        "width": 401,
+        "height": 847,
+        "kind": "mobile",
+        "deviceFrame": true,
+        "alt": "STI Vio-Log mobile student navigation for service, QR, violations, clearance, and account options.",
+        "caption": "Supplied application screenshot · identifying details redacted.",
+        "explanation": "Mobile student navigation for service, QR, violations, clearance, and account options."
+      },
+      {
+        "id": "landing",
+        "label": "Landing Page",
+        "src": "/assets/projects/sti-vio-log-landing.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-landing-small.webp",
+        "smallWidth": 960,
+        "width": 1901,
+        "height": 992,
+        "kind": "desktop",
+        "deviceFrame": false,
+        "alt": "STI Vio-Log public landing page with an explicitly labeled sample-data portal preview.",
+        "caption": "Supplied application screenshot.",
+        "explanation": "Public landing page with an explicitly labeled sample-data portal preview."
+      },
+      {
+        "id": "signin",
+        "label": "Sign-In",
+        "src": "/assets/projects/sti-vio-log-signin.webp",
+        "srcSmall": "/assets/projects/sti-vio-log-signin-small.webp",
+        "smallWidth": 960,
+        "width": 1919,
+        "height": 994,
+        "kind": "desktop",
+        "deviceFrame": false,
+        "alt": "STI Vio-Log account sign-in page with populated account and credential areas hidden.",
+        "caption": "Supplied application screenshot · identifying details redacted.",
+        "explanation": "Account sign-in page with populated account and credential areas hidden."
+      }
+    ]
+  },
+  {
+    "id": "kwiztorya",
+    "title": "Kwiztorya",
+    "platform": "Mobile",
+    "year": 2025,
+    "summary": "An Android learning game that explores Philippine history through quizzes, stories, and saved progress.",
+    "role": "Lead Programmer · Android Development",
+    "roleDetail": "An application development research project at STI College Global City, where I served as lead programmer within a three-member team.",
+    "sourceUrl": "https://github.com/Eyzen08/Kwiztorya",
+    "liveUrl": null,
+    "status": "Academic Android project",
+    "technologies": [
+      "java",
+      "android",
+      "xml",
+      "firebase",
+      "sharedpreferences",
+      "gradle",
+      "git"
+    ],
+    "sections": [
+      {
+        "id": "context",
+        "title": "History through a Playable Sequence",
+        "paragraphs": [
+          "Kwiztorya is an educational Android project focused on Philippine history. It combines multiple-choice quizzes with story journeys so the player can move between answering questions, reading narrative content, and reviewing progress. The project explores how a small mobile game can organize learning content into approachable sessions.",
+          "The repository identifies three team developers. Its educational purpose is documented; learning improvement, student engagement, and classroom adoption have not been measured in the available material."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "contribution",
+        "title": "My Contribution",
+        "paragraphs": [
+          "I led building the Android application within the team. The scope connected quiz and story screens, navigation, score feedback, local progression, settings, and account screens. Java activities, XML layouts, Android resources, and the Gradle project show the resulting team implementation."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "features",
+        "title": "The Quiz Loop",
+        "paragraphs": [
+          "The player selects an available era, answers multiple-choice questions, and receives a result summary. Questions and choices are shuffled for each attempt. Correct answers update the score, with visual and sound feedback.",
+          "Results present the score, answer counts, percentage, and feedback, with options to replay or return to chapter selection. Passing an era unlocks the next through locally stored progress."
+        ],
+        "bullets": [
+          "Choose · Browse historical eras and see which are available or locked.",
+          "Answer · Work through questions with immediate feedback and score updates.",
+          "Review · Read the result, replay a quiz, or continue to another era."
+        ]
+      },
+      {
+        "id": "story-mode",
+        "title": "Story Journeys and Progression",
+        "paragraphs": [
+          "Story Mode presents a chapter's narrative alongside a question, then advances through the selected journey. The source defines journeys around pre-colonial history, Spanish and American colonial periods, Japanese occupation, and modern Philippines. Completion is stored locally and used to unlock later journeys.",
+          "The pre-colonial journey contains developed narratives. Several later journeys include placeholder chapters and sample questions. Completing and reviewing that content is a next step before presenting a complete history curriculum."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "supporting-features",
+        "title": "Feedback and Player Settings",
+        "paragraphs": [
+          "The home screen combines accumulated scores and completed eras into a rank, giving players a compact view of progress.",
+          "Settings independently control background music and sound effects, saved on the device. Activities pause and release background audio through lifecycle methods. Sign-up, login, and logout screens support the account interface, with locally remembered login state."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "architecture",
+        "title": "Native Android Structure",
+        "paragraphs": [
+          "Kwiztorya uses Java activities and XML layouts with the Android SDK, AndroidX, and Material components. Intents pass the selected era, chapter, score, and result data between screens. Quiz questions and story content are bundled in the Java source.",
+          "ProgressManager stores active quiz and story progression in SharedPreferences. The repository also contains a SQLite helper, but the current gameplay and chapter screens use ProgressManager. Firebase Realtime Database supports the custom account code; the project does not use Firebase Authentication."
+        ],
+        "bullets": [
+          "Interface · Java activities, XML layouts, drawable resources, and local audio.",
+          "Game flow · Question selection, scoring, result screens, and sequential unlocking.",
+          "State · SharedPreferences for active progress and settings; Firebase Realtime Database for account records."
+        ]
+      },
+      {
+        "id": "process",
+        "title": "Implementation Map",
+        "paragraphs": [
+          "Four connected areas structure the implementation."
+        ],
+        "bullets": [
+          "App structure · Establish Android activities, XML screens, resources, and navigation.",
+          "Quiz mechanics · Connect era selection, bundled questions, answer feedback, scoring, and results.",
+          "Progression · Save local completion, unlock eras and journeys, and display player progress.",
+          "Player experience · Connect story chapters, music and sound controls, and account screens."
+        ]
+      },
+      {
+        "id": "challenges",
+        "title": "State across Screens",
+        "paragraphs": [
+          "Selection, gameplay, results, and home need consistent state. Replays keep the selected era; completed quizzes update chapter availability; sound settings apply across screens. Shared progression and preference helpers give those screens common state.",
+          "Progress stays on the device; cloud synchronization is not established. Custom account handling needs production authentication hardening before real account use. The project remains an educational app prototype."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "testing",
+        "title": "What Is Verified in the Repository",
+        "paragraphs": [
+          "Gradle declares JUnit and Android instrumentation dependencies. Committed tests are an example arithmetic test and package-name check, leaving scoring, progression, story completion, audio, and accounts without established feature coverage.",
+          "Feature checks should cover the pass boundary, replay navigation, locked eras, saved progress, and activity transitions. An Android build and device test are needed to establish the complete runtime behavior."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "deployment",
+        "title": "Android Build and Distribution",
+        "paragraphs": [
+          "The repository contains a Gradle Android application configured with minimum SDK 26 and target SDK 36. It declares app version 1.0. Those settings describe the build target, not a verified release artifact.",
+          "No GitHub release or public store listing was established from the inspected repository. The case study links to the source project; a published mobile release is unverified."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "outcomes",
+        "title": "What the Project Demonstrates",
+        "paragraphs": [
+          "The source connects a native quiz loop, stories, local progression, score feedback, and audio settings. Content completion, account hardening, and feature tests remain follow-up work. Download totals and learning-effectiveness results are not established."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "takeaways",
+        "title": "Design Takeaways",
+        "paragraphs": [
+          "A learning game needs reviewed content and consistent state. Shared progress rules help screens agree about completion. The next iteration should test scoring and unlocking, then verify the full flow on Android devices."
+        ],
+        "bullets": []
+      }
+    ],
+    "cardTechnologies": [
+      "java",
+      "android",
+      "firebase",
+      "sharedpreferences"
+    ],
+    "previewScreens": [
+      {
+        "id": "home",
+        "label": "Home",
+        "src": "/assets/projects/kwiztorya-home-recreated.webp",
+        "srcSmall": "/assets/projects/kwiztorya-home-recreated-small.webp",
+        "smallWidth": 420,
+        "width": 840,
+        "height": 1718,
+        "kind": "mobile",
+        "deviceFrame": false,
+        "alt": "Recreated Kwiztorya Home screen with a single-line title, History Novice rank, zero score and four navigation buttons",
+        "caption": "Recreated from the supplied app photo. The title wrapping and clarity were corrected for presentation; this is not an unmodified device capture.",
+        "explanation": "The Home screen connects Play, Story Mode, Chapter Selection and Settings, with the demonstrated score of 0 and eras progress of 0/5.",
+        "originalSrc": "/assets/projects/kwiztorya-home-capture.webp",
+        "presentationLabel": "Recreated Preview"
+      },
+      {
+        "id": "quiz",
+        "label": "Quiz",
+        "src": "/assets/projects/kwiztorya-quiz-enhanced.webp",
+        "width": 840,
+        "height": 1717,
+        "alt": "Kwiztorya quiz showing a Philippine history question and four answer choices",
+        "caption": "Enhanced from the recorded device demo.",
+        "explanation": "Answer a multiple-choice history question, track the score, and move through the selected era.",
+        "originalSrc": "/assets/projects/kwiztorya-quiz.webp",
+        "srcSmall": "/assets/projects/kwiztorya-quiz-enhanced-small.webp",
+        "smallWidth": 420,
+        "kind": "mobile",
+        "deviceFrame": false,
+        "enhanced": true,
+        "presentationLabel": "Enhanced Preview"
+      },
+      {
+        "id": "eras",
+        "label": "Era Selection",
+        "src": "/assets/projects/kwiztorya-eras-enhanced.webp",
+        "width": 840,
+        "height": 1717,
+        "alt": "Kwiztorya era selection with Pre-Colonial available and later eras locked",
+        "caption": "Enhanced from the recorded device demo.",
+        "explanation": "Choose a historical era and see which chapters are available as locally saved progress unlocks later quizzes.",
+        "originalSrc": "/assets/projects/kwiztorya-eras.webp",
+        "srcSmall": "/assets/projects/kwiztorya-eras-enhanced-small.webp",
+        "smallWidth": 420,
+        "kind": "mobile",
+        "deviceFrame": false,
+        "enhanced": true,
+        "presentationLabel": "Enhanced Preview"
+      },
+      {
+        "id": "story",
+        "label": "Story Mode",
+        "src": "/assets/projects/kwiztorya-story-enhanced.webp",
+        "width": 840,
+        "height": 1718,
+        "alt": "Kwiztorya Story Mode showing the first two historical journeys and their progression controls",
+        "caption": "Enhanced from the recorded device demo.",
+        "explanation": "Follow narrative journeys with story-based questions. The demo also shows unfinished chapter-count placeholders in the interface.",
+        "originalSrc": "/assets/projects/kwiztorya-story.webp",
+        "srcSmall": "/assets/projects/kwiztorya-story-enhanced-small.webp",
+        "smallWidth": 420,
+        "kind": "mobile",
+        "deviceFrame": false,
+        "enhanced": true,
+        "presentationLabel": "Enhanced Preview"
+      }
+    ]
+  }
+]

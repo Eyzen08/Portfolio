@@ -1,0 +1,305 @@
+[
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "category": "Programming Languages",
+    "description": "Application logic in the web interface and Node API.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "category": "Programming Languages",
+    "description": "Native Android screens, quizzes, and progression logic.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "html5",
+    "name": "HTML",
+    "category": "Frontend",
+    "description": "Semantic, statically generated pages in this portfolio.",
+    "projects": [],
+    "label": "Used in this portfolio"
+  },
+  {
+    "id": "css3",
+    "name": "CSS",
+    "category": "Frontend",
+    "description": "Responsive layouts, themes, and motion without a UI framework.",
+    "projects": [],
+    "label": "Used in this portfolio"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "Frontend",
+    "description": "Component-based interfaces for the discipline workflow.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "vite",
+    "name": "Vite",
+    "category": "Frontend",
+    "description": "Development and production builds for the React client.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "Backend",
+    "description": "Server runtime for the API and application services.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "express",
+    "name": "Express",
+    "category": "Backend",
+    "description": "HTTP routes, validation, and scoped access to application data.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "postgresql",
+    "name": "PostgreSQL",
+    "category": "Databases",
+    "description": "Relational storage for records, attendance, and service workflows.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "category": "Databases",
+    "description": "Managed PostgreSQL hosting for STI Vio-Log.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "firebase",
+    "name": "Firebase Realtime Database",
+    "category": "Databases",
+    "description": "Cloud data used by Kwiztorya’s custom account flow.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "android",
+    "name": "Android",
+    "category": "Mobile Development",
+    "description": "Native Java/XML application screens and Android lifecycle behavior.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "androidstudio",
+    "name": "Android Studio",
+    "category": "Mobile Development",
+    "description": "Android development environment for Kwiztorya.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "gradle",
+    "name": "Gradle",
+    "category": "Tools and Workflow",
+    "description": "Android project builds and dependency configuration.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "Tools and Workflow",
+    "description": "Version history and development branches across both projects.",
+    "projects": [
+      "sti-vio-log",
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "Tools and Workflow",
+    "description": "Source repositories, documentation, and public project history.",
+    "projects": [
+      "sti-vio-log",
+      "kwiztorya"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "Deployment and DevOps",
+    "description": "Frontend deployment for STI Vio-Log.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "render",
+    "name": "Render",
+    "category": "Deployment and DevOps",
+    "description": "Hosting for the STI Vio-Log API.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "socketio",
+    "name": "Socket.IO",
+    "category": "Integrations",
+    "description": "Scoped real-time communication and updates in STI Vio-Log.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "monochrome": true
+  },
+  {
+    "id": "nodejs",
+    "name": "Node test runner",
+    "category": "Testing and QA",
+    "description": "Behavior checks for this portfolio’s build, filters, and GitHub endpoint.",
+    "projects": [],
+    "label": "Used in this portfolio"
+  },
+  {
+    "id": "sql",
+    "iconId": "database",
+    "name": "SQL",
+    "category": "Programming Languages",
+    "description": "Relational queries and data modelling with PostgreSQL.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "Programming Languages",
+    "description": "Additional programming language experience listed in my résumé.",
+    "projects": [],
+    "label": "Additional familiarity",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "category": "Programming Languages",
+    "description": "Additional programming language experience listed in my résumé.",
+    "projects": [],
+    "label": "Additional familiarity",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "category": "Programming Languages",
+    "description": "Additional programming language experience listed in my résumé.",
+    "projects": [],
+    "label": "Additional familiarity",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "sqlite",
+    "name": "SQLite",
+    "category": "Databases",
+    "description": "A local database helper exists in Kwiztorya’s source; active gameplay progress uses SharedPreferences.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Present in project source"
+  },
+  {
+    "id": "xml",
+    "iconId": "code",
+    "name": "XML",
+    "category": "Mobile Development",
+    "description": "Native Android layouts and application resources.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "sharedpreferences",
+    "iconId": "code",
+    "name": "SharedPreferences",
+    "category": "Mobile Development",
+    "description": "Local quiz progression, story completion, and settings.",
+    "projects": [
+      "kwiztorya"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "category": "Tools and Workflow",
+    "description": "Code editing and development tooling listed in my résumé.",
+    "projects": [],
+    "label": "Listed in my résumé",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "pdfkit",
+    "iconId": "document",
+    "name": "PDFKit",
+    "category": "Integrations",
+    "description": "PDF document and certificate generation in STI Vio-Log.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "exceljs",
+    "iconId": "document",
+    "name": "ExcelJS",
+    "category": "Integrations",
+    "description": "Spreadsheet reports and exports in STI Vio-Log.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project"
+  }
+]

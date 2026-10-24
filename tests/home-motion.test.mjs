@@ -1,0 +1,53 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { initHome } from '../assets/home.js';
+
+function element(textContent = '') {
+  return { dataset:{},hidden:false,textContent,scrollHeight:150,attributes:{},listeners:{},
+    style:{setProperty(){},removeProperty(){}},
+    setAttribute(key,value){this.attributes[key]=value;},
+    addEventListener(type,callback){this.listeners[type]=callback;},
+    contains(node){return node===this;},querySelector(){return null;},querySelectorAll(){return [];} };
+}
+
+test('Home without a hobby carousel starts the sphere and suspends offscreen/hidden', async t=>{
+  const keys=['document','window','matchMedia','Image','ResizeObserver','IntersectionObserver','requestAnimationFrame','cancelAnimationFrame'];
+  const saved=new Map(keys.map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));
+  t.after(()=>{for(const key of keys){if(saved.get(key))Object.defineProperty(globalThis,key,saved.get(key));else delete globalThis[key];}});
+  for(const [hasCanvas,hasOptional] of [[true,true],[false,true],[true,false]]){
+    const sphere=element(),strip=element(),gallery=element();
+    const presentation=element();presentation.hidden=true;
+    gallery.querySelectorAll=()=>[element()];
+    let draws=0;const circles=[];
+    const context={stroke(){},moveTo(){},lineTo(){},setTransform(){},clearRect(){draws++;},beginPath(){},arc(x,y){circles.push([x,y]);},fill(){},drawImage(){}};
+    const canvas={width:640,height:520,clientWidth:640,getContext:()=>hasCanvas?context:null,addEventListener(){}};
+    const sphereNodes={'canvas':canvas,'[data-sphere-name]':element(),'[data-sphere-presentation]':presentation};
+    sphere.querySelector=selector=>sphereNodes[selector];sphere.querySelectorAll=()=>['React','Java'].map(name=>{const item=element();item.dataset.name=name;item.querySelector=()=>({src:'/icon.svg'});return item;});
+    const nodes={'[data-sphere]':sphere,'[data-moving-strip]':hasOptional?strip:null,'[data-gallery]':hasOptional?gallery:null};
+    const doc=element();doc.documentElement={dataset:{theme:'light'}};doc.hidden=false;doc.querySelector=selector=>nodes[selector] ?? null;globalThis.document=doc;
+    globalThis.window={devicePixelRatio:1,innerHeight:900,addEventListener(){}};
+    globalThis.matchMedia=()=>({matches:true,addEventListener(){}});
+    globalThis.Image=class {complete=true;naturalWidth=26;};
+    globalThis.ResizeObserver=class {observe(){}};
+    const observers=[];globalThis.IntersectionObserver=class {constructor(callback){observers.push(callback);}observe(){}};
+    let frameId=0;const frames=new Map();
+    globalThis.requestAnimationFrame=callback=>{frames.set(++frameId,callback);return frameId;};
+    globalThis.cancelAnimationFrame=id=>frames.delete(id);
+    let now=0;
+    const advance=milliseconds=>{for(let end=now+milliseconds;now<end;){now+=16;const callbacks=[...frames.values()];frames.clear();callbacks.forEach(callback=>callback(now));}};
+    initHome();
+    assert.equal(presentation.hidden,!hasCanvas,'Sphere is shown automatically only when canvas works');
+    assert.equal(frames.size,0,'No offscreen animation loop');
+    observers[0]([sphere,strip].map(target=>({target,isIntersecting:true})));
+    if(hasOptional)assert.equal(strip.dataset.running,'true');
+    advance(4200);
+    if(hasCanvas){assert.ok(draws>100);assert.notDeepEqual(circles.slice(0,2),circles.slice(-2),'Sphere projection moves over time');}
+    doc.hidden=true;doc.listeners.visibilitychange();assert.equal(frames.size,0);if(hasOptional)assert.equal(strip.dataset.running,'false');
+    const hiddenDraws=draws;advance(60000);assert.equal(draws,hiddenDraws,'No sphere draws while hidden');
+    doc.hidden=false;doc.listeners.visibilitychange();advance(100);
+    if(hasOptional)assert.equal(strip.dataset.running,'true');
+    if(hasCanvas)assert.ok(draws>hiddenDraws,'Sphere resumes when the tab is visible');
+    observers[0]([sphere,strip].map(target=>({target,isIntersecting:false})));
+    assert.equal(frames.size,0);if(hasOptional)assert.equal(strip.dataset.running,'false');
+  }
+});
