@@ -8,7 +8,7 @@ const technologies = JSON.parse(await readFile(new URL('../data/technologies.jso
 const pages = renderPages({profile,projects,technologies});
 const home = pages.find(p => p.route === '/');
 test('full remake includes real decks, project stages, resources and complete no-JS evidence', () => {
-  for (const marker of ['data-home', 'data-background-deck', 'data-gallery', 'data-sphere', 'id="training"']) assert.ok(home.content.includes(marker), marker);
+  for (const marker of ['data-home', 'data-background-deck', 'data-gallery', 'skill-categories', 'id="training"']) assert.ok(home.content.includes(marker), marker);
   assert.doesNotMatch(home.content, /data-hobby-|\/assets\/hobbies\/|Artwork Credits/);
   assert.equal((home.content.match(/data-background-card/g)||[]).length, 3);
   assert.equal((home.content.match(/<article class="project-feature/g)||[]).length,2);
@@ -37,7 +37,7 @@ test('gallery wraps and resets, deck positions wrap, motion stops at each lifecy
   assert.deepEqual([0,1,2,3,4].map(i=>deckOffset(i,0,5)),[0,1,2,-2,-1]);
   const active={hidden:false,visible:true,interacting:false};
   assert.equal(motionAllowed(active),true);
-  assert.equal(motionAllowed({...active,reduced:true}),true,'Explicit Home motion overrides the system preference');
+  assert.equal(motionAllowed({...active,reduced:true}),true,'Decorative Home motion stays active under either system preference');
   for(const key of ['hidden','interacting']) assert.equal(motionAllowed({...active,[key]:true}),false,key);
   assert.equal(motionAllowed({...active,visible:false}),false);
   const points=spherePoints(20);assert.equal(points.length,20);
@@ -54,9 +54,11 @@ test('wide-screen section tracking follows section positions',async()=>{
 
 });
 
-test('sphere and linked list coexist without pause/view controls, and marquee copies are decorative',()=>{
+test('categorized skill evidence stays static and marquee copies are decorative',()=>{
   assert.doesNotMatch(home.content,/data-sphere-pause|data-sphere-list|data-sphere-controls|Pause sphere|List view|Sphere view/);
-  assert.ok(home.content.indexOf('data-sphere-presentation')<home.content.indexOf('id="sphere-evidence"'));
+  assert.match(home.content, /class="skill-categories"/);
+  assert.match(home.content, /href="\/projects\/sti-vio-log\/"/);
+  assert.match(home.content, /data-sphere-presentation hidden><canvas/);
   assert.match(home.content,/<ul class="bento-tools" aria-hidden="true">/);
   const copy=home.content.match(/<ul class="bento-tools" aria-hidden="true">([\s\S]*?)<\/ul>/)[1];
   assert.doesNotMatch(copy,/<a |<button|tabindex/);

@@ -29,7 +29,7 @@ export async function buildSite({ outDir = join(root, 'public'), release = false
     if (!path.startsWith('/assets/') || path.includes('..') || path.includes('\\')) throw new Error('Public personal assets must be inside /assets/.');
     await access(join(root, path.slice(1)));
   }
-  for (const item of [...profile.hobbyCards, ...profile.gallery, ...profile.education.flatMap(item=>item.preview?[item.preview]:[])]) {
+  for (const item of [...profile.hobbyCards, ...profile.gallery, ...(profile.heroPortrait ? [profile.heroPortrait] : []), ...profile.education.flatMap(item=>item.preview?[item.preview]:[])]) {
     if (!item.src.startsWith('/assets/') || item.src.includes('..') || item.src.includes('\\') || !Number.isInteger(item.width) || !Number.isInteger(item.height) || item.width <= 0 || item.height <= 0 || !item.alt || !item.description || !item.credit) throw new Error('Invalid profile media.');
     await access(join(root,item.src.slice(1)));
   }

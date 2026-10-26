@@ -122,3 +122,53 @@ export function initProjectPreviews() {
     });
   });
 }
+
+export function initCertificatePreviews() {
+  const dialog=document.querySelector('[data-certificate-viewer]');
+  if(!dialog || typeof dialog.showModal!=='function')return;
+  const image=dialog.querySelector('[data-certificate-image]');
+  const title=dialog.querySelector('[data-certificate-title]');
+  const original=dialog.querySelector('[data-certificate-document]');
+  const error=dialog.querySelector('[data-certificate-error]');
+  const close=dialog.querySelector('[data-certificate-close]');
+  let opener;
+  document.querySelectorAll('[data-certificate-open]').forEach(link=>{
+    const fallback=link.closest('.home-certificate,.certification-card').querySelector('[data-certificate-original]');
+    fallback.hidden=true;
+    link.setAttribute('aria-haspopup','dialog');
+    link.setAttribute('aria-controls','certificate-viewer');
+    link.setAttribute('aria-label',`Preview ${link.dataset.certificateTitle} certificate`);
+    link.addEventListener('click',event=>{
+      if(event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
+      if(dialog.open){event.preventDefault();return;}
+      const thumbnail=link.querySelector('img');
+      image.hidden=false;error.hidden=true;
+      image.alt=thumbnail.alt;image.width=thumbnail.width;image.height=thumbnail.height;
+      image.src=thumbnail.getAttribute('src');
+      title.textContent=link.dataset.certificateTitle;
+      original.href=fallback.href;
+      original.textContent=`Open Original ${fallback.dataset.documentKind}`;
+      original.setAttribute('aria-label',`${original.textContent} (opens in a new tab)`);
+      try{dialog.showModal();}catch{fallback.hidden=false;return;}
+      event.preventDefault();opener=link;
+      document.documentElement.classList.add('preview-open');
+    });
+  });
+  image.addEventListener('error',()=>{image.hidden=true;error.hidden=false;});
+  close.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('keydown',event=>{
+    if(event.key!=='Tab')return;
+    if((event.shiftKey&&document.activeElement===close)||(!event.shiftKey&&document.activeElement===original)){
+      event.preventDefault();(event.shiftKey?original:close).focus();
+    }
+  });
+  dialog.addEventListener('click',event=>{
+    if(event.target!==dialog)return;
+    const bounds=dialog.getBoundingClientRect();
+    if(event.clientX<bounds.left || event.clientX>bounds.right || event.clientY<bounds.top || event.clientY>bounds.bottom)dialog.close();
+  });
+  dialog.addEventListener('close',()=>{
+    document.documentElement.classList.remove('preview-open');
+    opener?.focus({preventScroll:true});
+  });
+}

@@ -181,3 +181,37 @@ The owner supplied three certificate images and a one-page Cyber Threat Manageme
 
 The location card now uses MapLibre GL JS 6.15.0 with OpenFreeMap Positron/Dark styles and live OpenStreetMap data. Required attribution remains on the map. The map shows a city-level Taguig view, not a home address, and never requests browser geolocation. MapLibre's browser module, worker, stylesheet and license are copied locally by the build. Styles, sprites, glyphs and tiles load from `tiles.openfreemap.org`; the deployment CSP permits that host and the local worker without allowing inline scripts or eval. Source licenses remain in the dependency and published vendor directory.
 
+
+
+## Résumé-led redesign — 25 October 2026
+
+This entry supersedes earlier résumé and social-preview notes. The existing public résumé was replaced byte-for-byte by the owner's matching updated `EJ_Christian_Medilo_RESUME.pdf` (70,415 bytes; SHA-256 `789013513f4916e26205c61831ee166379b0d714c8a807b96a5683f3e713e641`). The document includes fourth-year BSIT status, the MIT Department placement and seven professional-development entries. No PDF contents were edited. The source filename differs from the `(3)` filename mentioned in the brief; extracted contents match the requested updated facts.
+
+The existing social SVG/PNG uses the neutral charcoal/sage palette and aspiring-developer positioning. Existing portrait images, authentic application captures, enhanced/recreated labels, original-capture links, certificate documents and image provenance remain unchanged. Four certificate previews are available; the remaining three résumé entries have no invented image, issuer or verification link.
+
+
+## Reference recreation — 26 October 2026
+
+This entry supersedes the prior social-preview palette and hero notes. `personal/ej-formal-cutout.png` is the owner's unchanged 408×612 transparent PNG supplied from `formal_pic-removebg-preview.png`. SHA-256: `2bda32198b054d733abdf364152099b26f8059320e6f2de1267dc4b13ddb7de3`. Only CSS sizing, positioning and a lower-edge fade are applied; there is no generated or reconstructed facial detail. The original casual portrait, optimized variants and photo logo remain available and are used on About and shared branding.
+
+`fonts/archivo-variable.ttf` is the official Google Fonts Archivo width/weight variable font, downloaded from the google/fonts repository's `ofl/archivo/Archivo[wdth,wght].ttf`; its OFL license is `fonts/Archivo-OFL.txt`. The hero and section headings use 115% width. Existing self-hosted Inter remains the body font. `brand/grain.svg` is a small original SVG turbulence texture authored for this implementation. No reference-site photograph, logo, personal text or commercial testimonial was copied.
+
+The social preview SVG/PNG uses the monochrome palette and embeds the same owner-supplied formal PNG. Existing certificate documents/previews, sanitized application screens, recreated/enhanced labels and original-capture links remain unchanged. Four certificate previews are available across seven records; three records correctly state that no preview is available.
+
+
+## Remaining certificate originals supplied — 26 October 2026
+
+This entry supersedes earlier statements that three previews were unavailable. The owner supplied the remaining three one-page PDF certificates. All originals were copied byte-for-byte into `certifications/` under clean public filenames. Poppler rendered the entire first page at a maximum dimension of 1100px; WebP quality 90 thumbnails preserve the full page and aspect ratio. Original PDFs and all rendered previews were visually inspected. All seven training records now have authentic previews and original-document links on Home and Training. The résumé PDF remains unchanged.
+
+| Public PDF | Supplied source | Issuer / completion | Preview |
+|---|---|---|---|
+| `azure-ai-fundamentals.pdf` | `Certificate_of_Completion (1).pdf` | TESDA Online Program, 24 October 2026 | 1100×778; 56,412 bytes |
+| `introduction-to-modern-ai.pdf` | Owner's Introduction to Modern AI certificate PDF | DICT-ITU DTC Initiative through Cisco Networking Academy, 25 October 2026 | 1100×746; 57,710 bytes |
+| `fundamentals-of-artificial-intelligence.pdf` | `Certificate_of_Completion.pdf` | TESDA Online Program, 24 October 2026 | 1100×778; 53,158 bytes |
+
+The TESDA course named Microsoft Artificial Intelligence Course: Azure AI Fundamentals is represented as a TESDA Online Program completion certificate. No Microsoft certification exam or Microsoft-issued credential is implied. Existing month-level dates are retained consistently across the site; these source records supply the exact days.
+
+Original SHA-256 fingerprints:
+- `azure-ai-fundamentals.pdf`: `b2dc0255e8690b4578825a5dc836af54bdae992501d3c5e63206b4f57e8e8f26`
+- `introduction-to-modern-ai.pdf`: `f110423ed4b52e0efb1d221b443dfde5b787f8a6a3705bd61b6ab2fd5968ffc2`
+- `fundamentals-of-artificial-intelligence.pdf`: `65c68cdb3ec376d7172508f2430bd4fe810cb91e197e2e3ffdf08cefc2510ea8`

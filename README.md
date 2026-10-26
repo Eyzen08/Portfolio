@@ -2,19 +2,23 @@
 
 A responsive software developer portfolio showcasing practical software systems and web development. Vanilla HTML, CSS, and JavaScript; one native Node build generates eight main pages and two case studies. No chatbot.
 
-Production: [ej-medilo.vercel.app](https://ej-medilo.vercel.app). Vercel project `ej-portfolio` is connected to `Eyzen08/Portfolio`: `main` deploys to production and other branches create previews. Both environments use `SITE_URL=https://ej-medilo.vercel.app`. Node.js 24.x runs `npm ci` and `npm run build:release`, serving `public/` plus the GitHub API function. `GITHUB_TOKEN` is intentionally unset; the contribution calendar can be unavailable.
+Public portfolio: [ejmedilo.vercel.app](https://ejmedilo.vercel.app/). Vercel runs `npm ci` and `npm run build:release`, serving `public/` and the existing GitHub API function. Set `SITE_URL=https://ejmedilo.vercel.app` for release generation. Retain a server-side `GITHUB_TOKEN` for authenticated contribution-calendar access; direct GitHub links remain available without it. This redesign has not been deployed.
 
-## Current visual direction
+## Current visual direction — 26 October 2026
 
-Inter typography, warm-white light surfaces, violet accents, and a near-black dark theme. Home opens directly with a three-column summary grid: identity, background highlights, About/focus, portrait, Taguig map, and Craft with the moving technology strip and contact/résumé actions. Equal-width STI Vio-Log and Kwiztorya features follow, then Skills, AI Tools, Training, Education/Experience, GitHub Activity, and Contact. The grid becomes two columns below 1024px and one below 768px, with natural document scrolling throughout.
+This pass closely recreates [the supplied reference](https://jtenajuraportfolio.com/) in the existing portfolio: monochrome light/dark themes, Archivo display typography, an outlined/solid name hero with the owner's transparent formal photograph, slash-prefixed headings, the original rotating technology globe beside grouped skills, image-led project rows, expandable experience, a horizontal certificate strip, contact cards and a four-column footer.
 
-On Home, the header links scroll to sections while Resume opens its dedicated page. Other pages retain their existing page navigation; the footer and section links keep all dedicated routes available. Smooth anchor scrolling respects reduced motion. The mobile menu closes immediately so its collapse does not shift an anchor behind the sticky header. See [summary-first Home verification](docs/SUMMARY-FIRST-HOME.md).
+Home follows Hero → About/Education → Tech Stack globe → Projects → Experience → Certificates → AI Workflow → GitHub → Contact. Five header anchors follow the reference; every detailed route remains reachable through the footer and relevant content links. The other pages retain their page menus. The updated résumé supplies fourth-year BSIT status, MIT Department placement, seven professional-development entries and the expanded skills. The detailed Kwiztorya case study retains its source-reviewed Firebase/SharedPreferences explanation.
 
-Screenshot decks and the moving technology strip retain the owner's explicit autoplay choice, including overriding reduced motion on Home. Offscreen/hidden-tab effects suspend, and decks pause during interaction. This is a known accessibility limitation; full WCAG 2.2 AA compliance is not claimed. Other existing reduced-motion handling remains. No framework, animation library, or dependency was added. See [the current redesign report](docs/EDITORIAL-REDESIGN.md) for scope, checks, and release limits. Earlier dated visual records below describe prior layouts.
+The supplied formal PNG is unchanged; the original casual portrait and photo logo remain. Authentic/sanitized screenshots, enhanced/recreated labels, original-capture links, source/live links, manual screenshot dialogs, filters, map, GitHub and contact form are preserved. At the owner's explicit request, intended motion stays active under either OS motion preference. Offscreen, hidden-tab and interaction pauses remain. No new runtime dependency or deployment configuration was added.
 
-Projects now shows both applications in a responsive grid with roles, technology tags, and separate preview/case-study actions. Native screenshot dialogs offer manual browsing, provenance and original-image links; card autoplay pauses while its viewer is open. See [project preview verification](docs/PROJECT-PREVIEWS.md).
+All 85 tests and the release build pass. The current update preserves the existing card grid with six steps under “Let’s Build Together,” labels the Home project anchor “Projects,” and opens certificate image popups before original documents. See [certificate previews and verification](docs/CERTIFICATE-PREVIEWS.md). Each experience still has six bullets in its own desktop three-row, two-column list, stacking below 1024px; Education retains only STI College Global City and Moreh Academy. Older dated reports describe previous layouts and motion policies. The restored globe and grouped skills remain unchanged. This pass has not been deployed.
 
-The gallery currently uses the supplied portrait only. Add approved records to `profile.gallery` to enable its previous/next controls; keep the portrait first. Each media record needs id, label, description, src, width, height, alt and credit. Original hobby assets and hobbyCards records are retained but are no longer displayed. Keep all media local under assets and original personal files outside output. See [the remake report](docs/FULL-VISUAL-REMAKE.md) for verification and remaining limits.
+## Motion — 26 October 2026
+
+The reference's measured motion now drives the header/hero sequence, masked name letters and section words, viewport reveals, scroll-linked ghost headings and hero parallax, social/mouse loops, image/credential interactions, menus, disclosures and native project dialogs. CSS and WAAPI share the observed easing and timing; no animation library was added. Existing content, globe, galleries, original documents, routes, theme and contact logic remain intact. OS reduced-motion suppression has been removed as requested; reveals never rely on CSS-hidden default content. Phone/tablet intro text remains opaque after entering.
+
+The [motion inventory](docs/MOTION-INVENTORY.md) separates observed reference behavior, adaptations and omissions. The [latest verification](docs/EXPERIENCE-MOTION-UPDATE.md) covers the owner's revised motion policy, 79 tests, production-browser checks under reduced motion, a standard-preference JavaScript fixture and script-free fallbacks. No deployment or external inquiry was performed.
 
 ## Run locally
 
@@ -32,14 +36,14 @@ The preview is deliberately a noindex draft. The supplied portrait is installed 
 
 | Route | Content |
 | --- | --- |
-| / | Summary/About card grid with portrait/map, equal project features, skills/globe, AI tools, training, education/experience, activity, contact |
+| / | Formal portrait hero, About/Education, skill folders, projects, experience, certificates, workflow, activity and contact |
 | /about/ | Professional background, working style, AI-assisted development and learning AI Engineering |
 | /projects/ | Searchable responsive project cards with expanded screenshot viewers |
 | /projects/sti-vio-log/ | Full-stack capstone case study |
 | /projects/kwiztorya/ | Native Android case study |
 | /stack/ | Searchable technology with project evidence |
 | /activity/ | Public GitHub activity and configured contribution calendar |
-| /training/ | Five credentials with four certificate previews linked to the supplied originals |
+| /training/ | Seven credentials with seven certificate previews linked to the supplied originals |
 | /resume/ | HTML résumé, print layout and supplied PDF download |
 | /contact/ | Direct email, social links and Formspree inquiry form |
 
@@ -49,7 +53,7 @@ The preview is deliberately a noindex draft. The supplied portrait is installed 
 - data/projects.json: descriptions, contributions, source/live links, case sections, curated cardTechnologies and previewScreens (id, label, src, srcSmall, smallWidth, width, height, kind, deviceFrame, alt, caption, explanation; optional originalSrc/enhanced/presentationLabel).
 - data/technologies.json: categories, labels and project relationships. Optional iconId selects an interface symbol; evidenceUrl links résumé-only skills to /resume/#skills instead of implying portfolio usage.
 - scripts/templates.mjs: shared layout and page presentation.
-- assets/site.css, assets/app.js, assets/decks.js and assets/home.js: shared design, themes, filtering, decks and motion.
+- assets/site.css, assets/redesign.css, assets/app.js, assets/decks.js and assets/home.js: shared design, themes, filtering, decks and motion.
 
 Include only verified public facts. Do not commit credentials, private student records or production screenshots containing personal information. EJ confirmed STI as a team capstone with sole system development/full-stack leadership and Kwiztorya as a team project where EJ led development.
 

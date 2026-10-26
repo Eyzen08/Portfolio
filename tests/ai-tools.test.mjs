@@ -12,18 +12,17 @@ test('AI tools render once after the technical stack with complete static conten
   assert.equal((home.match(/id="ai"/g) || []).length, 1);
   assert.ok(home.indexOf('id="skills"') < home.indexOf('id="ai"'));
   assert.ok(home.indexOf('id="about"') < home.indexOf('id="skills"'));
-  assert.ok(home.indexOf('id="ai"') < home.indexOf('id="training"'));
+  assert.ok(home.indexOf('id="training"') < home.indexOf('id="ai"'));
   const section = home.match(/<section[^>]*id="ai"[\s\S]*?<\/section>/)[0];
-  assert.match(section, /<h2[^>]*>AI Tools I Use<\/h2>/);
-  assert.ok(section.includes('I use AI tools as part of my development workflow to support research, problem-solving, code analysis, and implementation. I remain responsible for reviewing, testing, and validating the solutions I use.'));
-  assert.deepEqual(profile.aiTools.map(tool => tool.name), ['Google Gemini', 'ChatGPT', 'OpenAI Codex', 'Claude']);
-  const cards = [...section.matchAll(/<article class="ai-tool-card[^\"]*"[\s\S]*?<\/article>/g)].map(match => match[0]);
-  assert.equal(cards.length, 4);
+  assert.match(section, /<h3[^>]*>AI Tools I Use<\/h3>/);
+  assert.match(section, /I review and test AI-generated suggestions/);
+  assert.deepEqual(profile.aiTools.map(tool => tool.name), ['Google Gemini', 'ChatGPT', 'OpenAI Codex', 'Claude', 'GitHub Copilot']);
+  const tools = [...section.matchAll(/<li><img[^>]*>[\s\S]*?<\/li>/g)].map(match => match[0]);
+  assert.equal(tools.length, 5);
   for (const [index, tool] of profile.aiTools.entries()) {
-    for (const text of [tool.name, tool.category, tool.description]) assert.ok(cards[index].includes(text));
-    assert.match(cards[index], /<img[^>]+width="32" height="32"[^>]+alt="[^\"]+ logo"/);
-    assert.ok(cards[index].includes(`src="${tool.logo}"`));
-    assert.doesNotMatch(cards[index], /<a\b|<button\b|tabindex=/);
+    assert.ok(tools[index].includes(tool.name));
+    assert.ok(tools[index].includes(`src="${tool.logo}"`));
+    assert.match(tools[index], /alt=""/);
     await access(new URL(`..${tool.logo}`, import.meta.url));
   }
   for (const text of [profile.aiApproach, profile.aiLearning, 'I review and test AI-generated suggestions']) assert.ok(section.includes(text));
@@ -32,7 +31,7 @@ test('AI tools render once after the technical stack with complete static conten
 });
 
 test('UI headings and actions use Title Case while prose, official names, and destinations survive', () => {
-  for (const text of ['Software, Put into Practice.', 'Tools behind the Work.', 'About Me', 'My Focus', 'Craft', 'My Responsibility as a Developer', 'Learning through Practice.', 'A Practical Foundation.', 'Experience &amp; Immersion', 'Code, in the Open.', 'Open Full Map', 'View Certificate']) assert.ok(page('/').includes(text), text);
+  for (const text of ['About', 'Tech Stack', 'Projects', 'Experience', 'Certificates', 'Workflow', 'Activity', 'Let’s Build Together', 'Open Full Map', 'Preview Certificate']) assert.ok(page('/').includes(text), text);
   for (const project of projects) assert.ok(page('/projects/').includes(`${project.title} Screenshots`));
   assert.match(page('/projects/'), /Expand Preview/);
   assert.match(page('/projects/sti-vio-log/'), /Tools around the Core Workflow/);
