@@ -165,13 +165,11 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 .sphere-section { text-align: center; }.sphere-section .section-heading { text-align: left; }.sphere-presentation { position: relative; width: min(640px,100%); margin: -20px auto 0; }.sphere-presentation canvas { width: 100%; height: auto; display: block; aspect-ratio: 640/520; touch-action: pan-y; }.sphere-name { min-height: 28px; color: var(--muted); font-size: 15px; margin: -14px 0 28px; }.sphere-evidence { padding: 0; list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }.sphere-evidence a { display: flex; gap: 8px; align-items: center; min-height: 44px; border: 1px solid var(--line); background: var(--surface); border-radius: 25px; padding: 8px 14px; font-size: 13px; }.sphere-evidence .brand-icon { width: 22px; height: 22px; }
 .certification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: var(--card-gap); align-items: stretch; margin-bottom: 80px; }
 .certification-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
-.certificate-preview { display: block; margin: 12px 12px 0; border-radius: 8px; }
-.certificate-preview img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: contain; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
-.certificate-preview > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 44px; padding: 10px 8px 0; font-size: 14px; color: var(--accent); }
+.certificate-preview { display: block; margin: 12px 12px 0; padding: 4px; border: 2px solid var(--line); border-radius: 8px; background: var(--surface-alt); overflow: hidden; }
+.certificate-preview img { width: 100%; height: auto; border: 0; border-radius: 3px; }
 .certificate-placeholder { margin: 12px 12px 44px; aspect-ratio: 4/3; display: grid; align-content: center; justify-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; color: var(--muted); text-align: center; padding: 18px; }
 .certificate-placeholder p { margin: 0; font-size: 14px; }
 .certificate-placeholder .icon { width: 30px; height: 30px; }
-.certificate-preview:focus-visible { outline-offset: 3px; }
 .certificate-details { padding: 24px; flex: 1; }
 .certificate-meta { color: var(--muted); font-size: 13px; min-height: 3.3em; margin-bottom: 10px; }
 .certificate-details h2 { font-size: clamp(20px, 2vw, 26px); line-height: 1.35; margin-bottom: 0; }

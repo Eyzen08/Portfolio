@@ -5,3 +5,4 @@ public/
 !.env.example
 node_modules/
 .qa/
+.private/certificate-originals/

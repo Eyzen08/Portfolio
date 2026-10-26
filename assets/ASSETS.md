@@ -1,5 +1,11 @@
 # Asset sources
 
+## Certificate privacy previews — 27 October 2026
+
+This entry supersedes earlier public-original and image-viewer descriptions below. Only seven static certificate previews are published. Eight signature regions, including the Code to Success digital-signature annotation, are blurred directly in four lossless `*-redacted.png` images. Pixel comparisons verify that every pixel outside those regions is unchanged. The three unsigned WebP previews are byte-identical to their prior versions.
+
+Original PDFs/images and the four unblurred previews are archived locally in Git-ignored `.private/certificate-originals/`, outside published assets. The build publishes only certificate preview paths listed in the profile and clears old certificate output before copying them. No original-file links or certificate image viewer remain. Earlier published deployments and Git history are not erased by this change. The résumé PDF is unchanged.
+
 ## 20 October 2026 AI tool logos
 
 These marks identify tools used in EJ's workflow; they do not imply ownership, sponsorship, or endorsement. Original vendor files are served locally without recoloring, redrawing, or changed proportions. Small white logo surfaces preserve the supplied marks in both site themes. No general open-source license is asserted for these vendor trademarks.

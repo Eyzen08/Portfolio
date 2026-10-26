@@ -1,4 +1,4 @@
-import { initDecks, initProjectPreviews, initCertificatePreviews } from './decks.js';
+import { initDecks, initProjectPreviews } from './decks.js';
 import { initHome } from './home.js';
 import { initLocationMap } from './location-map.js';
 import { initMotion, playMotion } from './motion.js';
@@ -15,7 +15,6 @@ if (typeof document !== 'undefined') {
   const root = document.documentElement;
   initDecks();
   initProjectPreviews();
-  initCertificatePreviews();
   initLocationMap();
   if (document.querySelector('[data-home]')) initHome();
   const portraitSwap = document.querySelector('[data-portrait-swap]');

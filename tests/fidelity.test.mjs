@@ -9,6 +9,16 @@ const [profile, projects, technologies] = await Promise.all(['profile','projects
 const pages = renderPages({profile,projects,technologies});
 const home = pages.find(page=>page.route==='/');
 
+test('hero strip presents the three development capabilities in order',()=>{
+  const strip=home.content.match(/<div class="hero-facts">([\s\S]*?)<\/section>/)[1];
+  const pairs=[...strip.matchAll(/<strong>(.*?)<\/strong><span>(.*?)<\/span>/g)].map(match=>match.slice(1));
+  assert.deepEqual(pairs,[
+    ['WEB + APP','APPLICATION DEVELOPMENT'],
+    ['FULL-STACK','FRONTEND &amp; BACKEND'],
+    ['AI-ASSISTED','DEVELOPMENT WORKFLOW']
+  ]);
+});
+
 test('reference composition uses the supplied transparent formal portrait and truthful sections', async()=>{
   assert.match(home.content,/hero-formal-portrait/);
   assert.match(home.content,/class="reference-heading"/);

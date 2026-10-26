@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir, cp, access } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, cp, access, rm } from 'node:fs/promises';
 import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { renderPages, shell } from './templates.mjs';
@@ -34,10 +34,10 @@ export async function buildSite({ outDir = join(root, 'public'), release = false
     await access(join(root,item.src.slice(1)));
   }
   for (const item of profile.certifications) {
-    if (!item.preview && !item.documentUrl) continue;
+    if (!item.preview) continue;
     const preview = item.preview;
     if (!preview || !Number.isInteger(preview.width) || !Number.isInteger(preview.height) || preview.width <= 0 || preview.height <= 0 || !preview.alt) throw new Error('Invalid certificate preview.');
-    for (const path of [preview.src, item.documentUrl]) {
+    for (const path of [preview.src]) {
       if (typeof path !== 'string' || !path.startsWith('/assets/certifications/') || path.includes('..') || path.includes('\\') || path.includes('?') || path.includes('#')) throw new Error('Invalid certificate asset path.');
       await access(join(root, path.slice(1)));
     }
@@ -64,7 +64,13 @@ export async function buildSite({ outDir = join(root, 'public'), release = false
   const context = { profile, projects, technologies, release, origin: canonicalOrigin };
   const pages = renderPages(context);
   await mkdir(outDir, { recursive: true });
-  await cp(join(root, 'assets'), join(outDir, 'assets'), { recursive: true });
+  await cp(join(root, 'assets'), join(outDir, 'assets'), { recursive: true, filter: source => source !== join(root, 'assets', 'certifications') });
+  const certificateDir = join(outDir, 'assets', 'certifications');
+  await rm(certificateDir, { recursive: true, force: true });
+  await mkdir(certificateDir, { recursive: true });
+  for (const item of profile.certifications.filter(item => item.preview)) {
+    await cp(join(root, item.preview.src.slice(1)), join(outDir, item.preview.src.slice(1)));
+  }
   const mapVendor=join(outDir,'assets','vendor','maplibre');
   await mkdir(mapVendor,{recursive:true});
   for(const name of ['maplibre-gl.mjs','maplibre-gl-worker.mjs','maplibre-gl.css'])await cp(join(root,'node_modules','maplibre-gl','dist',name),join(mapVendor,name));

@@ -34,11 +34,14 @@ test('education remains exactly the two supplied institutions, qualifications an
   ]);
 });
 
-test('OS motion stays active except the requested About portrait crossfade',async()=>{
+test('OS motion stays active except the About crossfade and card hover effects',async()=>{
   const photoRule='@media (prefers-reduced-motion: reduce) { .about-portrait .about-photo-swap img { transition: none; } }';
+  const cardRule='@media(prefers-reduced-motion:reduce){[data-card-hover]{translate:none!important;transition:none}[data-card-hover]::after{background:none;transition:none}}';
   for(const path of ['assets/site.css','assets/redesign.css','assets/motion.css','assets/home.js','assets/decks.js','assets/motion.js']) {
-    const source=await read(path);
+    let source=await read(path);
     if(path==='assets/site.css') assert.ok(source.includes(photoRule));
-    assert.doesNotMatch(source.replace(photoRule,''),/prefers-reduced-motion/,path);
+    if(path==='assets/motion.css') assert.ok(source.includes(cardRule));
+    if(path==='assets/motion.js') source=source.replace(/function initCardHover\(\) \{[\s\S]*?(?=export function initMotion)/,'');
+    assert.doesNotMatch(source.replace(photoRule,'').replace(cardRule,''),/prefers-reduced-motion/,path);
   }
 });

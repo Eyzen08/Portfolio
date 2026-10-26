@@ -36,7 +36,7 @@ test('Home retains all seven credentials and all seven supplied document preview
     const card = cards.find(card => card.includes(escaped(item.title)));
     assert.ok(card, item.title);
     for (const text of [item.organization, item.period].filter(Boolean)) assert.ok(card.includes(escaped(text)));
-    if (item.preview) { assert.ok(card.includes(item.preview.src)); assert.ok(card.includes(item.documentUrl)); }
+    if (item.preview) { assert.ok(card.includes(item.preview.src)); assert.doesNotMatch(card,/data-certificate-open|data-certificate-original/); }
     else { assert.match(card, /Certificate preview unavailable/); assert.doesNotMatch(card, /class="certificate-preview"/); }
   }
   assert.equal((training.match(/class="certificate-preview"/g) || []).length, 7);

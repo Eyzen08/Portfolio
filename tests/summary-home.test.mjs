@@ -28,7 +28,7 @@ test('Home menu scrolls to existing sections while detailed pages and footer ret
     const html = shell(page, { profile });
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     const hrefs = [...nav.matchAll(/href="([^"]+)"/g)].map(match => match[1]);
-    assert.deepEqual(hrefs, page.route === '/' ? ['#about', '#skills', '#projects', '#experience', '#contact'] : ['/', '/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/']);
+    assert.deepEqual(hrefs, page.route === '/' ? ['#about', '#skills', '#projects', '#experience', '#training', '#contact'] : ['/', '/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/']);
     if (page.route === '/') for (const href of hrefs.filter(href => href.startsWith('#'))) assert.ok(home.content.includes(`id="${href.slice(1)}"`));
     const footer = html.match(/<nav class="footer-pages"[\s\S]*?<\/nav>/)[0];
     for (const href of ['/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/', '/activity/']) assert.ok(footer.includes(`href="${href}"`));

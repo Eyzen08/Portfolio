@@ -118,8 +118,7 @@
         "width": 1100,
         "height": 778,
         "alt": "Microsoft Artificial Intelligence Course: Azure AI Fundamentals certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/azure-ai-fundamentals.pdf"
+      }
     },
     {
       "title": "Introduction to Modern AI",
@@ -130,8 +129,7 @@
         "width": 1100,
         "height": 746,
         "alt": "Introduction to Modern AI certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/introduction-to-modern-ai.pdf"
+      }
     },
     {
       "title": "Fundamentals of Artificial Intelligence",
@@ -142,56 +140,51 @@
         "width": 1100,
         "height": 778,
         "alt": "Fundamentals of Artificial Intelligence certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/fundamentals-of-artificial-intelligence.pdf"
+      }
     },
     {
       "title": "Cyber Threat Management",
       "organization": "Cisco Networking Academy",
       "period": "August 2026",
       "preview": {
-        "src": "/assets/certifications/cyber-threat-management.webp",
+        "src": "/assets/certifications/cyber-threat-management-redacted.png",
         "width": 1100,
         "height": 850,
         "alt": "Cyber Threat Management certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/cyber-threat-management.pdf"
+      }
     },
     {
       "title": "Cybersecurity Quality Assurance: Detect, Test, Secure",
       "organization": "Ethel Programming Computer Programming Services",
       "period": "August 2026",
       "preview": {
-        "src": "/assets/certifications/cybersecurity-quality-assurance.webp",
+        "src": "/assets/certifications/cybersecurity-quality-assurance-redacted.png",
         "width": 1100,
         "height": 778,
         "alt": "Cybersecurity Quality Assurance: Detect, Test, Secure certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/cybersecurity-quality-assurance.png"
+      }
     },
     {
       "title": "Code to Success: Mastering Software Development Cycle for IS Professionals",
       "organization": "JPCS Clarendon College",
       "period": "August 2026",
       "preview": {
-        "src": "/assets/certifications/code-to-success.webp",
+        "src": "/assets/certifications/code-to-success-redacted.png",
         "width": 1100,
         "height": 778,
         "alt": "Code to Success: Mastering Software Development Cycle for IS Professionals certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/code-to-success.jpg"
+      }
     },
     {
       "title": "LEGO Educational Robotics and Computer Technical Training",
       "organization": "University of the East–Manila Campus",
       "period": "June 2018",
       "preview": {
-        "src": "/assets/certifications/lego-robotics-training.webp",
+        "src": "/assets/certifications/lego-robotics-training-redacted.png",
         "width": 1100,
         "height": 871,
         "alt": "LEGO Educational Robotics and Computer Technical Training certificate awarded to EJ Christian Medilo"
-      },
-      "documentUrl": "/assets/certifications/lego-robotics-training.jpg"
+      }
     }
   ],
   "hobbyCards": [

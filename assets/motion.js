@@ -41,6 +41,54 @@ function split(element, pieces) {
   return fragments.map(mask=>mask.firstElementChild);
 }
 
+function initCardHover() {
+  const cards=[...document.querySelectorAll('.card,.background-paper,.tool-window,.contribution-card,.project-screenshot-link,.more-project,.next-step-grid>article')]
+    .filter(card=>!card.matches('.hero-portrait,.project-feature,.case-role,.contact-info,.resume-document .card,.case-content>.card'));
+  if(!cards.length)return ()=>{};
+  for(const card of cards)card.dataset.cardHover='';
+  const fine=matchMedia('(hover: hover) and (pointer: fine)');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let active,focused,point,frame=0;
+  const reset=()=>{
+    cancelAnimationFrame(frame);frame=0;
+    if(active)delete active.dataset.cardActive;
+    active=null;
+  };
+  const draw=()=>{
+    frame=0;if(!active)return;
+    const bounds=active.getBoundingClientRect();
+    active.style.setProperty('--card-x',`${Math.max(0,Math.min(bounds.width,point.x-bounds.left))}px`);
+    active.style.setProperty('--card-y',`${Math.max(0,Math.min(bounds.height,point.y-bounds.top))}px`);
+  };
+  const move=event=>{
+    if(event.pointerType==='touch'||!fine.matches||document.hidden){reset();return;}
+    const card=event.target.closest?.('[data-card-hover]');
+    if(!card){reset();return;}
+    if(card!==active){reset();active=card;active.dataset.cardActive='true';}
+    if(reduced.matches)return;
+    point={x:event.clientX,y:event.clientY};
+    if(!frame)frame=requestAnimationFrame(draw);
+  };
+  const leave=event=>{if(active&&!active.contains(event.relatedTarget))reset();};
+  const focus=event=>{
+    if(focused)delete focused.dataset.cardFocus;
+    const target=event.type==='focusout'?event.relatedTarget:event.target;
+    focused=target?.matches(':focus-visible')?target.closest('[data-card-hover]'):null;
+    if(focused)focused.dataset.cardFocus='true';
+  };
+  const listeners={pointerover:move,pointermove:move,pointerout:leave,pointercancel:reset,visibilitychange:reset,focusin:focus,focusout:focus};
+  for(const [type,listener] of Object.entries(listeners))document.addEventListener(type,listener,{passive:true});
+  window.addEventListener('blur',reset);window.addEventListener('pagehide',reset);
+  fine.addEventListener('change',reset);reduced.addEventListener('change',reset);
+  return ()=>{
+    reset();
+    for(const card of cards){delete card.dataset.cardHover;delete card.dataset.cardFocus;card.style.removeProperty('--card-x');card.style.removeProperty('--card-y');}
+    for(const [type,listener] of Object.entries(listeners))document.removeEventListener(type,listener);
+    window.removeEventListener('blur',reset);window.removeEventListener('pagehide',reset);
+    fine.removeEventListener('change',reset);reduced.removeEventListener('change',reset);
+  };
+}
+
 export function initMotion() {
   if(typeof document==='undefined' || typeof window==='undefined') return ()=>{};
   previousCleanup?.();
@@ -97,6 +145,7 @@ export function initMotion() {
     },{rootMargin:'0px 0px 8% 0px',threshold:.01});
   } catch { return ()=>{}; }
 
+  const cleanupCards=initCardHover();
   const register=(node,run)=>{
     const bounds=node.getBoundingClientRect();
     // Late initialization must not make already-readable content disappear.
@@ -155,6 +204,7 @@ export function initMotion() {
   document.addEventListener('visibilitychange',sync);
   window.addEventListener('pagehide',hide);window.addEventListener('pageshow',show);
   function cleanup(){
+    cleanupCards();
     observer.disconnect();cancelEffects();cancelAnimationFrame(frame);resetScroll();
     if(hero)hero.dataset.motionRunning='false';
     window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);
