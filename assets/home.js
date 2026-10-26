@@ -36,9 +36,10 @@ export function currentSection(sections, viewportHeight) {
 }
 export function initHome() {
   const sphere = document.querySelector('[data-sphere]');
+  const presentation = sphere?.querySelector('[data-sphere-presentation]');
   const strip = document.querySelector('[data-moving-strip]');
   let frame = 0, last = 0, angle = 0;
-  const visible = new Map([sphere,strip].filter(Boolean).map(element=>[element,false]));
+  const visible = new Map([presentation,strip].filter(Boolean).map(element=>[element,false]));
   const running = element => motionAllowed({ hidden: document.hidden, visible: visible.get(element), interacting: false });
 
   const gallery = document.querySelector('[data-gallery]');
@@ -52,7 +53,7 @@ export function initHome() {
       photos.forEach((photo,i)=>{photo.hidden = i !== current;});
       const img = photos[current].querySelector('img');
       gallery.querySelector('[data-gallery-caption]').textContent = img.alt;
-      img.animate([{opacity:.4},{opacity:1}],{duration:220});
+      img.animate?.([{opacity:.4},{opacity:1}],{duration:220});
     };
     gallery.querySelector('[data-gallery-prev]').addEventListener('click',()=>selectPhoto(-1));
     gallery.querySelector('[data-gallery-next]').addEventListener('click',()=>selectPhoto(1));
@@ -101,8 +102,9 @@ export function initHome() {
     name.textContent=closest?sphereItems[closest.index].dataset.name:'Explore the Technologies';
   }
   if(context){
-    sphere.querySelector('[data-sphere-presentation]').hidden=false;
+    presentation.hidden=false;
     new ResizeObserver(draw).observe(canvas);
+    new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
     canvas.addEventListener('pointermove',event=>{const rect=canvas.getBoundingClientRect();pointer={x:event.clientX-rect.left,y:event.clientY-rect.top};draw();});
     canvas.addEventListener('pointerleave',()=>{pointer=null;draw();});
     draw();
@@ -111,13 +113,13 @@ export function initHome() {
   function tick(time) {
     frame = 0;
     const delta = last ? Math.min(time-last,64) : 0; last = time;
-    if(context && running(sphere)){angle+=delta*Math.PI*2/52000;draw();}
-    if(context && running(sphere)) frame=requestAnimationFrame(tick);
+    if(context && running(presentation)){angle+=delta*Math.PI*2/52000;draw();}
+    if(context && running(presentation)) frame=requestAnimationFrame(tick);
   }
   function sync() {
     if(strip)strip.dataset.running=String(running(strip));
     if(frame)cancelAnimationFrame(frame);frame=0;last=0;
-    if(context && running(sphere))frame=requestAnimationFrame(tick);
+    if(context && running(presentation))frame=requestAnimationFrame(tick);
   }
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)visible.set(entry.target,entry.isIntersecting);sync();},{threshold:.1});
   for(const element of visible.keys())observer.observe(element);
@@ -127,7 +129,7 @@ export function initHome() {
   const links=[...document.querySelectorAll('[data-section-link]')];
   const sections=links.map(link=>document.getElementById(link.dataset.sectionLink)).filter(Boolean);
   const updateSection = () => {
-    const active=currentSection(sections.map(section=>({id:section.id,top:section.getBoundingClientRect().top})),window.innerHeight);
+    const active=sections[0]?.getBoundingClientRect().top > window.innerHeight*.4 ? null : currentSection(sections.map(section=>({id:section.id,top:section.getBoundingClientRect().top})),window.innerHeight);
     for(const link of links){if(link.dataset.sectionLink===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');}
   };
   window.addEventListener('scroll',updateSection,{passive:true});

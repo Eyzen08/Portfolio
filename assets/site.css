@@ -1,7 +1,6 @@
 @font-face { font-family: Inter; src: url('/assets/fonts/inter-latin-variable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
 :root { color-scheme: light; --bg: #fbfaf7; --surface: #f3f1ed; --surface-alt: #e9e7ef; --text: #19191d; --muted: #63636f; --accent: #7c3aed; --action: #7c3aed; --action-text: #ffffff; --line: #dadae2; --field-line: #827c91; --violet: #7c3aed; --shadow: 0 12px 32px #19191d0a; --grain-opacity: .04; --motion-fast: 160ms; --motion-base: 180ms; --motion-panel: 220ms; --motion-entrance: 550ms; --ease: cubic-bezier(.2,.7,.2,1); --card-gap: 24px; --card-padding: 28px; }
 :root[data-theme='dark'] { color-scheme: dark; --bg: #0c0b13; --surface: #18171f; --surface-alt: #24212f; --text: #f4f3f7; --muted: #b8b6c3; --accent: #b89aff; --action: #b89aff; --action-text: #0c0b13; --line: #38343f; --field-line: #847a97; --violet: #b89aff; --shadow: 0 14px 36px #0003; --grain-opacity: .03; }
-@view-transition { navigation: auto; }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 110px; }
 body { position: relative; isolation: isolate; min-height: 100vh; margin: 0; background: var(--bg); color: var(--text); font: 400 18px/1.65 Inter, system-ui, sans-serif; transition: background-color var(--motion-base), color var(--motion-base); }
@@ -144,7 +143,6 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
   :root { --card-gap: 16px; --card-padding: 20px; } body { font-size: 17px; }.container { width: calc(100% - 40px); }.header-inner { padding: 10px 20px; }.wordmark { font-size: 16px; }.wordmark img { width: 30px; height: 30px; }.header-actions { gap: 8px; }.preview-label { display: none; }.section-heading { align-items: start; flex-direction: column; gap: 10px; }.resume-layout { grid-template-columns: 1fr; }.resume-project > div { flex-direction: column; gap: 4px; }.github-heading { flex-direction: column; gap: 10px; }.github-stats { gap: 35px; }.event-list li { flex-direction: column; gap: 5px; }.contact-cta { flex-direction: column; align-items: start; }.footer-inner { align-items: start; flex-direction: column; padding-block: 30px; gap: 10px; }.footer-links { gap: 25px; }.page-intro { padding-top: 45px; }.page-intro h1 { font-size: clamp(38px, 9.8vw, 58px); }.page-intro > p { font-size: 19px; }.about-intro { grid-template-columns: 1fr; padding-bottom: 16px; }.strength-grid { grid-template-columns: 1fr; }.personal-grid, .repository-list { grid-template-columns: 1fr; }.filter-buttons { gap: 7px; }.filter-buttons button { font-size: 13px; padding-inline: 11px; }.stack-grid { grid-template-columns: 1fr; }.repository-list > a { gap: 14px; }.case-role p { font-size: 19px; }.case-outline nav { grid-template-columns: 1fr; }.case-content h2 { font-size: 26px; }.architecture > div { flex-direction: column; align-items: stretch; }.architecture-connector { transform: rotate(90deg); text-align: center; }.case-next { flex-wrap: wrap; }.timeline article { grid-template-columns: 1fr; gap: 7px; }.resume-project > div { gap: 12px; }.contact-layout { grid-template-columns: 1fr; padding-bottom: 32px; }.contact-info .social-list { max-width: 430px; }
 }
 @media (max-width: 359px) { .container { width: calc(100% - 32px); }.header-inner { padding-inline: 16px; }.wordmark { gap: 7px; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } html:not(.home-page) *, html:not(.home-page) *::before, html:not(.home-page) *::after { animation: none !important; transition: none !important; } html:not(.home-page)::view-transition-old(root), html:not(.home-page)::view-transition-new(root) { animation: none; } }
 
 /* Shared footer and retained gallery/background presentation. */
 .footer-inner { flex-wrap: wrap; }
@@ -387,7 +385,6 @@ body::before { display: none; }
 .ai-approach > div:last-child { border-left: 2px solid var(--accent); padding-left: 28px; }
 .ai-approach h3 { font-size: 23px; }
 .ai-approach p { font-size: 17px; max-width: 60ch; }
-@media (prefers-reduced-motion: reduce) { .ai-tool-card { transition: none; } }
 .home-certificates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
 .home-certificate.card { display: flex; flex-direction: column; padding: 24px; border-radius: 20px; }
 .home-certificates .certificate-preview { margin: 0 0 18px; }

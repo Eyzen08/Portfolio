@@ -30,7 +30,7 @@ test('six sanitized STI screens and four attributed Kwiz screens have complete l
 });
 function node(textContent=''){return {dataset:{},hidden:false,textContent,scrollHeight:150,attrs:{},listeners:{},hasAttribute(k){return k in this.attrs;},style:{setProperty(){}},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,fn){this.listeners[k]=fn;},contains(n){return n===this;},querySelector(){return null;},querySelectorAll(){return [];}};}
 test('shared decks autoplay independently, pause on interaction and reset hidden time',async t=>{
-  const keys=['document','ResizeObserver','IntersectionObserver','setTimeout','clearTimeout'];const saved=new Map(keys.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
+  const keys=['document','matchMedia','ResizeObserver','IntersectionObserver','setTimeout','clearTimeout'];const saved=new Map(keys.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
   t.after(()=>keys.forEach(k=>saved.get(k)?Object.defineProperty(globalThis,k,saved.get(k)):delete globalThis[k]));
   const build=(count,kind='project',compact=false)=>{const group=node();group.dataset.deckKind=kind;if(compact)group.attrs['data-deck-compact']='';const controls=node(),prev=node(),next=node(),counter=node(),stage=node();
     const captions=Array.from({length:count},()=>node());const buttons=Array.from({length:count},(_,i)=>{const b=node();b.dataset.deckIndex=String(i);return b;});
@@ -39,7 +39,7 @@ test('shared decks autoplay independently, pause on interaction and reset hidden
     group.querySelector=s=>compact&&s!=='[data-deck-stage]'?null:({'[data-deck-controls]':controls,'[data-deck-prev]':prev,'[data-deck-next]':next,'[data-deck-counter]':counter,'[data-deck-stage]':stage})[s]||null;
     return {group,cards,captions,buttons,prev,next,counter};};
   const a=build(6),b=build(3),compact=build(4,'project',true),background=build(3,'background');const groups=[a,b,compact,background];const doc=node();doc.hidden=false;doc.querySelectorAll=()=>groups.map(x=>x.group);globalThis.document=doc;
-  globalThis.ResizeObserver=class{observe(){}};let observer;globalThis.IntersectionObserver=class{constructor(fn){observer=fn;}observe(){}};
+  const media={matches:false,listeners:{},addEventListener(type,fn){this.listeners[type]=fn;}};globalThis.matchMedia=()=>media;globalThis.ResizeObserver=class{observe(){}};let observer;globalThis.IntersectionObserver=class{constructor(fn){observer=fn;}observe(){}};
   let now=0,id=0;const timers=new Map();globalThis.setTimeout=(fn,ms)=>{timers.set(++id,{fn,at:now+ms});return id;};globalThis.clearTimeout=id=>timers.delete(id);
   const advance=ms=>{now+=ms;for(const [id,timer] of [...timers])if(timer.at<=now){timers.delete(id);timer.fn();}};
   const {initDecks}=await import('../assets/decks.js');initDecks();assert.equal(timers.size,0);
@@ -62,4 +62,8 @@ test('shared decks autoplay independently, pause on interaction and reset hidden
   assert.equal(a.counter.textContent,previewFrame,'An open viewer must keep its card paused even when focus moves to browser chrome');
   delete a.group.dataset.previewOpen;a.group.listeners.previewchange();advance(4000);
   assert.notEqual(a.counter.textContent,previewFrame,'Normal autoplay resumes after the viewer closes and focus leaves');
+  media.matches=true;media.listeners.change?.();assert.ok(timers.size>0,'OS reduced motion leaves visible autoplay active');
+  const beforeManual=a.counter.textContent;a.next.listeners.click();assert.notEqual(a.counter.textContent,beforeManual,'Manual controls remain available');
+  const manualFrame=a.counter.textContent;advance(4000);assert.notEqual(a.counter.textContent,manualFrame,'Autoplay continues under reduced motion');
+  media.matches=false;media.listeners.change?.();assert.ok(timers.size>0,'Autoplay remains active under standard motion');
 });

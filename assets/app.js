@@ -1,6 +1,7 @@
-import { initDecks, initProjectPreviews } from './decks.js';
+import { initDecks, initProjectPreviews, initCertificatePreviews } from './decks.js';
 import { initHome } from './home.js';
 import { initLocationMap } from './location-map.js';
+import { initMotion, playMotion } from './motion.js';
 export function matchesFilter(item, query, category) {
   return (category === 'all' || item.category.toLowerCase() === category.toLowerCase()) &&
     query.trim().toLowerCase().split(/\s+/).every(word => item.search.toLowerCase().includes(word));
@@ -14,6 +15,7 @@ if (typeof document !== 'undefined') {
   const root = document.documentElement;
   initDecks();
   initProjectPreviews();
+  initCertificatePreviews();
   initLocationMap();
   if (document.querySelector('[data-home]')) initHome();
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
@@ -21,7 +23,7 @@ if (typeof document !== 'undefined') {
   try { preference = localStorage.getItem('ej-theme'); } catch { /* Storage can be unavailable in private browsing. */ }
   function updateTheme() {
     root.dataset.theme = resolveTheme(preference, systemTheme.matches);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', root.dataset.theme === 'dark' ? '#0c0b13' : '#fbfaf7');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', root.dataset.theme === 'dark' ? '#0f0f0f' : '#fdfdfc');
     document.querySelector('[data-theme-toggle]')?.setAttribute('aria-label', `Switch to ${root.dataset.theme === 'dark' ? 'Light' : 'Dark'} Mode`);
   }
   updateTheme();
@@ -38,10 +40,14 @@ if (typeof document !== 'undefined') {
     menuButton.hidden = false;
     const setMenu = open => {
       menu.dataset.open = String(open);
+      menu.inert = !open && matchMedia('(max-width: 1023px)').matches;
       menuButton.setAttribute('aria-expanded', String(open));
     };
     setMenu(false);
     menuButton.addEventListener('click', () => setMenu(menu.dataset.open !== 'true'));
+    document.addEventListener('pointerdown', event => {
+      if (menu.dataset.open === 'true' && !menu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+    });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && menu.dataset.open === 'true') { setMenu(false); menuButton.focus(); }
     });
@@ -64,7 +70,7 @@ if (typeof document !== 'undefined') {
         const appeared = item.hidden && visible;
         item.hidden = !visible;
         if (visible) count++;
-        if (appeared && !matchMedia('(prefers-reduced-motion: reduce)').matches) item.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180 });
+        if (appeared) playMotion(item,'feedback',{duration:180});
       }
       group.querySelector('[data-result-count]').textContent = `${count} ${group.dataset.filterGroup === 'projects' ? 'project' : 'technology'}${count === 1 ? '' : group.dataset.filterGroup === 'projects' ? 's' : ' entries'}`;
       group.querySelector('[data-empty]').hidden = count !== 0;
@@ -109,6 +115,7 @@ if (typeof document !== 'undefined') {
       form.dataset.pending = 'false';
       button.disabled = false;
       button.textContent = 'Send Inquiry';
+      playMotion(status,'feedback');
     }
   });
 
@@ -184,4 +191,5 @@ if (typeof document !== 'undefined') {
   }
 
   document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+  initMotion();
 }

@@ -21,7 +21,7 @@
   },
   {
     "id": "html5",
-    "name": "HTML",
+    "name": "HTML5",
     "category": "Frontend",
     "description": "Semantic, statically generated pages in this portfolio.",
     "projects": [],
@@ -29,7 +29,7 @@
   },
   {
     "id": "css3",
-    "name": "CSS",
+    "name": "CSS3",
     "category": "Frontend",
     "description": "Responsive layouts, themes, and motion without a UI framework.",
     "projects": [],
@@ -67,7 +67,7 @@
   },
   {
     "id": "express",
-    "name": "Express",
+    "name": "Express.js",
     "category": "Backend",
     "description": "HTTP routes, validation, and scoped access to application data.",
     "projects": [
@@ -108,7 +108,7 @@
   },
   {
     "id": "android",
-    "name": "Android",
+    "name": "Android SDK",
     "category": "Mobile Development",
     "description": "Native Java/XML application screens and Android lifecycle behavior.",
     "projects": [
@@ -119,7 +119,7 @@
   {
     "id": "androidstudio",
     "name": "Android Studio",
-    "category": "Mobile Development",
+    "category": "Tools and Workflow",
     "description": "Android development environment for Kwiztorya.",
     "projects": [
       "kwiztorya"
@@ -185,7 +185,7 @@
   {
     "id": "socketio",
     "name": "Socket.IO",
-    "category": "Integrations",
+    "category": "Backend",
     "description": "Scoped real-time communication and updates in STI Vio-Log.",
     "projects": [
       "sti-vio-log"
@@ -273,7 +273,7 @@
   },
   {
     "id": "vscode",
-    "name": "VS Code",
+    "name": "Visual Studio Code",
     "category": "Tools and Workflow",
     "description": "Code editing and development tooling listed in my résumé.",
     "projects": [],
@@ -284,7 +284,7 @@
     "id": "pdfkit",
     "iconId": "document",
     "name": "PDFKit",
-    "category": "Integrations",
+    "category": "Tools and Workflow",
     "description": "PDF document and certificate generation in STI Vio-Log.",
     "projects": [
       "sti-vio-log"
@@ -295,11 +295,89 @@
     "id": "exceljs",
     "iconId": "document",
     "name": "ExcelJS",
-    "category": "Integrations",
+    "category": "Tools and Workflow",
     "description": "Spreadsheet reports and exports in STI Vio-Log.",
     "projects": [
       "sti-vio-log"
     ],
     "label": "Used in a project"
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "category": "Programming Languages",
+    "description": "Listed in my updated résumé; developing my TypeScript practice.",
+    "projects": [],
+    "label": "Listed in my résumé",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "tailwind",
+    "name": "Tailwind CSS",
+    "category": "Frontend",
+    "description": "Utility-based interface styling included in my technical skill set.",
+    "projects": [],
+    "label": "Listed in my résumé",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "responsive",
+    "name": "Responsive user interfaces",
+    "category": "Frontend",
+    "description": "Responsive layout and accessible interface development.",
+    "projects": [],
+    "label": "Listed in my résumé",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "rest",
+    "name": "REST APIs",
+    "category": "Backend",
+    "description": "Request validation and HTTP API integration.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "rbac",
+    "name": "Role-based access control",
+    "category": "Security",
+    "description": "Role and ownership checks in the application API.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "sessions",
+    "name": "Cookie-based sessions",
+    "category": "Security",
+    "description": "Opaque cookie sessions for application authentication.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "csrf",
+    "name": "CSRF protection",
+    "category": "Security",
+    "description": "Request protection around authenticated application actions.",
+    "projects": [
+      "sti-vio-log"
+    ],
+    "label": "Used in a project",
+    "iconId": "code",
+    "evidenceUrl": "/resume/#skills"
   }
 ]

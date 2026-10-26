@@ -17,10 +17,10 @@ const page = route => pages.find(item => item.route === route).content;
 test('Home and About keep the portrait and photo branding without the old workflow', async () => {
   const home = page('/');
   assert.match(home, /class="summary-grid"/);
-  assert.match(home, /class="bento-photo card card--media"/);
-  assert.match(home, /src="\/assets\/personal\/ej-portrait.webp"/);
-  assert.match(home, /srcset="[^\"]*ej-portrait-400.webp 400w[^\"]*ej-portrait.webp 800w"/);
-  assert.match(home, /width="800" height="1067"/);
+  assert.match(home, /class="hero-portrait bento-photo card card--media"/);
+  assert.match(home, /src="\/assets\/personal\/ej-formal-cutout.png"/);
+  assert.match(home, /class="hero-formal-portrait"/);
+  assert.match(home, /width="408" height="612"/);
   assert.doesNotMatch(home, /STI Vio-Log workflow|workflow-violation|hero-studio|EJ’s initials/);
   assert.match(page('/about/'), /ej-portrait.webp/);
   assert.match(page('/projects/sti-vio-log/'), /<ol class="process-list">[\s\S]*Record[\s\S]*Clearance/);
@@ -39,12 +39,12 @@ test('Home and About keep the portrait and photo branding without the old workfl
 test('summary overview retains factual background, professional summary and reading order', () => {
   const home = page('/');
   assert.doesNotMatch(home, /class="bento-grid"/);
-  for(const text of ['About Me','Education','Project Leadership','Training','Taguig City, Philippines','Philippine Standard Time','UTC+8','STI College Global City','5 training and certification entries']) assert.ok(home.includes(text),text);
+  for(const text of ['About Me','Education','Project Leadership','Training','Taguig City, Philippines','Philippine Standard Time','UTC+8','STI College Global City','7 training and certification entries']) assert.ok(home.includes(text),text);
   const ids = [...home.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(ids.length,new Set(ids).size);
   for(const match of home.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));
   for(const anchor of ['top','about','skills','projects','experience','education','contact']) assert.ok(ids.includes(anchor));
-  const order=['summary-grid','featured-section','sphere-section','home-ai','home-training','home-background','home-contact'].map(name=>home.indexOf(name));
+  const order=['summary-grid','sphere-section','featured-section','home-background','home-training','home-ai','home-contact'].map(name=>home.indexOf(name));
   assert.deepEqual(order,[...order].sort((a,b)=>a-b));
 });
 
@@ -67,12 +67,12 @@ test('Home and About share professional AI content without hobbies', () => {
 test('résumé offers the supplied PDF, responsibilities, and a readable skills section', async () => {
   const html = page('/resume/');
   assert.match(html, /href="\/assets\/resume\/ej-christian-medilo-resume.pdf"[^>]*download/);
-  assert.match(html, /NSTP OJT Trainee — Admission Office/);
-  assert.match(html, /54 hours of NSTP/);
-  assert.match(html, /80 hours of Work Immersion/);
-  assert.match(html, /BS in Information Technology \(BSIT\)/);
-  assert.match(html, /ICT Strand, Senior High School/);
-  assert.equal(profile.certifications.length, 5);
+  assert.match(html, /54-Hour NSTP OJT Trainee — Media and Information Technology \(MIT\) Department/);
+  assert.match(html, /54-Hour NSTP/);
+  assert.match(html, /80-Hour Work Immersion/);
+  assert.match(html, /Bachelor of Science in Information Technology \(BSIT\)/);
+  assert.match(html, /Information and Communications Technology \(ICT\) Strand, Senior High School/);
+  assert.equal(profile.certifications.length, 7);
   assert.doesNotMatch(html, /IT Support Volunteer|MySQL/);
   assert.match(html, /id="skills"/);
   assert.match(html, /Introduction to Modern AI/);
@@ -82,7 +82,7 @@ test('résumé offers the supplied PDF, responsibilities, and a readable skills 
     await buildSite({ outDir: directory });
     const pdf = await readFile(join(directory, 'assets/resume/ej-christian-medilo-resume.pdf'));
     assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
-    assert.equal(createHash('sha256').update(pdf).digest('hex'), '8b918650807cfb1c629702f47d8e9d66d03f2f2d83b598d5b83681ddfd21c818', 'The latest supplied PDF must remain unmodified');
+    assert.equal(createHash('sha256').update(pdf).digest('hex'), '789013513f4916e26205c61831ee166379b0d714c8a807b96a5683f3e713e641', 'The latest supplied PDF must remain unmodified');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -93,7 +93,7 @@ test('initial visual theme updates browser chrome with saved, system, and unavai
     const meta = { setAttribute(name, value) { this[name] = value; } };
     runInNewContext(source, { document: { documentElement: root, querySelector: () => meta }, localStorage: { getItem() { if (fails) throw new Error('Unavailable'); return saved; } }, matchMedia: () => ({ matches: prefersDark }) });
     assert.equal(root.dataset.theme, expected);
-    assert.equal(meta.content, expected === 'dark' ? '#0c0b13' : '#fbfaf7');
+    assert.equal(meta.content, expected === 'dark' ? '#0f0f0f' : '#fdfdfc');
   }
 });
 
@@ -103,8 +103,8 @@ test('project cards retain searchable evidence and genuine case-study destinatio
     const cards = [...html.matchAll(/<article class="project-card[\s\S]*?<\/article>/g)].map(match => match[0]);
     assert.equal(cards.length, 2);
     assert.match(cards[0], /PostgreSQL/);
-    assert.match(cards[0], /Sole System Developer · Full-Stack Lead/);
-    assert.doesNotMatch(cards[0], /class="project-status"/);
+    assert.match(cards[0], /Full-Stack Developer/);
+    assert.match(cards[0], /class="project-status"/);
     assert.match(page('/projects/sti-vio-log/'), /PostgreSQL/);
     assert.match(cards[1], /kwiztorya-quiz-enhanced.webp/);
     assert.match(cards[1], /href="\/projects\/kwiztorya\/"/);

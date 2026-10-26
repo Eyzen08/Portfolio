@@ -1,15 +1,15 @@
 {
   "name": "EJ Christian Medilo",
   "shortName": "EJ Medilo",
-  "role": "Software Developer",
+  "role": "Aspiring Software Developer",
   "location": "Taguig City, Philippines",
   "email": "ejchristianmedilo12@gmail.com",
   "github": "Eyzen08",
-  "aboutSummary": "I’m EJ Christian Medilo, a software developer and BSIT student at STI College Global City. I enjoy turning ideas into practical software systems that solve real problems.",
-  "aiApproach": "I use AI tools to support planning, development, and problem-solving. Building systems with AI assistance helps me explore approaches, understand unfamiliar concepts, and learn throughout the development process.",
-  "aiLearning": "I’m currently studying AI Engineering to strengthen my technical foundation and learn how to apply AI effectively in useful software.",
-  "intro": "I build full-stack web and native Android applications, connecting clear interfaces, reliable APIs, and data. I’m continuing to grow as a software developer and explore AI engineering.",
-  "summary": "Software Developer and BSIT student at STI College Global City, with hands-on experience in frontend and backend development, REST API integration, database management, and application security. I build practical web and Android applications while continuing to develop my software engineering skills and explore AI engineering.",
+  "aboutSummary": "I’m EJ Christian Medilo, a fourth-year BSIT student at STI College Global City and an aspiring software developer. I build full-stack web and Android applications, learning through practical projects.",
+  "aiApproach": "I use AI to support development planning, code analysis, troubleshooting, research, implementation, and learning.",
+  "aiLearning": "I’m exploring AI engineering and building my foundations through study and practical experimentation.",
+  "intro": "I build web and Android applications that connect clear interfaces, useful workflows, and reliable data.",
+  "summary": "I am a fourth-year BSIT student and aspiring software developer with hands-on experience building full-stack web and Android applications. I developed STI Vio-Log, a student discipline and community service management system, and led development of Kwiztorya, a Philippine history learning application. My experience includes React, Node.js, Express.js, PostgreSQL, Java, API integration, and application security, with a growing interest in AI engineering.",
   "goal": "I’m strengthening my full-stack development practice: designing clear interfaces, building reliable APIs, and deploying applications that solve practical problems. I’m also exploring how AI can support useful software experiences.",
   "interests": "I’m interested in AI and emerging technologies: discovering new tools, experimenting with AI-assisted development, and understanding how technology can improve software and user experiences.",
   "hobbies": "Outside development, I enjoy online games, movies, and anime. Gaming gives me a mix of competitive and collaborative experiences; movies and anime let me explore different stories, characters, and creative worlds.",
@@ -57,29 +57,37 @@
   ],
   "experience": [
     {
-      "title": "NSTP OJT Trainee — Admission Office",
+      "title": "54-Hour NSTP OJT Trainee — Media and Information Technology (MIT) Department",
       "organization": "Moreh Academy",
       "period": "2024",
       "location": "Upper Bicutan, Taguig City",
       "bullets": [
-        "Completed 54 hours of NSTP on-the-job training in the Admission Office, assisting school personnel with administrative tasks and day-to-day operations.",
-        "Provided basic technical assistance and coordinated equipment preparation with staff for school and office activities."
+        "Assisted with basic computer and software troubleshooting to address routine technical issues.",
+        "Supported computer and peripheral setup to prepare devices for departmental activities.",
+        "Responded to basic IT requests to support the department's day-to-day operations.",
+        "Organized digital files and departmental documents to improve access and information retrieval.",
+        "Processed graduate portraits to prepare images for school-related materials.",
+        "Refined graduate portraits and image assets to maintain consistent quality and professional presentation."
       ]
     },
     {
-      "title": "Work Immersion Trainee",
+      "title": "80-Hour Work Immersion Trainee",
       "organization": "BCiS Power Technologies Corp.",
       "period": "2023",
       "location": "South Cembo, Makati City",
       "bullets": [
-        "Completed 80 hours of Work Immersion, performing administrative and routine IT-support tasks to maintain organized office operations.",
-        "Collaborated with supervisors on technical requests and daily responsibilities, supporting timely completion of assigned work and team coordination."
+        "Coordinated administrative tasks to support daily office operations.",
+        "Assisted with routine office activities to support established administrative workflows.",
+        "Maintained workplace records to meet documentation requirements.",
+        "Organized administrative records to make information easier to retrieve.",
+        "Responded to assigned technical requests from supervisors to support operational needs.",
+        "Handled assigned operational requests to help maintain smooth daily operations."
       ]
     }
   ],
   "education": [
     {
-      "title": "BS in Information Technology (BSIT)",
+      "title": "Bachelor of Science in Information Technology (BSIT)",
       "organization": "STI College Global City",
       "period": "2023–Present",
       "preview": {
@@ -93,33 +101,52 @@
       }
     },
     {
-      "title": "ICT Strand, Senior High School",
+      "title": "Information and Communications Technology (ICT) Strand, Senior High School",
       "organization": "Moreh Academy",
       "period": "2021–2023"
     }
   ],
   "certifications": [
     {
-      "title": "Code to Success: Mastering Software Development Cycle for IS Professionals",
-      "organization": "JPCS Clarendon College",
-      "period": "2026",
+      "title": "Microsoft Artificial Intelligence Course: Azure AI Fundamentals",
+      "organization": "TESDA Online Program",
+      "period": "October 2026",
       "preview": {
-        "src": "/assets/certifications/code-to-success.webp",
+        "src": "/assets/certifications/azure-ai-fundamentals.webp",
         "width": 1100,
         "height": 778,
-        "alt": "Code to Success: Mastering Software Development Cycle for IS Professionals certificate awarded to EJ Christian Medilo"
+        "alt": "Microsoft Artificial Intelligence Course: Azure AI Fundamentals certificate awarded to EJ Christian Medilo"
       },
-      "documentUrl": "/assets/certifications/code-to-success.jpg"
+      "documentUrl": "/assets/certifications/azure-ai-fundamentals.pdf"
     },
     {
       "title": "Introduction to Modern AI",
-      "organization": "Cisco Networking Academy",
-      "period": "2026"
+      "organization": "DICT-ITU DTC Initiative through Cisco Networking Academy",
+      "period": "October 2026",
+      "preview": {
+        "src": "/assets/certifications/introduction-to-modern-ai.webp",
+        "width": 1100,
+        "height": 746,
+        "alt": "Introduction to Modern AI certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/introduction-to-modern-ai.pdf"
+    },
+    {
+      "title": "Fundamentals of Artificial Intelligence",
+      "organization": "TESDA Online Program",
+      "period": "October 2026",
+      "preview": {
+        "src": "/assets/certifications/fundamentals-of-artificial-intelligence.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Fundamentals of Artificial Intelligence certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/fundamentals-of-artificial-intelligence.pdf"
     },
     {
       "title": "Cyber Threat Management",
       "organization": "Cisco Networking Academy",
-      "period": "2026",
+      "period": "August 2026",
       "preview": {
         "src": "/assets/certifications/cyber-threat-management.webp",
         "width": 1100,
@@ -131,7 +158,7 @@
     {
       "title": "Cybersecurity Quality Assurance: Detect, Test, Secure",
       "organization": "Ethel Programming Computer Programming Services",
-      "period": "2026",
+      "period": "August 2026",
       "preview": {
         "src": "/assets/certifications/cybersecurity-quality-assurance.webp",
         "width": 1100,
@@ -141,9 +168,21 @@
       "documentUrl": "/assets/certifications/cybersecurity-quality-assurance.png"
     },
     {
+      "title": "Code to Success: Mastering Software Development Cycle for IS Professionals",
+      "organization": "JPCS Clarendon College",
+      "period": "August 2026",
+      "preview": {
+        "src": "/assets/certifications/code-to-success.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Code to Success: Mastering Software Development Cycle for IS Professionals certificate awarded to EJ Christian Medilo"
+      },
+      "documentUrl": "/assets/certifications/code-to-success.jpg"
+    },
+    {
       "title": "LEGO Educational Robotics and Computer Technical Training",
-      "organization": "University of the East Manila",
-      "period": "2018",
+      "organization": "University of the East–Manila Campus",
+      "period": "June 2018",
       "preview": {
         "src": "/assets/certifications/lego-robotics-training.webp",
         "width": 1100,
@@ -251,6 +290,22 @@
       "logo": "/assets/icons/claude.svg",
       "category": "Code Analysis and Technical Reasoning",
       "description": "I use Claude to analyze code, explore alternative solutions, reason through technical problems, and assist with documentation."
+    },
+    {
+      "name": "GitHub Copilot",
+      "logo": "/assets/icons/github.svg",
+      "category": "AI-Assisted Development",
+      "description": "I use GitHub Copilot for coding suggestions, then review, understand, and test the code I keep."
     }
-  ]
+  ],
+  "positioning": "Aspiring Software Developer | Full-Stack Web Development | Exploring AI Engineering",
+  "heroPortrait": {
+    "src": "/assets/personal/ej-formal-cutout.png",
+    "width": 408,
+    "height": 612,
+    "alt": "EJ Christian Medilo wearing a black suit, white shirt and tie",
+    "description": "Owner-supplied formal portrait with transparent background.",
+    "credit": "Personal photograph supplied by EJ Christian Medilo",
+    "sha256": "2bda32198b054d733abdf364152099b26f8059320e6f2de1267dc4b13ddb7de3"
+  }
 }

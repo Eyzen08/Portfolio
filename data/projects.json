@@ -4,12 +4,12 @@
     "title": "STI Vio-Log",
     "platform": "Web",
     "year": 2026,
-    "summary": "A student discipline system for managing violations, community service, QR attendance, and clearance.",
-    "role": "Sole System Developer · Full-Stack Lead",
-    "roleDetail": "A team capstone project for the Discipline Office at STI College Global City, where I was the sole system developer and full-stack lead.",
+    "summary": "A full-stack web application that centralizes student violation records, community service assignments, and clearance workflows to support the Discipline Office’s monitoring and record management.",
+    "role": "Full-Stack Developer",
+    "roleDetail": "I developed STI Vio-Log as the full-stack lead and primary system developer for the academic capstone team at STI College Global City.",
     "sourceUrl": "https://github.com/Eyzen08/STI-Vio-Log",
     "liveUrl": "https://sti-vio-log.vercel.app",
-    "status": "Live web platform",
+    "status": "Public web deployment · Academic capstone",
     "technologies": [
       "javascript",
       "react",
@@ -19,7 +19,9 @@
       "postgresql",
       "supabase",
       "socketio",
-      "git"
+      "git",
+      "vercel",
+      "render"
     ],
     "sections": [
       {
@@ -35,7 +37,7 @@
         "id": "contribution",
         "title": "My Contribution",
         "paragraphs": [
-          "I was the sole system developer within the capstone team and led the full-stack implementation. That responsibility covered connecting the React interface, Express API, PostgreSQL data model, authentication, permissions, and deployment configuration into one system.",
+          "I was the primary system developer and full-stack lead within the academic capstone team. My work connected the React interface, Express API, PostgreSQL data model, authentication, permissions, and deployment configuration into one system.",
           "The scope includes attendance rules, student self-service, staff operations, reports, and audit history, with frontend and backend access boundaries."
         ],
         "bullets": []
@@ -224,6 +226,15 @@
         "caption": "Supplied application screenshot · identifying details redacted.",
         "explanation": "Account sign-in page with populated account and credential areas hidden."
       }
+    ],
+    "category": "Student Discipline and Community Service Management",
+    "context": "Capstone Project — STI College Global City",
+    "contribution": "Full-stack lead and primary system developer for the academic capstone team.",
+    "features": [
+      "QR-based attendance and digital time records (DTR)",
+      "Community service-hour tracking",
+      "Role-based access control and real-time updates",
+      "Report generation and clearance workflows"
     ]
   },
   {
@@ -231,17 +242,18 @@
     "title": "Kwiztorya",
     "platform": "Mobile",
     "year": 2025,
-    "summary": "An Android learning game that explores Philippine history through quizzes, stories, and saved progress.",
-    "role": "Lead Programmer · Android Development",
-    "roleDetail": "An application development research project at STI College Global City, where I served as lead programmer within a three-member team.",
+    "summary": "An Android learning application that makes Philippine history more engaging through interactive quizzes, story-based learning, and saved progress.",
+    "role": "Lead Programmer",
+    "roleDetail": "I led a three-member development team in building Kwiztorya for an application development research project at STI College Global City.",
     "sourceUrl": "https://github.com/Eyzen08/Kwiztorya",
     "liveUrl": null,
-    "status": "Academic Android project",
+    "status": "Academic Android project · Source available",
     "technologies": [
       "java",
       "android",
       "xml",
       "firebase",
+      "sqlite",
       "sharedpreferences",
       "gradle",
       "git"
@@ -260,7 +272,7 @@
         "id": "contribution",
         "title": "My Contribution",
         "paragraphs": [
-          "I led building the Android application within the team. The scope connected quiz and story screens, navigation, score feedback, local progression, settings, and account screens. Java activities, XML layouts, Android resources, and the Gradle project show the resulting team implementation."
+          "I led a three-member development team in building the Android application. My work connected quiz and story screens, navigation, score feedback, local progression, settings, and account screens. Java activities, XML layouts, Android resources, and the Gradle project show the resulting team implementation."
         ],
         "bullets": []
       },
@@ -439,6 +451,15 @@
         "enhanced": true,
         "presentationLabel": "Enhanced Preview"
       }
+    ],
+    "category": "Philippine History Learning Application",
+    "context": "Application Development Research Project — STI College Global City",
+    "contribution": "Led a three-member development team in building the Android application.",
+    "features": [
+      "Interactive quizzes across five historical eras",
+      "Story Mode and achievement tracking",
+      "Firebase-backed sign-in and local data storage",
+      "Saved quiz scores, chapter progression, and resume learning"
     ]
   }
 ]

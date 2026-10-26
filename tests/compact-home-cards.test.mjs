@@ -15,11 +15,11 @@ test('each complete Home project card contains its information, screenshots and 
     const card = cards[index];
     for (const text of [project.title, project.role, project.summary]) assert.ok(card.includes(escaped(text)), text);
     for (const href of [`/projects/${project.id}/`, project.sourceUrl, project.liveUrl].filter(Boolean)) assert.ok(card.includes(`href="${href}"`));
-    assert.match(card, /data-deck-prev/); assert.match(card, /data-deck-next/);
-    assert.equal((card.match(/data-deck-select\b/g) || []).length, project.previewScreens.length);
+    assert.match(card, /data-preview-prev/); assert.match(card, /data-preview-next/);
+    assert.equal((card.match(/data-preview-select\b/g) || []).length, project.previewScreens.length);
     for (const screen of project.previewScreens) {
-      assert.ok(card.includes(`aria-controls="picture-${project.id}-${screen.id}"`));
-      assert.ok(card.includes(`id="picture-${project.id}-${screen.id}"`));
+      assert.ok(card.includes(`aria-controls="preview-${project.id}-${screen.id}"`));
+      assert.ok(card.includes(`id="preview-${project.id}-${screen.id}"`));
       assert.ok(card.includes(`href="${screen.src}"`));
       if (screen.originalSrc) assert.ok(card.includes(`href="${screen.originalSrc}"`));
       if (screen.presentationLabel) assert.ok(card.includes(screen.presentationLabel));
@@ -27,26 +27,27 @@ test('each complete Home project card contains its information, screenshots and 
   });
 });
 
-test('Home displays three certificate previews and keeps the other two training records', () => {
-  const training = home.slice(home.indexOf('id="training"'), home.indexOf('id="education"'));
-  const featured = [...training.matchAll(/<article class="home-certificate card"[\s\S]*?<\/article>/g)].map(match => match[0]);
-  assert.equal(featured.length, 3);
-  const expected = profile.certifications.filter(item => item.preview).slice(0, 3);
-  expected.forEach((item, index) => {
-    for (const text of [escaped(item.title), item.organization, item.period, item.preview.src, item.documentUrl]) assert.ok(featured[index].includes(text), text);
-  });
-  const remaining = training.slice(training.indexOf('class="training-summary"'));
-  assert.match(remaining, /Introduction to Modern AI/); assert.match(remaining, /LEGO Educational Robotics/);
-  assert.equal((remaining.match(/<li>/g) || []).length, 2);
-  const dedicated = pages.find(page => page.route === '/training/').content;
-  assert.equal((dedicated.match(/class="certificate-preview"/g) || []).length, 4);
+test('Home retains all seven credentials and all seven supplied document previews', () => {
+  const training = home.slice(home.indexOf('id="training"'), home.indexOf('id="ai"'));
+  const cards = [...training.matchAll(/<article class="home-certificate card"[\s\S]*?<\/article>/g)].map(match => match[0]);
+  assert.equal(cards.length, 7);
+  for (const item of profile.certifications) {
+    const card = cards.find(card => card.includes(escaped(item.title)));
+    assert.ok(card, item.title);
+    for (const text of [item.organization, item.period].filter(Boolean)) assert.ok(card.includes(escaped(text)));
+    if (item.preview) { assert.ok(card.includes(item.preview.src)); assert.ok(card.includes(item.documentUrl)); }
+    else { assert.match(card, /Certificate preview unavailable/); assert.doesNotMatch(card, /class="certificate-preview"/); }
+  }
+  assert.equal((training.match(/class="certificate-preview"/g) || []).length, 7);
+  assert.match(training, /tabindex="0" role="region"/);
+  assert.match(training, /Earlier training/);
 });
 
 test('matching Education and Experience panels retain every record and bullet', () => {
-  const foundation = home.slice(home.indexOf('id="education"'), home.indexOf('id="github"'));
-  assert.equal((foundation.match(/class="foundation-panel card"/g) || []).length, 2);
-  assert.match(foundation, /<h3[^>]*>Education<\/h3>/);
-  assert.match(foundation, /<h3[^>]*>Experience &amp; Immersion<\/h3>/);
+  const foundation = home.slice(home.indexOf('id="education"'), home.indexOf('id="training"'));
+  assert.equal((foundation.match(/name="experience-rows"/g) || []).length, profile.experience.length);
+  assert.match(foundation, /— Education/);
+  assert.match(foundation, /Student training &amp; work immersion/);
   for (const item of [...profile.education, ...profile.experience]) {
     for (const text of [item.title, item.organization, item.period, item.location, ...(item.bullets || [])].filter(Boolean)) assert.ok(foundation.includes(escaped(text)), text);
   }
