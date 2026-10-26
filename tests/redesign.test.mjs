@@ -40,7 +40,7 @@ test('summary overview retains factual background, professional summary and read
   const home = page('/');
   assert.doesNotMatch(home, /class="bento-grid"/);
   for(const text of ['About Me','Education','Project Leadership','Training','Taguig City, Philippines','Philippine Standard Time','UTC+8','STI College Global City','7 training and certification entries']) assert.ok(home.includes(text),text);
-  const ids = [...home.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+  const ids = [...home.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(ids.length,new Set(ids).size);
   for(const match of home.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));
   for(const anchor of ['top','about','skills','projects','experience','education','contact']) assert.ok(ids.includes(anchor));
@@ -106,7 +106,7 @@ test('project cards retain searchable evidence and genuine case-study destinatio
     assert.match(cards[0], /Full-Stack Developer/);
     assert.match(cards[0], /class="project-status"/);
     assert.match(page('/projects/sti-vio-log/'), /PostgreSQL/);
-    assert.match(cards[1], /kwiztorya-quiz-enhanced.webp/);
+    assert.match(cards[1], /kwiztorya-mockup-quiz.webp/);
     assert.match(cards[1], /href="\/projects\/kwiztorya\/"/);
     assert.doesNotMatch(cards[1], /welcome-art/);
   }
@@ -118,13 +118,13 @@ test('Kwiztorya preview has four complete figures before JavaScript and valid un
   assert.equal((html.match(/data-deck-card/g) || []).length, 4);
   assert.match(html, /data-deck-controls hidden/);
   assert.doesNotMatch(html, /data-deck-card hidden/);
-  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(ids.length, new Set(ids).size);
   for (const match of html.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));
   const kwiz = projects.find(item => item.id === 'kwiztorya');
   assert.equal(kwiz.previewScreens.length, 4);
   for (const screen of kwiz.previewScreens) {
-    assert.ok(screen.width > 0 && screen.height > screen.width);
+    assert.ok(screen.width > 0 && screen.height < screen.width);
     assert.ok(screen.alt && screen.caption && screen.explanation);
     const bytes = await readFile(new URL(`..${screen.src}`, import.meta.url));
     assert.equal(bytes.subarray(8, 12).toString(), 'WEBP');

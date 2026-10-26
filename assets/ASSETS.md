@@ -215,3 +215,9 @@ Original SHA-256 fingerprints:
 - `azure-ai-fundamentals.pdf`: `b2dc0255e8690b4578825a5dc836af54bdae992501d3c5e63206b4f57e8e8f26`
 - `introduction-to-modern-ai.pdf`: `f110423ed4b52e0efb1d221b443dfde5b787f8a6a3705bd61b6ab2fd5968ffc2`
 - `fundamentals-of-artificial-intelligence.pdf`: `65c68cdb3ec376d7172508f2430bd4fe810cb91e197e2e3ffdf08cefc2510ea8`
+
+## 26 October 2026 — supplied project mockups
+
+Current revision: STI selects the four 1920 × 1080 `sti-vio-log-mockup-*-v3.webp` compositions (960 × 540 thumbnails), with the authentic live-site logo and masked public sign-in captures over the cool-white office background. Kwiztorya retains the four original supplied 1536 × 1024 compositions and original screenshot popup. PNG masters/backgrounds are in `design/project-showcase/`; raw live captures stay in ignored `.qa/`. See the current-revision section of `docs/PROJECT-SHOWCASE.md` for provenance, privacy masks, and verification. The following paragraph records the earlier version.
+
+Home, Projects and both case-study galleries now use the eight owner-approved landscape compositions. STI combines the nine supplied transparent devices and the supplied desktop landing image over four AI-generated studio background plates. UI pixels are supplied imagery, with account/student identifiers masked before native-browser PNG export. Kwiztorya uses four supplied phone/tablet presentation compositions unchanged. These are labeled presentation mockups, not unmodified device screenshots. PNG masters and generated backgrounds are outside the published assets, in design/project-showcase/. Full provenance, generation prompts, composition groupings and QA are documented in docs/PROJECT-SHOWCASE.md. Existing source assets remain unchanged; unredacted new source captures are not published.

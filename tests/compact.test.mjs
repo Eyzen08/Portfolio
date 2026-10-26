@@ -7,18 +7,15 @@ const projects=JSON.parse(await readFile(new URL('../data/projects.json',import.
 const technologies=JSON.parse(await readFile(new URL('../data/technologies.json',import.meta.url)));
 const pages=renderPages({profile,projects,technologies});
 
-test('overview and case-study screenshots share device frames without double-framing STI mobile captures',()=>{
- for(const project of projects){
-  for(const route of ['/','/projects/',`/projects/${project.id}/`]){
+test('overview and case-study mockups are not wrapped in additional devices',()=>{
+ for(const project of projects)for(const route of ['/','/projects/',`/projects/${project.id}/`]){
    const html=pages.find(p=>p.route===route).content;
    for(const screen of project.previewScreens){
-    assert.equal(html.includes(`class="phone-frame"><img src="${screen.src}"`),project.id==='kwiztorya',`${route} ${screen.id} phone`);
-    assert.equal(html.includes(`class="monitor-display"><img src="${screen.src}"`),screen.kind==='desktop',`${route} ${screen.id} monitor`);
+     assert.ok(html.includes(`src="${screen.src}"`));
+     assert.ok(!html.includes(`class="phone-frame"><img src="${screen.src}"`));
+     assert.ok(!html.includes(`class="monitor-display"><img src="${screen.src}"`));
    }
-   if(route!== '/projects/sti-vio-log/')assert.match(html,/Recreated Preview/);
-  }
-  const detail=pages.find(p=>p.route===`/projects/${project.id}/`).content;
-  for(const screen of project.previewScreens)assert.ok(detail.includes(screen.caption.replaceAll('&','&amp;')));
+   assert.match(html,/Owner-Supplied Mockup/);
  }
 });
 
@@ -42,9 +39,10 @@ test('globe mesh is finite, connected on the sphere and rotates through the exis
  const point=lines.find(l=>Math.abs(l[0].x)>.1)[0];assert.notDeepEqual(projectPoint(point,0),projectPoint(point,.4));
 });
 
-test('Home preview is explicitly recreated, first in sequence and linked to a source app crop',()=>{
- const kwiz=projects.find(p=>p.id==='kwiztorya');assert.deepEqual(kwiz.previewScreens.map(s=>s.id),['home','quiz','eras','story']);
- const home=kwiz.previewScreens[0];assert.equal(home.presentationLabel,'Recreated Preview');assert.match(home.caption,/Recreated/);assert.match(home.explanation,/0\/5/);assert.ok(home.originalSrc);
- for(const s of projects[0].previewScreens.filter(s=>s.kind==='mobile')){assert.match(s.src,/-cropped.webp$/);assert.equal(s.deviceFrame,true);assert.ok(s.width<420);}
+test('new Home mockup leads the supplied Kwiz sequence without fabricated release claims',()=>{
+ const kwiz=projects.find(p=>p.id==='kwiztorya');assert.deepEqual(kwiz.previewScreens.map(s=>s.id),['home','quiz','story','settings']);
+ assert.equal(kwiz.previewScreens[0].presentationLabel,'Owner-Supplied Mockup');
+ assert.match(kwiz.previewScreens[0].caption,/not an unmodified device capture/);
+ assert.equal(kwiz.platform,'Mobile');assert.equal(kwiz.liveUrl,null);
+ assert.ok(kwiz.previewScreens.every(s=>!s.originalSrc));
 });
-

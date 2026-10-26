@@ -15,14 +15,15 @@ test('each complete Home project card contains its information, screenshots and 
     const card = cards[index];
     for (const text of [project.title, project.role, project.summary]) assert.ok(card.includes(escaped(text)), text);
     for (const href of [`/projects/${project.id}/`, project.sourceUrl, project.liveUrl].filter(Boolean)) assert.ok(card.includes(`href="${href}"`));
-    assert.match(card, /data-preview-prev/); assert.match(card, /data-preview-next/);
-    assert.equal((card.match(/data-preview-select\b/g) || []).length, project.previewScreens.length);
+    const gallery = project.id === 'sti-vio-log' ? home.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : card;
+    assert.match(gallery, /data-preview-prev/); assert.match(gallery, /data-preview-next/);
+    assert.equal((gallery.match(/data-preview-select\b/g) || []).length, project.previewScreens.length);
     for (const screen of project.previewScreens) {
-      assert.ok(card.includes(`aria-controls="preview-${project.id}-${screen.id}"`));
-      assert.ok(card.includes(`id="preview-${project.id}-${screen.id}"`));
-      assert.ok(card.includes(`href="${screen.src}"`));
-      if (screen.originalSrc) assert.ok(card.includes(`href="${screen.originalSrc}"`));
-      if (screen.presentationLabel) assert.ok(card.includes(screen.presentationLabel));
+      assert.ok(gallery.includes(`aria-controls="preview-${project.id}-${screen.id}"`));
+      assert.ok(gallery.includes(`id="preview-${project.id}-${screen.id}"`));
+      assert.ok(gallery.includes(`href="${screen.src}"`));
+      if (screen.originalSrc) assert.ok(gallery.includes(`href="${screen.originalSrc}"`));
+      if (screen.presentationLabel) assert.ok(gallery.includes(screen.presentationLabel));
     }
   });
 });

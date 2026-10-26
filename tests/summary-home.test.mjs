@@ -15,7 +15,7 @@ test('Home opens with the complete professional overview and renders each intera
     assert.equal([...home.content.matchAll(new RegExp(`${marker}(?=[\\s>])`, 'g'))].length, 1, `${marker} is not duplicated below the overview`);
   }
   assert.doesNotMatch(home.content, /editorial-hero|hero-project|data-hobby-/);
-  const ids = [...home.content.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  const ids = [...home.content.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(ids.length, new Set(ids).size);
   const positions = ['top', 'about', 'education', 'skills', 'projects', 'experience', 'training', 'ai', 'github', 'contact'].map(id => ids.indexOf(id));
   assert.ok(positions.every(index => index >= 0));

@@ -79,8 +79,8 @@ export function initDecks() {
   document.addEventListener('visibilitychange',()=>{for(const state of states.values())state.sync();});
 }
 
-export function initProjectPreviews() {
-  document.querySelectorAll('[data-project-preview]').forEach(card => {
+function initScreenshotPreviews() {
+  document.querySelectorAll('[data-screenshot-preview]').forEach(card => {
     const dialog = card.querySelector('dialog');
     if (!dialog || typeof dialog.showModal !== 'function') return;
     const slides = [...dialog.querySelectorAll('[data-preview-slide]')];
@@ -120,6 +120,65 @@ export function initProjectPreviews() {
       opener?.focus({ preventScroll: true });
       card.dispatchEvent(new Event('previewchange'));
     });
+  });
+}
+
+export function initProjectPreviews() {
+  initScreenshotPreviews();
+  const dialog=document.querySelector('[data-project-viewer]');
+  if(!dialog || typeof dialog.showModal!=='function')return;
+  const panels=[...dialog.querySelectorAll('[data-project-panel]')];
+  const close=dialog.querySelector('[data-preview-close]');
+  const title=dialog.querySelector('[data-project-title]');
+  const thumbnail=dialog.querySelector('[data-project-thumbnail]');
+  const featured=dialog.querySelector('[data-project-featured]');
+  let panel,active=0,opener;
+  const select=index=>{
+    const slides=[...panel.querySelectorAll('[data-preview-slide]')];
+    active=galleryIndex(0,index,slides.length);
+    slides.forEach((slide,i)=>{slide.hidden=i!==active;});
+    panel.querySelectorAll('[data-preview-select]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===active)));
+    panel.querySelector('[data-preview-count]').textContent=(active+1)+' / '+slides.length;
+  };
+  const showProject=id=>{
+    const target=panels.find(item=>item.dataset.projectPanel===id);
+    if(!target)return false;
+    panel=target;panels.forEach(item=>{item.hidden=item!==panel;});
+    title.textContent=panel.dataset.projectTitle;
+    thumbnail.src=panel.querySelector('.preview-image').src;
+    featured.hidden=panel.dataset.projectFeatured!=='true';
+    select(0);dialog.scrollTop=0;return true;
+  };
+  document.querySelectorAll('[data-details-open]').forEach(link=>link.addEventListener('click',event=>{
+    if(event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
+    if(dialog.open){event.preventDefault();return;}
+    if(!showProject(link.dataset.projectId))return;
+    try{dialog.showModal();}catch{return;}
+    event.preventDefault();opener=link;
+    document.documentElement.classList.add('preview-open');close.focus();
+  }));
+  panels.forEach(item=>{
+    item.querySelectorAll('[data-preview-select]').forEach(button=>button.addEventListener('click',()=>select(Number(button.dataset.previewIndex))));
+    item.querySelector('[data-preview-prev]').addEventListener('click',()=>select(active-1));
+    item.querySelector('[data-preview-next]').addEventListener('click',()=>select(active+1));
+  });
+  close.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('click',event=>{
+    if(event.target!==dialog)return;
+    const bounds=dialog.getBoundingClientRect();
+    if(event.clientX<bounds.left || event.clientX>bounds.right || event.clientY<bounds.top || event.clientY>bounds.bottom)dialog.close();
+  });
+  dialog.addEventListener('keydown',event=>{
+    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(active+(event.key==='ArrowLeft'?-1:1));}
+    if(event.key!=='Tab')return;
+    const controls=[...dialog.querySelectorAll('a[href],button:not([disabled])')].filter(node=>!node.closest('[hidden]'));
+    const first=controls[0],last=controls.at(-1);
+    if((event.shiftKey&&document.activeElement===first)||(!event.shiftKey&&document.activeElement===last)){
+      event.preventDefault();(event.shiftKey?last:first).focus();
+    }
+  });
+  dialog.addEventListener('close',()=>{
+    document.documentElement.classList.remove('preview-open');opener?.focus({preventScroll:true});
   });
 }
 

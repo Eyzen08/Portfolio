@@ -7,27 +7,28 @@ const projects=JSON.parse(await readFile(new URL('../data/projects.json',import.
 const technologies=JSON.parse(await readFile(new URL('../data/technologies.json',import.meta.url)));
 const pages=renderPages({profile,projects,technologies});
 test('all project contexts use independent layered decks with complete figures before JS',()=>{
-  for(const [route,count] of [['/',2],['/projects/',2],['/projects/sti-vio-log/',1],['/projects/kwiztorya/',1]]){
+  for(const [route,count] of [['/',0],['/projects/',0],['/projects/sti-vio-log/',1],['/projects/kwiztorya/',1]]){
     const html=pages.find(p=>p.route===route).content;
     assert.equal((html.match(/data-picture-deck/g)||[]).length,count,route);
     assert.ok(!html.includes('phone-trio'));
     assert.ok(!html.includes('class="project-stage"'));
-    const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
+    const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
     for(const match of html.matchAll(/aria-controls="([^"]+)"/g))assert.ok(ids.includes(match[1]));
     assert.ok(!/data-deck-card[^>]* hidden/.test(html));
     if(route.startsWith('/projects/')&&route!=='/projects/') assert.ok(html.includes('data-deck-controls hidden'));
     else assert.ok(!html.includes('data-rail-controls'));
   }
 });
-test('six sanitized STI screens and four attributed Kwiz screens have complete local records',async()=>{
-  assert.deepEqual(projects[0].previewScreens.map(s=>s.id),['dashboard','attendance','student','navigation','landing','signin']);
+test('four STI compositions and four supplied Kwiz mockups have complete local records',async()=>{
+  assert.deepEqual(projects[0].previewScreens.map(s=>s.id),['landing','signin','dashboard','workflows']);
   for(const project of projects)for(const screen of project.previewScreens){
-    assert.ok(['mobile','desktop'].includes(screen.kind));assert.ok(screen.label&&screen.alt&&screen.caption&&screen.explanation);
+    assert.equal(screen.kind,'desktop');assert.equal(screen.deviceFrame,true);
+    assert.ok(screen.label&&screen.alt&&screen.caption&&screen.explanation);
+    assert.equal(screen.presentationLabel,'Owner-Supplied Mockup');
     for(const field of ['src','srcSmall'])await readFile(new URL(`..${screen[field]}`,import.meta.url));
   }
-  for(const screen of projects[1].previewScreens){assert.ok(screen.presentationLabel);assert.ok(screen.originalSrc);assert.ok(screen.width>=800);if(screen.id!=='home'){assert.ok(screen.enhanced);assert.equal(screen.caption,'Enhanced from the recorded device demo.');}}
-  for(const screen of projects[0].previewScreens.filter(s=>s.kind==='mobile'))assert.equal(screen.deviceFrame,true);
 });
+
 function node(textContent=''){return {dataset:{},hidden:false,textContent,scrollHeight:150,attrs:{},listeners:{},hasAttribute(k){return k in this.attrs;},style:{setProperty(){}},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,fn){this.listeners[k]=fn;},contains(n){return n===this;},querySelector(){return null;},querySelectorAll(){return [];}};}
 test('shared decks autoplay independently, pause on interaction and reset hidden time',async t=>{
   const keys=['document','matchMedia','ResizeObserver','IntersectionObserver','setTimeout','clearTimeout'];const saved=new Map(keys.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));

@@ -12,11 +12,11 @@ test('Projects exposes both cards, separate preview and case actions, and comple
   assert.equal(cards.length,2);
   for(const [index,project] of projects.entries()){
     const card=cards[index];assert.ok(card.includes(project.role));assert.match(card,/class="tags"/);
-    assert.match(card,/Preview Screenshots/);assert.match(card,/View Case Study/);
+    assert.match(card,/View Project/);assert.match(card,/Case Study/);
     assert.ok(card.includes(`href="/projects/${project.id}/"`));
-    assert.match(card,/<dialog[^>]+aria-labelledby=/);
     assert.ok(card.includes(`href="${project.previewScreens[0].src}"`),'Preview retains its no-JS image destination');
-    const dialog=card.match(/<dialog[\s\S]*?<\/dialog>/)[0];
+    const dialog=project.id==='sti-vio-log' ? html.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : card.match(/<dialog[\s\S]*?<\/dialog>/)[0];
+    assert.match(dialog,/<dialog[^>]+aria-labelledby=/);
     assert.equal((dialog.match(/data-preview-slide/g)||[]).length,project.previewScreens.length);
     assert.doesNotMatch(dialog,/class="monitor-frame"|class="phone-frame"|data-deck/);
     for(const screen of project.previewScreens){
@@ -24,7 +24,7 @@ test('Projects exposes both cards, separate preview and case actions, and comple
       if(screen.originalSrc)assert.ok(dialog.includes(`href="${screen.originalSrc}"`));
     }
   }
-  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);assert.equal(ids.length,new Set(ids).size);
+  const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);assert.equal(ids.length,new Set(ids).size);
   for(const match of html.matchAll(/aria-(?:controls|labelledby)="([^"]+)"/g))assert.ok(ids.includes(match[1]));
 });
 
@@ -40,7 +40,7 @@ test('viewer opens the displayed screen, wraps manually, closes cleanly, and fal
     querySelector:s=>({'[data-preview-count]':counter,'[data-preview-prev]':prev,'[data-preview-next]':next,'[data-preview-close]':close})[s]});
   const frames=[node(),node(),node()];frames[1].dataset.selected='true';
   const card={dataset:{},dispatchEvent(){},querySelector:()=>dialog,querySelectorAll:s=>s==='[data-preview-open]'?[opener]:frames};
-  const classes=new Set();globalThis.document={querySelectorAll:()=>[card],documentElement:{classList:{add:s=>classes.add(s),remove:s=>classes.delete(s)}}};
+  const classes=new Set();globalThis.document={querySelector:()=>null,querySelectorAll:()=>[card],documentElement:{classList:{add:s=>classes.add(s),remove:s=>classes.delete(s)}}};
   const {initProjectPreviews}=await import('../assets/decks.js');assert.equal(typeof initProjectPreviews,'function');initProjectPreviews();
   let prevented=0;const event={button:0,currentTarget:opener,preventDefault(){prevented++;}};
   opener.listeners.click({...event,ctrlKey:true});assert.equal(prevented,0);assert.equal(dialog.open,false);
