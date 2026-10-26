@@ -18,6 +18,30 @@ if (typeof document !== 'undefined') {
   initCertificatePreviews();
   initLocationMap();
   if (document.querySelector('[data-home]')) initHome();
+  const portraitSwap = document.querySelector('[data-portrait-swap]');
+  if (portraitSwap) {
+    const formal = portraitSwap.querySelector('[data-formal-portrait]');
+    let available = false, wantsFormal = false;
+    const showPortrait = show => {
+      wantsFormal = show;
+      portraitSwap.setAttribute('aria-pressed', String(available && show));
+    };
+    const ready = () => {
+      available = formal.naturalWidth > 0;
+      portraitSwap.disabled = !available;
+      showPortrait(wantsFormal);
+    };
+    formal.addEventListener('load', ready);
+    formal.addEventListener('error', () => {
+      available = false;
+      portraitSwap.disabled = true;
+      showPortrait(false);
+    });
+    portraitSwap.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') showPortrait(true); });
+    portraitSwap.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') showPortrait(false); });
+    portraitSwap.addEventListener('click', () => showPortrait(portraitSwap.getAttribute('aria-pressed') !== 'true'));
+    ready();
+  }
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
   let preference;
   try { preference = localStorage.getItem('ej-theme'); } catch { /* Storage can be unavailable in private browsing. */ }

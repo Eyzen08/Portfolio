@@ -117,6 +117,13 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 .page-intro .project-meta { justify-content: start; margin-top: 25px; }.page-intro .project-meta span + span { border-left: 1px solid var(--line); padding-left: 16px; }
 .about-intro { display: grid; grid-template-columns: .65fr 1.35fr; gap: var(--card-gap); padding-bottom: 24px; }.about-intro section p { max-width: 68ch; color: var(--muted); }
 .about-portrait { display: flex; flex-direction: column; align-items: center; justify-content: center; }.about-portrait .portrait { font-size: 38px; margin-bottom: 22px; }.about-portrait p { font-weight: 600; margin-bottom: 6px; }.about-portrait > span { font-size: 15px; color: var(--muted); }
+.about-photo-swap { position: relative; display: block; width: 100%; max-width: 400px; aspect-ratio: 800 / 1067; flex-shrink: 0; margin: 0 0 22px; padding: 0; border: 0; border-radius: 12px; background: var(--surface); overflow: hidden; }
+.about-photo-swap:disabled { cursor: default; }
+.about-portrait .about-photo-swap img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; margin: 0; border-radius: inherit; transition: opacity 200ms ease; }
+.about-photo-swap .portrait-swap-formal { object-fit: contain; opacity: 0; }
+.about-photo-swap[aria-pressed='true'] .portrait { opacity: 0; }
+.about-photo-swap[aria-pressed='true'] .portrait-swap-formal { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .about-portrait .about-photo-swap img { transition: none; } }
 .strength-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--card-gap); margin-top: 24px; }.strength-grid p { color: var(--muted); }
 .personal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); }.personal-grid p { color: var(--muted); }.personal-symbol { font-size: 35px; color: var(--violet); display: block; margin-bottom: 18px; }
 .filter-controls { padding-bottom: 34px; }.search-field { display: flex; align-items: center; gap: 12px; width: min(500px, 100%); padding: 0 16px; border: 1px solid var(--field-line); border-radius: 7px; background: var(--surface); color: var(--muted); }.search-field input { width: 100%; min-width: 0; padding: 13px 0; border: 0; background: transparent; color: var(--text); outline-offset: 3px; }

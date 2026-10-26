@@ -6,6 +6,8 @@
   "email": "ejchristianmedilo12@gmail.com",
   "github": "Eyzen08",
   "aboutSummary": "I’m EJ Christian Medilo, a fourth-year BSIT student at STI College Global City and an aspiring software developer. I build full-stack web and Android applications, learning through practical projects.",
+  "aboutIntroHeading": "Building Ideas with Code, Creativity, and AI.",
+  "aboutIntroText": "I build practical web applications and thoughtful digital experiences by combining software development skills with AI-powered tools. I use AI to explore solutions, troubleshoot code, improve workflows, and accelerate development while continuously strengthening my own technical knowledge and problem-solving abilities.",
   "aiApproach": "I use AI to support development planning, code analysis, troubleshooting, research, implementation, and learning.",
   "aiLearning": "I’m exploring AI engineering and building my foundations through study and practical experimentation.",
   "intro": "I build web and Android applications that connect clear interfaces, useful workflows, and reliable data.",
@@ -301,11 +303,11 @@
   "positioning": "Aspiring Software Developer | Full-Stack Web Development | Exploring AI Engineering",
   "heroPortrait": {
     "src": "/assets/personal/ej-formal-cutout.png",
-    "width": 408,
-    "height": 612,
+    "width": 1024,
+    "height": 1536,
     "alt": "EJ Christian Medilo wearing a black suit, white shirt and tie",
     "description": "Owner-supplied formal portrait with transparent background.",
     "credit": "Personal photograph supplied by EJ Christian Medilo",
-    "sha256": "2bda32198b054d733abdf364152099b26f8059320e6f2de1267dc4b13ddb7de3"
+    "sha256": "0b05a2f36c1fe08f815e57294d70105fb41d30b251b63aae7040ccbb65a1d3de"
   }
 }

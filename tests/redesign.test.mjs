@@ -20,7 +20,7 @@ test('Home and About keep the portrait and photo branding without the old workfl
   assert.match(home, /class="hero-portrait bento-photo card card--media"/);
   assert.match(home, /src="\/assets\/personal\/ej-formal-cutout.png"/);
   assert.match(home, /class="hero-formal-portrait"/);
-  assert.match(home, /width="408" height="612"/);
+  assert.match(home, /width="1024" height="1536"/);
   assert.doesNotMatch(home, /STI Vio-Log workflow|workflow-violation|hero-studio|EJ’s initials/);
   assert.match(page('/about/'), /ej-portrait.webp/);
   assert.match(page('/projects/sti-vio-log/'), /<ol class="process-list">[\s\S]*Record[\s\S]*Clearance/);

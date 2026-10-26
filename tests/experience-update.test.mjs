@@ -34,7 +34,11 @@ test('education remains exactly the two supplied institutions, qualifications an
   ]);
 });
 
-test('production styles and controllers do not automatically suppress motion by OS preference',async()=>{
-  for(const path of ['assets/site.css','assets/redesign.css','assets/motion.css','assets/home.js','assets/decks.js','assets/motion.js'])
-    assert.doesNotMatch(await read(path),/prefers-reduced-motion/,path);
+test('OS motion stays active except the requested About portrait crossfade',async()=>{
+  const photoRule='@media (prefers-reduced-motion: reduce) { .about-portrait .about-photo-swap img { transition: none; } }';
+  for(const path of ['assets/site.css','assets/redesign.css','assets/motion.css','assets/home.js','assets/decks.js','assets/motion.js']) {
+    const source=await read(path);
+    if(path==='assets/site.css') assert.ok(source.includes(photoRule));
+    assert.doesNotMatch(source.replace(photoRule,''),/prefers-reduced-motion/,path);
+  }
 });

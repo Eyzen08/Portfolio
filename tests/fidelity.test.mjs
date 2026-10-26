@@ -24,6 +24,10 @@ test('reference composition uses the supplied transparent formal portrait and tr
   assert.doesNotMatch(home.content,/JERWIN|TEÑAJURA|CLIENT SATISFACTION|PROJECTS DELIVERED/);
   assert.match(shell(home,{profile}),/archivo-variable\.ttf/);
   const image=await readFile(new URL('../assets/personal/ej-formal-cutout.png',import.meta.url));
+  assert.equal(image.subarray(1,4).toString(),'PNG');
+  assert.equal(image.readUInt32BE(16),profile.heroPortrait.width);
+  assert.equal(image.readUInt32BE(20),profile.heroPortrait.height);
+  assert.equal(image[25],6,'Hero PNG supports full alpha transparency');
   assert.equal(createHash('sha256').update(image).digest('hex'),profile.heroPortrait.sha256);
 });
 
