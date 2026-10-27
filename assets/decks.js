@@ -18,7 +18,7 @@ export function initDecks() {
     let active = 0, hovered = false, focused = false, timer;
     const state = { visible: false, sync() {
       clearTimeout(timer);
-      if (state.visible && !document.hidden && !hovered && !focused && group.dataset.previewOpen !== 'true' && cards.length > 1) timer = setTimeout(() => { select(active + 1); state.sync(); }, 4000);
+      if (state.visible && !document.hidden && document.documentElement.dataset.motion!=='reduced' && !hovered && !focused && group.dataset.previewOpen !== 'true' && cards.length > 1) timer = setTimeout(() => { select(active + 1); state.sync(); }, 4000);
     } };
     const select = (index, manual = false) => {
       active = galleryIndex(0,index,cards.length);
@@ -77,6 +77,7 @@ export function initDecks() {
     states.set(group,state);observer.observe(group);
   });
   document.addEventListener('visibilitychange',()=>{for(const state of states.values())state.sync();});
+  document.addEventListener('motionchange',()=>{for(const state of states.values())state.sync();});
 }
 
 function initScreenshotPreviews() {

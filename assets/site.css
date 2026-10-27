@@ -123,7 +123,7 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 .about-photo-swap .portrait-swap-formal { object-fit: contain; opacity: 0; }
 .about-photo-swap[aria-pressed='true'] .portrait { opacity: 0; }
 .about-photo-swap[aria-pressed='true'] .portrait-swap-formal { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .about-portrait .about-photo-swap img { transition: none; } }
+:root[data-motion='reduced'] .about-portrait .about-photo-swap img { transition: none; }
 .strength-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--card-gap); margin-top: 24px; }.strength-grid p { color: var(--muted); }
 .personal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); }.personal-grid p { color: var(--muted); }.personal-symbol { font-size: 35px; color: var(--violet); display: block; margin-bottom: 18px; }
 .filter-controls { padding-bottom: 34px; }.search-field { display: flex; align-items: center; gap: 12px; width: min(500px, 100%); padding: 0 16px; border: 1px solid var(--field-line); border-radius: 7px; background: var(--surface); color: var(--muted); }.search-field input { width: 100%; min-width: 0; padding: 13px 0; border: 0; background: transparent; color: var(--text); outline-offset: 3px; }
@@ -189,7 +189,7 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 /* One shared deck preserves full application screenshots in every page context. */
 .picture-deck { min-width: 0; --picture-height: 560px; }
 .picture-stage { position: relative; overflow: hidden; border-radius: 16px; }
-.home-page .picture-deck[data-enhanced] .picture-stage { transform: perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)); transition: transform 160ms var(--ease); }
+
 .picture-panel { margin: 0 0 24px; }
 .picture-media { display: flex; align-items: center; justify-content: center; padding: 24px; }
 .picture-media > img { flex-shrink: 0; display: block; max-width: 100%; max-height: 520px; width: auto; height: auto; object-fit: contain; }

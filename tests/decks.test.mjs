@@ -39,7 +39,7 @@ test('shared decks autoplay independently, pause on interaction and reset hidden
     group.querySelectorAll=s=>s==='[data-deck-card]'?cards:compact?[]:buttons;
     group.querySelector=s=>compact&&s!=='[data-deck-stage]'?null:({'[data-deck-controls]':controls,'[data-deck-prev]':prev,'[data-deck-next]':next,'[data-deck-counter]':counter,'[data-deck-stage]':stage})[s]||null;
     return {group,cards,captions,buttons,prev,next,counter};};
-  const a=build(6),b=build(3),compact=build(4,'project',true),background=build(3,'background');const groups=[a,b,compact,background];const doc=node();doc.hidden=false;doc.querySelectorAll=()=>groups.map(x=>x.group);globalThis.document=doc;
+  const a=build(6),b=build(3),compact=build(4,'project',true),background=build(3,'background');const groups=[a,b,compact,background];const doc=node();doc.documentElement={dataset:{motion:"full"}};doc.hidden=false;doc.querySelectorAll=()=>groups.map(x=>x.group);globalThis.document=doc;
   const media={matches:false,listeners:{},addEventListener(type,fn){this.listeners[type]=fn;}};globalThis.matchMedia=()=>media;globalThis.ResizeObserver=class{observe(){}};let observer;globalThis.IntersectionObserver=class{constructor(fn){observer=fn;}observe(){}};
   let now=0,id=0;const timers=new Map();globalThis.setTimeout=(fn,ms)=>{timers.set(++id,{fn,at:now+ms});return id;};globalThis.clearTimeout=id=>timers.delete(id);
   const advance=ms=>{now+=ms;for(const [id,timer] of [...timers])if(timer.at<=now){timers.delete(id);timer.fn();}};
@@ -67,4 +67,8 @@ test('shared decks autoplay independently, pause on interaction and reset hidden
   const beforeManual=a.counter.textContent;a.next.listeners.click();assert.notEqual(a.counter.textContent,beforeManual,'Manual controls remain available');
   const manualFrame=a.counter.textContent;advance(4000);assert.notEqual(a.counter.textContent,manualFrame,'Autoplay continues under reduced motion');
   media.matches=false;media.listeners.change?.();assert.ok(timers.size>0,'Autoplay remains active under standard motion');
+  doc.documentElement.dataset.motion='reduced';doc.listeners.motionchange();assert.equal(timers.size,0);
+  const paused=a.counter.textContent;advance(12000);assert.equal(a.counter.textContent,paused);
+  a.next.listeners.click();assert.notEqual(a.counter.textContent,paused,'Manual gallery controls still work');
+  doc.documentElement.dataset.motion='full';doc.listeners.motionchange();assert.ok(timers.size>0);
 });

@@ -70,5 +70,9 @@ test('Home without a hobby carousel starts the sphere and suspends offscreen/hid
     media.matches=false;media.listeners.change?.();
     observers[0]([presentation,strip].map(target=>({target,isIntersecting:true})));
     assert.equal(frames.size>0,hasCanvas,'Animation resumes only when canvas is available');
+    doc.documentElement.dataset.motion='reduced';doc.listeners.motionchange();assert.equal(frames.size,0);
+    if(hasOptional)assert.equal(strip.dataset.running,'false');
+    const pausedDraws=draws;advance(1000);assert.equal(draws,pausedDraws);
+    doc.documentElement.dataset.motion='full';doc.listeners.motionchange();assert.equal(frames.size>0,hasCanvas);
   }
 });

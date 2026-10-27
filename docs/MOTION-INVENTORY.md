@@ -1,5 +1,7 @@
 # Reference motion inventory — 26 October 2026
 
+> Historical reference research. Current implementation timings, manual preference and certificate privacy are documented in [MOTION-UPGRADE.md](MOTION-UPGRADE.md).
+
 **Later owner-requested policy update:** intended animations now remain active regardless of the OS reduced-motion setting. Reduced-motion cancellation and suppression described in this original verification record are historical. Offscreen, hidden-tab and interaction suspension remain. See [the current implementation and verification](EXPERIENCE-MOTION-UPDATE.md).
 
 Reference: [jtenajuraportfolio.com](https://jtenajuraportfolio.com/). Inspected in Chrome from initial load through About, Work/project dialog, Experience, Certificates/lightbox, Contact/footer and the phone menu. Public reference assets `index-BftNXYIv.js` and `index-Dk-eTZVt.css` confirm timings below; source files and before/after screenshots are in ignored `.qa/motion/`. These assets are research evidence only and are not bundled into this portfolio.

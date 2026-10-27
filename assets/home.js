@@ -40,7 +40,7 @@ export function initHome() {
   const strip = document.querySelector('[data-moving-strip]');
   let frame = 0, last = 0, angle = 0;
   const visible = new Map([presentation,strip].filter(Boolean).map(element=>[element,false]));
-  const running = element => motionAllowed({ hidden: document.hidden, visible: visible.get(element), interacting: false });
+  const running = element => motionAllowed({ hidden: document.hidden, visible: visible.get(element), interacting: false }) && document.documentElement.dataset.motion!=='reduced';
 
   const gallery = document.querySelector('[data-gallery]');
   const photos = [...(gallery?.querySelectorAll('[data-gallery-frame]') || [])];
@@ -124,6 +124,7 @@ export function initHome() {
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)visible.set(entry.target,entry.isIntersecting);sync();},{threshold:.1});
   for(const element of visible.keys())observer.observe(element);
   document.addEventListener('visibilitychange',sync);
+  document.addEventListener('motionchange',sync);
   sync();
 
   const links=[...document.querySelectorAll('[data-section-link]')];
@@ -136,14 +137,4 @@ export function initHome() {
   window.addEventListener('resize',updateSection);
   updateSection();
 
-  document.querySelectorAll('[data-tilt]').forEach(stage=>{
-    stage.addEventListener('pointermove',event=>{
-      if(event.pointerType!=='mouse')return;
-      const rect=stage.getBoundingClientRect();
-      stage.style.setProperty('--tilt-x',`${-(event.clientY-rect.top-rect.height/2)/rect.height*3}deg`);
-      stage.style.setProperty('--tilt-y',`${(event.clientX-rect.left-rect.width/2)/rect.width*3}deg`);
-    });
-    const reset=()=>{stage.style.removeProperty('--tilt-x');stage.style.removeProperty('--tilt-y');};
-    stage.addEventListener('pointerleave',reset);
-  });
 }

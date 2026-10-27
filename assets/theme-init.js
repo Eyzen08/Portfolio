@@ -5,3 +5,8 @@ try {
   document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0f0f0f' : '#fdfdfc');
+try {
+  document.documentElement.dataset.motion = localStorage.getItem('ej-motion') === 'reduced' ? 'reduced' : 'full';
+} catch {
+  document.documentElement.dataset.motion = 'full';
+}

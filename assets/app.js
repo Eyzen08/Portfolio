@@ -13,6 +13,21 @@ export function resolveTheme(saved, prefersDark) {
 
 if (typeof document !== 'undefined') {
   const root = document.documentElement;
+  const motionToggle=document.querySelector('[data-motion-toggle]');
+  const updateMotion=()=>{
+    if(!motionToggle)return;
+    const reduced=root.dataset.motion==='reduced';
+    motionToggle.hidden=false;
+    motionToggle.textContent=`Motion: ${reduced?'Reduced':'Full'}`;
+    motionToggle.setAttribute('aria-pressed',String(reduced));
+    motionToggle.setAttribute('aria-label','Reduce decorative motion');
+  };
+  updateMotion();
+  motionToggle?.addEventListener('click',()=>{
+    root.dataset.motion=root.dataset.motion==='reduced'?'full':'reduced';
+    try{localStorage.setItem('ej-motion',root.dataset.motion);}catch{/* The current page still honors the choice. */}
+    updateMotion();document.dispatchEvent(new Event('motionchange'));
+  });
   initDecks();
   initProjectPreviews();
   initLocationMap();

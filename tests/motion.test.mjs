@@ -25,18 +25,26 @@ function fixture(t,{reduced=false,top=1000,observer=true}={}) {
 test('motion uses measured easing/timing under either OS preference and skips unsupported animation',t=>{
   const f=fixture(t);
   playMotion(f.node);
-  assert.equal(f.calls[0].options.duration,1150);
+  assert.equal(f.calls[0].options.duration,650);
+  assert.equal(f.calls[0].options.composite,'add','Entrances compose with card depth');
   assert.equal(f.calls[0].options.easing,'cubic-bezier(.16,1,.3,1)');
   assert.equal(f.calls[0].options.fill,'backwards');
-  f.media.matches=true;assert.ok(playMotion(f.node));assert.equal(f.calls.length,2);
+  assert.deepEqual(f.calls[1].frames,[{opacity:0},{opacity:1}]);
+  assert.equal(f.calls[1].options.composite,undefined,'Opacity replaces rather than adds to the visible default');
+  f.media.matches=true;assert.ok(playMotion(f.node));assert.equal(f.calls.length,4);
   assert.equal(playMotion({}),null);
+});
+
+test('manual reduced motion skips spatial entrances',t=>{
+  const f=fixture(t);document.documentElement={dataset:{motion:'reduced'}};
+  assert.equal(playMotion(f.node),null);assert.equal(f.calls.length,0);
 });
 
 test('viewport reveals run once regardless of OS preference',t=>{
   const f=fixture(t);
   const cleanup=initMotion();f.cleanup(cleanup);
   assert.equal(f.calls.length,0,'Offscreen content waits for its viewport entry');
-  f.enter();f.enter();assert.equal(f.calls.length,1);
+  f.enter();f.enter();assert.equal(f.calls.length,2);
   f.media.matches=true;f.listeners.media?.();assert.equal(f.canceled(),0);
   assert.equal(f.node.hidden,false,'Canceling motion restores the visible document default');
 });
@@ -51,10 +59,16 @@ test('missing observers and late initialization leave content readable',async t=
 
 test('viewport entrances remain active when reduced motion is requested by the OS',t=>{
   const f=fixture(t,{reduced:true});f.cleanup(initMotion());f.enter();
-  assert.equal(f.calls.length,1);assert.equal(f.node.hidden,false);
+  assert.equal(f.calls.length,2);assert.equal(f.node.hidden,false);
 });
 
 test('hidden pages cancel active entrance effects',t=>{
   const f=fixture(t);const cleanup=initMotion();f.cleanup(cleanup);f.enter();
-  document.hidden=true;f.listeners.visibilitychange();assert.equal(f.canceled(),1);
+  document.hidden=true;f.listeners.visibilitychange();assert.equal(f.canceled(),2);
+});
+
+test('switching to manual reduced motion cancels active entrances immediately',t=>{
+  const f=fixture(t);document.documentElement={dataset:{motion:'full'}};f.cleanup(initMotion());f.enter();
+  document.documentElement.dataset.motion='reduced';f.listeners.motionchange();assert.equal(f.canceled(),2);
+  assert.equal(f.node.hidden,false);
 });
