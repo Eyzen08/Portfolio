@@ -24,7 +24,7 @@ test('summary Home puts the professional overview before project evidence',()=>{
     if(project.liveUrl)assert.ok(features[i].includes(`href="${project.liveUrl}"`));
     else assert.doesNotMatch(features[i],/Open Live Platform/);
   });
-  assert.match(features[1],/Owner-Supplied Mockup/);
+  assert.match(features[1],/data-details-open/);
   assert.match(home,/I review and test AI-generated suggestions/);
 });
 

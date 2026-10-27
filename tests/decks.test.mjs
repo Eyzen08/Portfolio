@@ -24,7 +24,7 @@ test('both single project images have complete local records',async()=>{
   for(const project of projects)for(const screen of project.previewScreens){
     assert.equal(screen.kind,'desktop');assert.equal(screen.deviceFrame,true);
     assert.ok(screen.label&&screen.alt&&screen.caption&&screen.explanation);
-    assert.equal(screen.presentationLabel,'Owner-Supplied Mockup');
+    assert.equal(screen.presentationLabel,undefined);
     for(const field of ['src','srcSmall'])await readFile(new URL(`..${screen[field]}`,import.meta.url));
   }
 });

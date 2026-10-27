@@ -8,7 +8,7 @@
     "role": "Full-Stack Developer",
     "roleDetail": "I developed STI Vio-Log as the full-stack lead and primary system developer for the academic capstone team at STI College Global City.",
     "sourceUrl": "https://github.com/Eyzen08/STI-Vio-Log",
-    "liveUrl": "https://sti-vio-log.vercel.app",
+    "liveUrl": "https://stiviolog.com/",
     "status": "Public web deployment · Academic capstone",
     "technologies": [
       "javascript",
@@ -153,9 +153,8 @@
         "kind": "desktop",
         "deviceFrame": true,
         "alt": "STI Vio-Log on a larger angled rear login monitor behind a foreground dashboard laptop, QR phone, and landing-page tablet, with the logo and a short system description at upper left.",
-        "caption": "Updated owner-supplied dashboard, student QR, landing-page, and login screenshots fitted to the existing device perspectives. All four application views remain visible. Account names, email, student identifiers, avatars, and the QR payload are masked.",
-        "explanation": "Updated application screens showcase sign-in, the dashboard, student QR attendance, and the public landing page across four devices.",
-        "presentationLabel": "Owner-Supplied Mockup"
+        "caption": "Student violation records, QR-based community-service attendance, and clearance tracking in one platform.",
+        "explanation": "Student violation records, QR-based community-service attendance, and clearance tracking in one platform."
       }
     ],
     "category": "Student Discipline and Community Service Management",
@@ -317,7 +316,7 @@
     "previewScreens": [
       {
         "id": "home",
-        "label": "Philippine History",
+        "label": "Application Overview",
         "src": "/assets/projects/kwiztorya-history-showcase.png",
         "srcSmall": "/assets/projects/kwiztorya-history-showcase-small.webp",
         "smallWidth": 960,
@@ -326,9 +325,8 @@
         "kind": "desktop",
         "deviceFrame": true,
         "alt": "Kwiztorya Philippine History presentation with the home screen on a phone beside a Pre-Colonial Era quiz on a tablet.",
-        "caption": "Owner-supplied presentation mockup; not an unmodified device capture or evidence of an iOS release.",
-        "explanation": "Home and quiz views presented together in one owner-supplied showcase image.",
-        "presentationLabel": "Owner-Supplied Mockup"
+        "caption": "An Android application for learning Philippine history through interactive quizzes, story-based lessons, and saved progress.",
+        "explanation": "An Android application for learning Philippine history through interactive quizzes, story-based lessons, and saved progress."
       }
     ],
     "category": "Philippine History Learning Application",

@@ -15,7 +15,7 @@ test('each complete Home project card contains its information and one image wit
     const card = cards[index];
     for (const text of [project.title, project.role, project.summary]) assert.ok(card.includes(escaped(text)), text);
     for (const href of [`/projects/${project.id}/`, project.sourceUrl, project.liveUrl].filter(Boolean)) assert.ok(card.includes(`href="${href}"`));
-    const gallery = project.id === 'sti-vio-log' ? home.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : card;
+    const gallery=home.match(new RegExp(`<section data-project-panel="${project.id}"[\\s\\S]*?</section>`))[0];
     assert.doesNotMatch(gallery, /data-preview-prev|data-preview-next|data-preview-select|data-preview-count/);
     for (const screen of project.previewScreens) {
       assert.ok(gallery.includes(`id="preview-${project.id}-${screen.id}"`));

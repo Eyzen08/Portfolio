@@ -15,7 +15,7 @@ test('overview and case-study mockups are not wrapped in additional devices',()=
      assert.ok(!html.includes(`class="phone-frame"><img src="${screen.src}"`));
      assert.ok(!html.includes(`class="monitor-display"><img src="${screen.src}"`));
    }
-   assert.match(html,/Owner-Supplied Mockup/);
+   assert.doesNotMatch(html,/Owner-Supplied Mockup/);
  }
 });
 
@@ -41,8 +41,8 @@ test('globe mesh is finite, connected on the sphere and rotates through the exis
 
 test('single supplied Kwiz showcase preserves the documented release status',()=>{
  const kwiz=projects.find(p=>p.id==='kwiztorya');assert.deepEqual(kwiz.previewScreens.map(s=>s.id),['home']);
- assert.equal(kwiz.previewScreens[0].presentationLabel,'Owner-Supplied Mockup');
- assert.match(kwiz.previewScreens[0].caption,/not an unmodified device capture/);
+ assert.equal(kwiz.previewScreens[0].presentationLabel,undefined);
+ assert.match(kwiz.previewScreens[0].caption,/Android application/);
  assert.equal(kwiz.platform,'Mobile');assert.equal(kwiz.liveUrl,null);
  assert.ok(kwiz.previewScreens.every(s=>!s.originalSrc));
 });

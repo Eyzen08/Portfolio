@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { renderPages } from '../scripts/templates.mjs';
 const [profile,projects,technologies]=await Promise.all(['profile','projects','technologies'].map(async name=>JSON.parse(await readFile(new URL(`../data/${name}.json`,import.meta.url)))));
 
-test('Projects exposes both cards, separate preview and case actions, and complete image provenance',()=>{
+test('Projects exposes both cards, separate preview and case actions, and complete project descriptions',()=>{
   const html=renderPages({profile,projects,technologies}).find(page=>page.route==='/projects/').content;
   assert.match(html,/<h1>Projects<\/h1>/);
   assert.match(html,/data-project-grid/);assert.doesNotMatch(html,/data-project-rail/);
@@ -15,8 +15,7 @@ test('Projects exposes both cards, separate preview and case actions, and comple
     assert.match(card,/View Project/);assert.match(card,/Case Study/);
     assert.ok(card.includes(`href="/projects/${project.id}/"`));
     assert.ok(card.includes(`href="${project.previewScreens[0].src}"`),'Preview retains its no-JS image destination');
-    const dialog=project.id==='sti-vio-log' ? html.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : card.match(/<dialog[\s\S]*?<\/dialog>/)[0];
-    assert.match(dialog,/<dialog[^>]+aria-labelledby=/);
+    const dialog=html.match(new RegExp(`<section data-project-panel="${project.id}"[\\s\\S]*?</section>`))[0];
     assert.equal((dialog.match(/data-preview-slide/g)||[]).length,project.previewScreens.length);
     assert.doesNotMatch(dialog,/class="monitor-frame"|class="phone-frame"|data-deck/);
     for(const screen of project.previewScreens){
@@ -30,32 +29,6 @@ test('Projects exposes both cards, separate preview and case actions, and comple
 
 function node(){return {dataset:{},hidden:false,textContent:'',listeners:{},attributes:{},addEventListener(type,fn){this.listeners[type]=fn;},setAttribute(k,v){this.attributes[k]=v;}};}
 function globals(t,names){const original=new Map(names.map(name=>[name,Object.getOwnPropertyDescriptor(globalThis,name)]));t.after(()=>names.forEach(name=>original.get(name)?Object.defineProperty(globalThis,name,original.get(name)):delete globalThis[name]));}
-
-test('viewer opens the displayed screen, wraps manually, closes cleanly, and falls back without dialog support',async t=>{
-  globals(t,['document']);
-  const slides=Array.from({length:3},node),buttons=Array.from({length:3},(_,index)=>Object.assign(node(),{dataset:{previewIndex:String(index)}}));
-  const counter=node(),prev=node(),next=node(),close=node(),opener=Object.assign(node(),{focuses:0,focus(){this.focuses++;}});
-  const dialog=Object.assign(node(),{open:false,showModal(){this.open=true;},close(){this.open=false;this.listeners.close();},
-    querySelectorAll:s=>s==='[data-preview-slide]'?slides:buttons,
-    querySelector:s=>({'[data-preview-count]':counter,'[data-preview-prev]':prev,'[data-preview-next]':next,'[data-preview-close]':close})[s]});
-  const frames=[node(),node(),node()];frames[1].dataset.selected='true';
-  const card={dataset:{},dispatchEvent(){},querySelector:()=>dialog,querySelectorAll:s=>s==='[data-preview-open]'?[opener]:frames};
-  const classes=new Set();globalThis.document={querySelector:()=>null,querySelectorAll:()=>[card],documentElement:{classList:{add:s=>classes.add(s),remove:s=>classes.delete(s)}}};
-  const {initProjectPreviews}=await import('../assets/decks.js');assert.equal(typeof initProjectPreviews,'function');initProjectPreviews();
-  let prevented=0;const event={button:0,currentTarget:opener,preventDefault(){prevented++;}};
-  opener.listeners.click({...event,ctrlKey:true});assert.equal(prevented,0);assert.equal(dialog.open,false);
-  opener.listeners.click(event);assert.equal(prevented,1);assert.equal(dialog.open,true);assert.ok(classes.has('preview-open'));
-  assert.equal(card.dataset.previewOpen,'true');
-  assert.equal(counter.textContent,'2 / 3');assert.equal(slides[1].hidden,false);
-  next.listeners.click();assert.equal(counter.textContent,'3 / 3');next.listeners.click();assert.equal(counter.textContent,'1 / 3');
-  dialog.listeners.keydown({key:'ArrowLeft',preventDefault(){}});assert.equal(counter.textContent,'3 / 3');
-  dialog.listeners.keydown({key:'ArrowRight',preventDefault(){}});assert.equal(counter.textContent,'1 / 3');
-  buttons[1].listeners.click();assert.equal(buttons[1].attributes['aria-pressed'],'true');assert.equal(slides.filter(slide=>!slide.hidden).length,1);
-  prev.listeners.click();assert.equal(counter.textContent,'1 / 3');close.listeners.click();
-  assert.equal(dialog.open,false);assert.equal(classes.has('preview-open'),false);assert.equal(opener.focuses,1);
-  assert.equal(card.dataset.previewOpen,undefined);
-  delete dialog.showModal;opener.listeners={};initProjectPreviews();assert.equal(opener.listeners.click,undefined,'Unsupported dialogs leave native image links alone');
-});
 
 test('project grid follows combined search and category filters, including zero results and reset',async t=>{
   globals(t,['document','localStorage','matchMedia']);

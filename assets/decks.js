@@ -80,52 +80,7 @@ export function initDecks() {
   document.addEventListener('motionchange',()=>{for(const state of states.values())state.sync();});
 }
 
-function initScreenshotPreviews() {
-  document.querySelectorAll('[data-screenshot-preview]').forEach(card => {
-    const dialog = card.querySelector('dialog');
-    if (!dialog || typeof dialog.showModal !== 'function') return;
-    const slides = [...dialog.querySelectorAll('[data-preview-slide]')];
-    const buttons = [...dialog.querySelectorAll('[data-preview-select]')];
-    const counter = dialog.querySelector('[data-preview-count]');
-    let active = 0, opener;
-    const select = index => {
-      active = galleryIndex(0, index, slides.length);
-      slides.forEach((slide,index) => { slide.hidden = index !== active; });
-      buttons.forEach((button,index) => button.setAttribute('aria-pressed', String(index === active)));
-      if(counter) counter.textContent = `${active + 1} / ${slides.length}`;
-    };
-    card.querySelectorAll('[data-preview-open]').forEach(link => link.addEventListener('click', event => {
-      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      if (dialog.open) return;
-      opener = event.currentTarget;
-      const frames = [...card.querySelectorAll('[data-deck-card]')];
-      select(Math.max(0, frames.findIndex(frame => frame.dataset.selected === 'true')));
-      card.dataset.previewOpen = 'true';
-      card.dispatchEvent(new Event('previewchange'));
-      document.documentElement.classList.add('preview-open');
-      dialog.showModal();
-    }));
-    buttons.forEach(button => button.addEventListener('click', () => select(Number(button.dataset.previewIndex))));
-    dialog.querySelector('[data-preview-prev]')?.addEventListener('click', () => select(active - 1));
-    dialog.querySelector('[data-preview-next]')?.addEventListener('click', () => select(active + 1));
-    dialog.querySelector('[data-preview-close]').addEventListener('click', () => dialog.close());
-    dialog.addEventListener('keydown', event => {
-      if (slides.length < 2 || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
-      event.preventDefault();
-      select(active + (event.key === 'ArrowLeft' ? -1 : 1));
-    });
-    dialog.addEventListener('close', () => {
-      delete card.dataset.previewOpen;
-      document.documentElement.classList.remove('preview-open');
-      opener?.focus({ preventScroll: true });
-      card.dispatchEvent(new Event('previewchange'));
-    });
-  });
-}
-
 export function initProjectPreviews() {
-  initScreenshotPreviews();
   const dialog=document.querySelector('[data-project-viewer]');
   if(!dialog || typeof dialog.showModal!=='function')return;
   const panels=[...dialog.querySelectorAll('[data-project-panel]')];
@@ -149,15 +104,17 @@ export function initProjectPreviews() {
     title.textContent=panel.dataset.projectTitle;
     thumbnail.src=panel.querySelector('.preview-image').src;
     featured.hidden=panel.dataset.projectFeatured!=='true';
-    select(0);dialog.scrollTop=0;return true;
+    select(0);return true;
   };
   document.querySelectorAll('[data-details-open]').forEach(link=>link.addEventListener('click',event=>{
     if(event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
-    if(dialog.open){event.preventDefault();return;}
     if(!showProject(link.dataset.projectId))return;
-    try{dialog.showModal();}catch{return;}
-    event.preventDefault();opener=link;
-    document.documentElement.classList.add('preview-open');close.focus();
+    if(!dialog.open){
+      try{dialog.showModal();}catch{return;}
+      opener=link;
+    }
+    event.preventDefault();
+    document.documentElement.classList.add('preview-open');close.focus();dialog.scrollTop=0;
   }));
   panels.forEach(item=>{
     item.querySelectorAll('[data-preview-select]').forEach(button=>button.addEventListener('click',()=>select(Number(button.dataset.previewIndex))));

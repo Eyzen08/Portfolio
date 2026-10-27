@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {renderPages} from '../scripts/templates.mjs';
 const [profile,projects,technologies]=await Promise.all(['profile','projects','technologies'].map(async name=>JSON.parse(await readFile(new URL(`../data/${name}.json`,import.meta.url)))));
 const pages=renderPages({profile,projects,technologies});
-test('Home and Projects share static composed covers, one Featured project and complete independent viewers',()=>{
+test('Home and Projects share static composed covers, one Featured project and complete shared details',()=>{
   for(const route of ['/','/projects/']){
     const html=pages.find(page=>page.route===route).content;
     const rows=[...html.matchAll(/<article class="(?:project-feature|project-card)[\s\S]*?<\/article>/g)].map(m=>m[0]);
@@ -17,10 +17,10 @@ test('Home and Projects share static composed covers, one Featured project and c
       assert.ok(row.includes(`href="/projects/${projects[i].id}/"`));
       assert.ok(row.includes(`href="${projects[i].sourceUrl}"`));
       assert.match(row,/class="brand-icon/);
-      const gallery=i===0 ? html.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : row;
+      const gallery=html.match(new RegExp(`<section data-project-panel="${projects[i].id}"[\\s\\S]*?</section>`))[0];
       assert.equal((gallery.match(/data-preview-slide/g)||[]).length,1);
       assert.doesNotMatch(gallery,/data-preview-prev|data-preview-next|data-preview-count|data-preview-select/);
-      assert.match(gallery,/Owner-Supplied Mockup/);
+      assert.ok(gallery.includes(projects[i].previewScreens[0].caption));
     });
   }
 });
@@ -36,7 +36,7 @@ test('each project selects one original PNG with a matching optimized thumbnail'
       assert.equal(screen.srcSmall,'/assets/projects/kwiztorya-history-showcase-small.webp');
     }
     assert.equal(screen.deviceFrame,true);assert.equal(screen.kind,'desktop');
-    assert.equal(screen.presentationLabel,'Owner-Supplied Mockup');
+    assert.equal(screen.presentationLabel,undefined);
     assert.ok(!screen.originalSrc,'Private source captures must not become public original links');
     const png=await readFile(new URL(`..${screen.src}`,import.meta.url));
     assert.equal(png.subarray(1,4).toString(),'PNG');
