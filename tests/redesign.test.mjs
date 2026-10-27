@@ -39,7 +39,7 @@ test('Home and About keep the portrait and photo branding without the old workfl
 test('summary overview retains factual background, professional summary and reading order', () => {
   const home = page('/');
   assert.doesNotMatch(home, /class="bento-grid"/);
-  for(const text of ['About Me','Education','Project Leadership','Training','Taguig City, Philippines','Philippine Standard Time','UTC+8','STI College Global City','7 training and certification entries']) assert.ok(home.includes(text),text);
+  for(const text of ['About Me','Education','Taguig City, Philippines','Philippine Standard Time','UTC+8','STI College Global City']) assert.ok(home.includes(text),text);
   const ids = [...home.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(ids.length,new Set(ids).size);
   for(const match of home.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));

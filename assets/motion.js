@@ -49,7 +49,7 @@ function split(element, pieces) {
 }
 
 function initCardHover() {
-  const cards=[...document.querySelectorAll('.card,.background-paper,.tool-window,.contribution-card,.project-screenshot-link,.more-project,.next-step-grid>article,[data-tilt]')]
+  const cards=[...document.querySelectorAll('.card,.tool-window,.contribution-card,.project-screenshot-link,.more-project,.next-step-grid>article,[data-tilt]')]
     .filter(card=>!card.matches('.hero-portrait,.project-feature,.case-role,.contact-info,.resume-document .card,.case-content>.card'));
   const magnets=[...document.querySelectorAll('.hero-copy .button.primary,.header-contact,.footer-identity>.button')];
   if(!cards.length&&!magnets.length)return ()=>{};
@@ -211,7 +211,7 @@ export function initMotion() {
   }
   const selectors=[
     '.hero-facts>div','.summary-about>h3','.summary-about>p','.expertise-list','.summary-about>.text-link',
-    '.about-education>.eyebrow','.timeline article','.about-education>img','.about-extras',
+    '.about-education>.eyebrow','.timeline article','.about-education>img',
     '.tool-window','.skill-group','.project-section-bar','.project-feature','.experience-row',
     '.certificate-group-heading','.home-certificates','.earlier-training','.workflow-grid>article',
     '.github-panel','.next-step-grid>article','.contact-info','.contact-form','.footer-inner>div',

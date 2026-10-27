@@ -4,7 +4,6 @@
 :root[data-theme='dark']{--card-light:rgb(255 255 255 / .14);--card-shadow:rgb(0 0 0 / .32)}
 :where([data-card-hover]){position:relative}
 [data-card-hover]{isolation:isolate;transition:transform 400ms var(--motion-ease),translate 400ms var(--motion-ease),scale 400ms var(--motion-ease),box-shadow 400ms var(--motion-ease),border-color 240ms var(--motion-ease)}
-.bento-background[data-enhanced] .background-paper[data-card-hover]{transition:transform 220ms var(--ease),box-shadow 260ms,translate 260ms var(--motion-ease)!important}
 [data-card-hover]::after{content:'';position:absolute;inset:0;z-index:2;border:1px solid transparent;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 260ms var(--motion-ease),border-color 240ms var(--motion-ease)}
 [data-card-focus]::after,[data-card-active]::after{border-color:var(--muted);opacity:1}
 @media(hover:hover) and (pointer:fine){
@@ -63,9 +62,9 @@
 @starting-style{.project-details-viewer[open]::backdrop{background:#0000;backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}}
 @keyframes gallery-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @supports (interpolate-size:allow-keywords){
-  .experience-row,.project-more,.about-extras{interpolate-size:allow-keywords}
-  :is(.experience-row,.project-more,.about-extras)::details-content{block-size:0;opacity:0;overflow:clip;transition:block-size var(--motion-disclosure) var(--motion-ease),opacity var(--motion-disclosure) var(--motion-ease),content-visibility var(--motion-disclosure) allow-discrete}
-  :is(.experience-row,.project-more,.about-extras)[open]::details-content{block-size:auto;opacity:1}
+  .experience-row,.project-more{interpolate-size:allow-keywords}
+  :is(.experience-row,.project-more)::details-content{block-size:0;opacity:0;overflow:clip;transition:block-size var(--motion-disclosure) var(--motion-ease),opacity var(--motion-disclosure) var(--motion-ease),content-visibility var(--motion-disclosure) allow-discrete}
+  :is(.experience-row,.project-more)[open]::details-content{block-size:auto;opacity:1}
   .project-more{--motion-disclosure:400ms}
 }
 @media(hover:hover) and (pointer:fine){

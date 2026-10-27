@@ -7,10 +7,10 @@ const projects = JSON.parse(await readFile(new URL('../data/projects.json', impo
 const technologies = JSON.parse(await readFile(new URL('../data/technologies.json', import.meta.url)));
 const pages = renderPages({profile,projects,technologies});
 const home = pages.find(p => p.route === '/');
-test('full remake includes real decks, project stages, resources and complete no-JS evidence', () => {
-  for (const marker of ['data-home', 'data-background-deck', 'data-gallery', 'skill-categories', 'id="training"']) assert.ok(home.content.includes(marker), marker);
+test('Home retains projects, resources and complete no-JS evidence', () => {
+  for (const marker of ['data-home', 'data-gallery', 'skill-categories', 'id="training"']) assert.ok(home.content.includes(marker), marker);
   assert.doesNotMatch(home.content, /data-hobby-|\/assets\/hobbies\/|Artwork Credits/);
-  assert.equal((home.content.match(/data-background-card/g)||[]).length, 3);
+  assert.doesNotMatch(home.content,/data-background-card/);
   assert.equal((home.content.match(/<article class="project-feature/g)||[]).length,2);
   assert.ok(home.content.includes(projects[1].previewScreens[0].src));
   assert.doesNotMatch(home.content,/hobby-art|highlight-tabs|STI Vio-Log workflow/);

@@ -7,10 +7,21 @@ const [profile, projects, technologies] = await Promise.all(['profile', 'project
 const pages = renderPages({ profile, projects, technologies });
 const home = pages.find(page => page.route === '/');
 
+test('the single map lives behind the hero with accessible controls and an external fallback', () => {
+  const hero=home.content.slice(0,home.content.indexOf('id="about"'));
+  assert.match(hero,/class="hero-map" data-location-map/);
+  assert.match(hero,/id="hero-map-controls"[^>]*hidden/);
+  assert.match(hero,/data-map-toggle[^>]*aria-expanded="false"[^>]*aria-controls="hero-map-controls"[^>]*hidden/);
+  assert.match(hero,/Open Full Map/);
+  assert.match(hero,/Philippine Standard Time/);
+  assert.doesNotMatch(home.content,/about-extras|data-background-deck|Explore my background|A Little Background/);
+  assert.doesNotMatch(home.content.slice(home.content.indexOf('id="about"')),/data-location-map/);
+});
+
 test('Home opens with the complete professional overview and renders each interactive component once', () => {
   const overview = home.content.slice(0, home.content.indexOf('id="projects"'));
   for (const text of [profile.name, profile.role, profile.aboutSummary, profile.goal, profile.intro, 'About Me']) assert.ok(overview.includes(text), text);
-  for (const marker of ['data-gallery', 'data-location-map', 'data-background-deck', 'data-moving-strip']) {
+  for (const marker of ['data-gallery', 'data-location-map', 'data-moving-strip']) {
     assert.ok(overview.includes(marker), `${marker} belongs in the overview`);
     assert.equal([...home.content.matchAll(new RegExp(`${marker}(?=[\\s>])`, 'g'))].length, 1, `${marker} is not duplicated below the overview`);
   }

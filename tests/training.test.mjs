@@ -50,16 +50,11 @@ test('Training shows seven credentials with accessible static previews', async (
   assert.ok(!resume.content.includes('certificate-preview'), 'Résumé must stay compact');
   const home = pages.find(page => page.route === '/').content;
   assert.ok(!home.includes('/resume/#certifications'));
-  assert.ok((home.match(/href="\/training\/"/g) || []).length >= 2);
+  assert.match(home,/href="\/training\/"/);
 });
 
-test('Background highlights include relevant previews and the location retains a map fallback',()=>{
+test('Education retains its preview and the hero location retains a map fallback',()=>{
   const home=pages.find(page=>page.route==='/').content;
-  for(const id of ['education','leadership','training']){
-    const card=home.match(new RegExp(`<article class="background-card" id="background-${id}"[\\s\\S]*?<\\/article>`))[0];
-    assert.match(card,/<img /);
-    assert.match(card,/Read More/);
-  }
   assert.match(home,/\/assets\/education\/sti-global-city.jpg/);
   assert.match(home,/data-location-map/);
   assert.match(home,/data-map-status/);
