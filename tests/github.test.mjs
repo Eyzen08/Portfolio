@@ -137,7 +137,7 @@ test('does not return exception text or server secrets', async () => {
   assert.doesNotMatch(JSON.stringify(response.body), /github-super-secret|failed with/);
 });
 
-test('authenticates fixed REST and calendar requests without exposing the server token', async () => {
+test('passes through public and private calendar counts without exposing private details or the token', async () => {
   publicResponses();
   const restFetch = globalThis.fetch;
   process.env.GITHUB_TOKEN = 'github-super-secret';
@@ -148,6 +148,8 @@ test('authenticates fixed REST and calendar requests without exposing the server
     assert.match(JSON.parse(options.body).query, /user\(login: "Eyzen08"\)/);
     return Response.json({ data: { user: { contributionsCollection: {
       startedAt: '2025-10-13T00:00:00Z', endedAt: '2026-10-13T00:00:00Z',
+      restrictedContributionsCount: 2,
+      privateRepository: { name: 'Secret-Project', payload: 'private-work-details' },
       contributionCalendar: { totalContributions: 3, weeks: [{ contributionDays: [
         { date: '2026-10-12', contributionCount: 0, contributionLevel: 'NONE' },
         { date: '2026-10-13', contributionCount: 3, contributionLevel: 'FOURTH_QUARTILE' },
@@ -163,7 +165,7 @@ test('authenticates fixed REST and calendar requests without exposing the server
     ] }],
   });
   assert.equal(response.body.calendarUnavailable, undefined);
-  assert.doesNotMatch(JSON.stringify(response.body), /github-super-secret/);
+  assert.doesNotMatch(JSON.stringify(response.body), /github-super-secret|Secret-Project|private-work-details|restrictedContributionsCount/);
 });
 
 test('preserves public data when GraphQL returns an error', async () => {

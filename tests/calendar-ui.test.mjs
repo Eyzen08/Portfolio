@@ -10,9 +10,8 @@ test('a refresh cannot leave old activity presented as current data', async t =>
       setAttribute() {}, append(...children) { this.children.push(...children); }, replaceChildren() { this.children = []; },
       addEventListener(type, callback) { this.listeners[type] = callback; } };
   }
-  const selectors = ['[data-github-status]', '[data-github-stats]', '[data-repos]', '[data-followers]', '[data-calendar-label]', '[data-calendar]', '[data-calendar-days]', '[data-calendar-section]', '[data-events]', '[data-github-retry]'];
+  const selectors = ['[data-calendar-label]', '[data-calendar]', '[data-calendar-days]', '[data-calendar-section]'];
   const nodes = new Map(selectors.map(selector => [selector, element()]));
-  nodes.get('[data-github-stats]').querySelector = selector => nodes.get(selector);
   const github = element(); github.querySelector = selector => nodes.get(selector);
   const docListeners={};
   globalThis.document = { hidden:false, documentElement: { dataset: {} }, querySelector: selector => selector === '[data-github]' ? github : null, querySelectorAll: () => [], createElement: element, addEventListener(type,fn) {docListeners[type]=fn;} };
@@ -37,21 +36,23 @@ test('a refresh cannot leave old activity presented as current data', async t =>
   assert.deepEqual(cells.map(cell=>cell.style.gridRow),['1','2','3','4','5']);
   assert.equal(cells[0].title,'2026-10-11: 0 contributions');
   assert.equal(nodes.get('[data-calendar-days]').children.length,5);
+  async function refresh() { interval(); await new Promise(resolve => setImmediate(resolve)); }
+  intersect([{isIntersecting:true}]);
   response.calendar={...calendar,total:0,weeks:[{days:[{date:'2026-10-13',count:0,level:0}]}]};
-  await nodes.get('[data-github-retry]').listeners.click();
+  await refresh();
   assert.equal(nodes.get('[data-calendar-label]').textContent,'0 contributions in the last year');
   assert.equal(nodes.get('[data-calendar-section]').hidden,false);
   response.calendar = null;
-  await nodes.get('[data-github-retry]').listeners.click();
+  await refresh();
   assert.equal(nodes.get('[data-calendar-section]').hidden, true);
+  assert.equal(nodes.get('[data-calendar-label]').textContent, 'Contribution calendar unavailable. View on GitHub.');
   response.calendar = calendar;
-  await nodes.get('[data-github-retry]').listeners.click();
+  await refresh();
   assert.equal(nodes.get('[data-calendar-section]').hidden, false);
   globalThis.fetch = async () => ({ ok: false });
-  await nodes.get('[data-github-retry]').listeners.click();
+  await refresh();
   assert.equal(nodes.get('[data-calendar-section]').hidden, true);
-  assert.equal(nodes.get('[data-github-stats]').hidden, true);
-  assert.equal(nodes.get('[data-events]').children.length, 0);
+  assert.equal(nodes.get('[data-calendar-label]').textContent, 'Contribution calendar unavailable. View on GitHub.');
   let calls=0;
   globalThis.fetch=async()=>{calls++;return {ok:true,json:async()=>response};};
   globalThis.document.hidden=true;intersect([{isIntersecting:true}]);interval();
@@ -59,8 +60,8 @@ test('a refresh cannot leave old activity presented as current data', async t =>
   globalThis.document.hidden=false;interval();await new Promise(resolve=>setImmediate(resolve));
   assert.equal(calls,1);
   globalThis.fetch=async()=>({ok:false,status:429,headers:{get:()=> '600'}});
-  await nodes.get('[data-github-retry]').listeners.click();
+  await refresh();
   globalThis.fetch=async()=>{calls++;return {ok:true,json:async()=>response};};
-  await nodes.get('[data-github-retry]').listeners.click();interval();
-  assert.equal(calls,1,'Retry-After prevents manual and automatic retry storms');
+  await refresh();
+  assert.equal(calls,1,'Retry-After prevents automatic retry storms');
 });

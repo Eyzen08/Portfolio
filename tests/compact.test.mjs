@@ -22,12 +22,14 @@ test('overview and case-study mockups are not wrapped in additional devices',()=
 test('Home and Activity expose a contribution card with a GitHub fallback link',()=>{
  for(const route of ['/','/activity/']){
   const html=pages.find(p=>p.route===route).content;
-  assert.match(html,/class="contribution-card"/);
-  assert.match(html,/>Contribution Activity<\/h[34]>/);
+  assert.match(html,/class="github-panel card contribution-card"/);
+  assert.match(html,/>Contribution Activity<\/h[23]>/);
   assert.match(html,/href="https:\/\/github.com\/Eyzen08\?tab=overview"[^>]*>View on GitHub/);
   assert.match(html,/data-calendar-section hidden/);
   assert.match(html,/class="calendar-scroll" tabindex="0" role="region" aria-label="Contribution calendar"/);
-  assert.match(html,/Read Daily Contribution Counts/);
+  assert.match(html,/<table class="sr-only"><caption>Daily contribution counts<\/caption>/);
+  assert.match(html,/data-calendar-label role="status">View contribution history on GitHub\./);
+  assert.doesNotMatch(html,/data-github-stats|data-events|data-github-retry|A Public Record of the Work|Refresh Activity/);
  }
 });
 

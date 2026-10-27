@@ -159,13 +159,13 @@ if (typeof document !== 'undefined') {
 
   const github = document.querySelector('[data-github]');
   if (github) {
-    const status = github.querySelector('[data-github-status]');
+    const label = github.querySelector('[data-calendar-label]');
     let pending=false,retryAt=0,lastFetch=0,visible=false;
     const populate = async () => {
       if(pending||Date.now()<retryAt)return;
       pending=true;lastFetch=Date.now();
       github.setAttribute('aria-busy', 'true');
-      status.textContent = 'Loading public GitHub activity…';
+      label.textContent = 'Loading contribution calendar…';
       try {
         const response = await fetch('/api/github', { signal: AbortSignal.timeout(16000) });
         if(response.status===429){
@@ -175,14 +175,8 @@ if (typeof document !== 'undefined') {
         if (!response.ok) throw new Error('Activity unavailable');
         const data = await response.json();
         if (data.profile?.login !== 'Eyzen08' || !Number.isFinite(Date.parse(data.fetchedAt))) throw new Error('Invalid activity');
-        const age = Date.now() - Date.parse(data.fetchedAt);
-        status.textContent = `Public data updated ${new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(data.fetchedAt))}${age > 300000 ? ' · cached data' : ''}.`;
-        const stats = github.querySelector('[data-github-stats]');
-        stats.hidden = false;
-        stats.querySelector('[data-repos]').textContent = data.profile.publicRepos;
-        stats.querySelector('[data-followers]').textContent = data.profile.followers;
         if (data.calendar) {
-          github.querySelector('[data-calendar-label]').textContent = `${data.calendar.total} contribution${data.calendar.total===1?'':'s'} in the last year`;
+          label.textContent = `${data.calendar.total} contribution${data.calendar.total===1?'':'s'} in the last year`;
           const heatmap = github.querySelector('[data-calendar]');
           const daily = github.querySelector('[data-calendar-days]');
           heatmap.replaceChildren(); daily.replaceChildren();
@@ -199,29 +193,14 @@ if (typeof document !== 'undefined') {
           github.querySelector('[data-calendar-section]').hidden = false;
         } else {
           github.querySelector('[data-calendar-section]').hidden = true;
-          github.querySelector('[data-calendar-label]').textContent = 'Explore the contribution calendar on GitHub.';
+          label.textContent = 'Contribution calendar unavailable. View on GitHub.';
         }
-        const feed = github.querySelector('[data-events]');
-        feed.replaceChildren();
-        for (const item of data.recentEvents || []) {
-          const url = new URL(item.url);
-          if (url.protocol !== 'https:' || url.hostname !== 'github.com') continue;
-          const li = document.createElement('li');
-          const link = document.createElement('a'); link.href = url.href; link.textContent = `${item.type.replace(/Event$/, '')} · ${item.repo}`;
-          const date = document.createElement('time'); date.dateTime = item.date; date.textContent = new Date(item.date).toLocaleDateString();
-          li.append(link, date); feed.append(li);
-        }
-        if (!feed.children.length) { const li = document.createElement('li'); li.textContent = 'No recent events returned by the public feed. Explore the repositories below.'; feed.append(li); }
       } catch {
-        github.querySelector('[data-github-stats]').hidden = true;
         github.querySelector('[data-calendar-section]').hidden = true;
-        github.querySelector('[data-events]').replaceChildren();
-        github.querySelector('[data-calendar-label]').textContent = 'Contribution calendar available on GitHub.';
-        status.textContent = 'Live activity is unavailable right now. My public profile and project repositories are available below.';
+        label.textContent = 'Contribution calendar unavailable. View on GitHub.';
       }
       finally { pending=false;github.setAttribute('aria-busy', 'false'); }
     };
-    github.querySelector('[data-github-retry]')?.addEventListener('click', populate);
     populate();
     new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);if(visible&&!document.hidden&&Date.now()-lastFetch>=300000)populate();}).observe(github);
     setInterval(()=>{if(visible&&!document.hidden)populate();},300000);

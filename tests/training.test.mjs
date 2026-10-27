@@ -59,7 +59,7 @@ test('Education retains its preview and the hero location retains a map fallback
   assert.match(home,/data-location-map/);
   assert.match(home,/data-map-status/);
   assert.match(home,/OpenStreetMap/);
-  assert.match(home,/data-github-retry/);
+  assert.match(home,/data-calendar-section/);
 });
 
 

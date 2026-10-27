@@ -2,7 +2,7 @@
 
 A responsive software developer portfolio showcasing practical software systems and web development. Vanilla HTML, CSS, and JavaScript; one native Node build generates eight main pages and two case studies. No chatbot.
 
-Public portfolio: [ejmedilo.vercel.app](https://ejmedilo.vercel.app/). Vercel runs `npm ci` and `npm run build:release`, serving `public/` and the existing GitHub API function. Set `SITE_URL=https://ejmedilo.vercel.app` for release generation. Retain a server-side `GITHUB_TOKEN` for authenticated contribution-calendar access; direct GitHub links remain available without it. Production releases require explicit owner approval.
+Public portfolio: [ejmedilo.vercel.app](https://ejmedilo.vercel.app/). Vercel runs `npm ci` and `npm run build:release`, serving `public/` and the existing GitHub API function. Set `SITE_URL=https://ejmedilo.vercel.app` for release generation. Configure a dedicated server-side `GITHUB_TOKEN` with `read:user` in Production and Preview for contribution-calendar access including anonymous private counts; direct GitHub links remain available without it. Production releases require explicit owner approval.
 
 ## Current visual direction — 27 October 2026
 
