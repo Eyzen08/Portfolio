@@ -17,12 +17,12 @@ test('overview pages use one shared project-details dialog outside filterable ro
   }
 });
 function element(dataset={}){return {dataset,hidden:false,listeners:{},attributes:{},style:{},textContent:'',addEventListener(k,fn){this.listeners[k]=fn;},setAttribute(k,v){this.attributes[k]=v;},focus(){document.activeElement=this;this.focuses=(this.focuses||0)+1;},closest(){return null;}};}
-function fixture(t,{supported=true,throws=false}={}){
+function fixture(t,{supported=true,throws=false,count=4,navigation=true}={}){
   const original=Object.getOwnPropertyDescriptor(globalThis,'document');t.after(()=>original?Object.defineProperty(globalThis,'document',original):delete globalThis.document);
   const close=element(),title=element(),thumb=element(),featured=element();
   const panels=['sti-vio-log'].map((id,i)=>{
     const p=element({projectPanel:id,projectTitle:projects[i].title,projectFeatured:String(i===0)});
-    p.slides=Array.from({length:4},()=>element());p.buttons=p.slides.map((_,j)=>element({previewIndex:String(j)}));p.counter=element();p.previous=element();p.next=element();p.image={src:`/${id}.webp`};
+    p.slides=Array.from({length:count},()=>element());p.buttons=navigation?p.slides.map((_,j)=>element({previewIndex:String(j)})):[];p.counter=navigation?element():null;p.previous=navigation?element():null;p.next=navigation?element():null;p.image={src:`/${id}.webp`};
     p.querySelectorAll=s=>s==='[data-preview-slide]'?p.slides:p.buttons;
     p.querySelector=s=>({'[data-preview-count]':p.counter,'[data-preview-prev]':p.previous,'[data-preview-next]':p.next,'.preview-image':p.image}[s]);return p;
   });
@@ -48,6 +48,13 @@ test('STI details wraps images, traps focus and restores its external opener',t=
 test('backdrop dismissal closes only outside the dialog and restores the opener',t=>{
   const f=fixture(t);click(f.links[0]);f.dialog.listeners.click({target:f.dialog,clientX:40,clientY:40});assert.equal(f.dialog.open,true);
   f.dialog.listeners.click({target:f.dialog,clientX:0,clientY:0});assert.equal(f.dialog.open,false);assert.equal(document.activeElement,f.links[0]);
+});
+
+test('single STI image opens without navigation controls and retains close/focus behavior',t=>{
+  const f=fixture(t,{count:1,navigation:false});
+  assert.equal(click(f.links[0]),true);assert.equal(f.dialog.open,true);assert.equal(f.panels[0].slides[0].hidden,false);
+  let prevented=false;f.dialog.listeners.keydown({key:'ArrowRight',preventDefault(){prevented=true;}});assert.equal(prevented,false);
+  f.close.listeners.click();assert.equal(f.dialog.open,false);assert.equal(document.activeElement,f.links[0]);
 });
 test('unsupported or throwing dialogs leave native image navigation and scrolling available',async t=>{
   for(const options of [{supported:false},{throws:true}])await t.test(JSON.stringify(options),t=>{const f=fixture(t,options);assert.equal(click(f.links[0]),false);assert.equal(f.dialog.open,false);assert.equal(f.classes.size,0);});

@@ -92,7 +92,7 @@ function initScreenshotPreviews() {
       active = galleryIndex(0, index, slides.length);
       slides.forEach((slide,index) => { slide.hidden = index !== active; });
       buttons.forEach((button,index) => button.setAttribute('aria-pressed', String(index === active)));
-      counter.textContent = `${active + 1} / ${slides.length}`;
+      if(counter) counter.textContent = `${active + 1} / ${slides.length}`;
     };
     card.querySelectorAll('[data-preview-open]').forEach(link => link.addEventListener('click', event => {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -107,11 +107,11 @@ function initScreenshotPreviews() {
       dialog.showModal();
     }));
     buttons.forEach(button => button.addEventListener('click', () => select(Number(button.dataset.previewIndex))));
-    dialog.querySelector('[data-preview-prev]').addEventListener('click', () => select(active - 1));
-    dialog.querySelector('[data-preview-next]').addEventListener('click', () => select(active + 1));
+    dialog.querySelector('[data-preview-prev]')?.addEventListener('click', () => select(active - 1));
+    dialog.querySelector('[data-preview-next]')?.addEventListener('click', () => select(active + 1));
     dialog.querySelector('[data-preview-close]').addEventListener('click', () => dialog.close());
     dialog.addEventListener('keydown', event => {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      if (slides.length < 2 || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
       event.preventDefault();
       select(active + (event.key === 'ArrowLeft' ? -1 : 1));
     });
@@ -139,7 +139,8 @@ export function initProjectPreviews() {
     active=galleryIndex(0,index,slides.length);
     slides.forEach((slide,i)=>{slide.hidden=i!==active;});
     panel.querySelectorAll('[data-preview-select]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===active)));
-    panel.querySelector('[data-preview-count]').textContent=(active+1)+' / '+slides.length;
+    const counter=panel.querySelector('[data-preview-count]');
+    if(counter) counter.textContent=(active+1)+' / '+slides.length;
   };
   const showProject=id=>{
     const target=panels.find(item=>item.dataset.projectPanel===id);
@@ -160,8 +161,8 @@ export function initProjectPreviews() {
   }));
   panels.forEach(item=>{
     item.querySelectorAll('[data-preview-select]').forEach(button=>button.addEventListener('click',()=>select(Number(button.dataset.previewIndex))));
-    item.querySelector('[data-preview-prev]').addEventListener('click',()=>select(active-1));
-    item.querySelector('[data-preview-next]').addEventListener('click',()=>select(active+1));
+    item.querySelector('[data-preview-prev]')?.addEventListener('click',()=>select(active-1));
+    item.querySelector('[data-preview-next]')?.addEventListener('click',()=>select(active+1));
   });
   close.addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{
@@ -170,7 +171,7 @@ export function initProjectPreviews() {
     if(event.clientX<bounds.left || event.clientX>bounds.right || event.clientY<bounds.top || event.clientY>bounds.bottom)dialog.close();
   });
   dialog.addEventListener('keydown',event=>{
-    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(active+(event.key==='ArrowLeft'?-1:1));}
+    if(panel?.querySelectorAll('[data-preview-slide]').length>1 && (event.key==='ArrowLeft'||event.key==='ArrowRight')){event.preventDefault();select(active+(event.key==='ArrowLeft'?-1:1));}
     if(event.key!=='Tab')return;
     const controls=[...dialog.querySelectorAll('a[href],button:not([disabled])')].filter(node=>!node.closest('[hidden]'));
     const first=controls[0],last=controls.at(-1);

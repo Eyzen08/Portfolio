@@ -32,7 +32,7 @@ test('AI tools render once after the technical stack with complete static conten
 
 test('UI headings and actions use Title Case while prose, official names, and destinations survive', () => {
   for (const text of ['About', 'Tech Stack', 'Projects', 'Experience', 'Certificates', 'Workflow', 'Activity', 'Let’s Build Together', 'Open Full Map', 'All Certificates']) assert.ok(page('/').includes(text), text);
-  for (const project of projects) assert.ok(page('/projects/').includes(`${project.title} Screenshots`));
+  for (const project of projects) assert.ok(page('/projects/').includes(`${project.title} Project Image`));
   assert.match(page('/projects/'), /View Project/);
   assert.match(page('/projects/sti-vio-log/'), /Tools around the Core Workflow/);
   assert.match(page('/projects/kwiztorya/'), /History through a Playable Sequence/);

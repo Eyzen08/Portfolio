@@ -8,7 +8,7 @@ const pages = renderPages({ profile, projects, technologies });
 const home = pages.find(page => page.route === '/').content;
 const escaped = text => text.replaceAll('&', '&amp;').replaceAll("'", '&#39;');
 
-test('each complete Home project card contains its information, screenshots and valid screen controls', () => {
+test('each complete Home project card contains its information and one image without slideshow controls', () => {
   const cards = [...home.matchAll(/<article class="project-feature card[\s\S]*?<\/article>/g)].map(match => match[0]);
   assert.equal(cards.length, projects.length);
   projects.forEach((project, index) => {
@@ -16,10 +16,8 @@ test('each complete Home project card contains its information, screenshots and 
     for (const text of [project.title, project.role, project.summary]) assert.ok(card.includes(escaped(text)), text);
     for (const href of [`/projects/${project.id}/`, project.sourceUrl, project.liveUrl].filter(Boolean)) assert.ok(card.includes(`href="${href}"`));
     const gallery = project.id === 'sti-vio-log' ? home.match(/<dialog[^>]*data-project-viewer[\s\S]*?<\/dialog>/)[0] : card;
-    assert.match(gallery, /data-preview-prev/); assert.match(gallery, /data-preview-next/);
-    assert.equal((gallery.match(/data-preview-select\b/g) || []).length, project.previewScreens.length);
+    assert.doesNotMatch(gallery, /data-preview-prev|data-preview-next|data-preview-select|data-preview-count/);
     for (const screen of project.previewScreens) {
-      assert.ok(gallery.includes(`aria-controls="preview-${project.id}-${screen.id}"`));
       assert.ok(gallery.includes(`id="preview-${project.id}-${screen.id}"`));
       assert.ok(gallery.includes(`href="${screen.src}"`));
       if (screen.originalSrc) assert.ok(gallery.includes(`href="${screen.originalSrc}"`));

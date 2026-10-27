@@ -6,8 +6,8 @@ const profile=JSON.parse(await readFile(new URL('../data/profile.json',import.me
 const projects=JSON.parse(await readFile(new URL('../data/projects.json',import.meta.url)));
 const technologies=JSON.parse(await readFile(new URL('../data/technologies.json',import.meta.url)));
 const pages=renderPages({profile,projects,technologies});
-test('all project contexts use independent layered decks with complete figures before JS',()=>{
-  for(const [route,count] of [['/',0],['/projects/',0],['/projects/sti-vio-log/',1],['/projects/kwiztorya/',1]]){
+test('project contexts retain static complete images before JS',()=>{
+  for(const [route,count] of [['/',0],['/projects/',0],['/projects/sti-vio-log/',0],['/projects/kwiztorya/',0]]){
     const html=pages.find(p=>p.route===route).content;
     assert.equal((html.match(/data-picture-deck/g)||[]).length,count,route);
     assert.ok(!html.includes('phone-trio'));
@@ -15,12 +15,12 @@ test('all project contexts use independent layered decks with complete figures b
     const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
     for(const match of html.matchAll(/aria-controls="([^"]+)"/g))assert.ok(ids.includes(match[1]));
     assert.ok(!/data-deck-card[^>]* hidden/.test(html));
-    if(route.startsWith('/projects/')&&route!=='/projects/') assert.ok(html.includes('data-deck-controls hidden'));
+    if(route.startsWith('/projects/')&&route!=='/projects/') assert.ok(!html.includes('data-deck-controls'));
     else assert.ok(!html.includes('data-rail-controls'));
   }
 });
-test('four STI compositions and four supplied Kwiz mockups have complete local records',async()=>{
-  assert.deepEqual(projects[0].previewScreens.map(s=>s.id),['landing','signin','dashboard','workflows']);
+test('both single project images have complete local records',async()=>{
+  assert.deepEqual(projects.map(p=>p.previewScreens.length),[1,1]);
   for(const project of projects)for(const screen of project.previewScreens){
     assert.equal(screen.kind,'desktop');assert.equal(screen.deviceFrame,true);
     assert.ok(screen.label&&screen.alt&&screen.caption&&screen.explanation);

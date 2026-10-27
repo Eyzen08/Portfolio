@@ -39,8 +39,8 @@ test('globe mesh is finite, connected on the sphere and rotates through the exis
  const point=lines.find(l=>Math.abs(l[0].x)>.1)[0];assert.notDeepEqual(projectPoint(point,0),projectPoint(point,.4));
 });
 
-test('new Home mockup leads the supplied Kwiz sequence without fabricated release claims',()=>{
- const kwiz=projects.find(p=>p.id==='kwiztorya');assert.deepEqual(kwiz.previewScreens.map(s=>s.id),['home','quiz','story','settings']);
+test('single supplied Kwiz showcase preserves the documented release status',()=>{
+ const kwiz=projects.find(p=>p.id==='kwiztorya');assert.deepEqual(kwiz.previewScreens.map(s=>s.id),['home']);
  assert.equal(kwiz.previewScreens[0].presentationLabel,'Owner-Supplied Mockup');
  assert.match(kwiz.previewScreens[0].caption,/not an unmodified device capture/);
  assert.equal(kwiz.platform,'Mobile');assert.equal(kwiz.liveUrl,null);

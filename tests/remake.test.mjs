@@ -12,7 +12,7 @@ test('full remake includes real decks, project stages, resources and complete no
   assert.doesNotMatch(home.content, /data-hobby-|\/assets\/hobbies\/|Artwork Credits/);
   assert.equal((home.content.match(/data-background-card/g)||[]).length, 3);
   assert.equal((home.content.match(/<article class="project-feature/g)||[]).length,2);
-  assert.ok(home.content.includes(projects[1].previewScreens[1].src));
+  assert.ok(home.content.includes(projects[1].previewScreens[0].src));
   assert.doesNotMatch(home.content,/hobby-art|highlight-tabs|STI Vio-Log workflow/);
   assert.equal((home.content.match(/<h1/g)||[]).length,1);
   for(const page of pages){

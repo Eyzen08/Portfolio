@@ -106,28 +106,28 @@ test('project cards retain searchable evidence and genuine case-study destinatio
     assert.match(cards[0], /Full-Stack Developer/);
     assert.match(cards[0], /class="project-status"/);
     assert.match(page('/projects/sti-vio-log/'), /PostgreSQL/);
-    assert.match(cards[1], /kwiztorya-mockup-quiz.webp/);
+    assert.match(cards[1], /kwiztorya-history-showcase.png/);
     assert.match(cards[1], /href="\/projects\/kwiztorya\/"/);
     assert.doesNotMatch(cards[1], /welcome-art/);
   }
 });
 
-test('Kwiztorya preview has four complete figures before JavaScript and valid unique controls', async () => {
+test('Kwiztorya preview has one static image before JavaScript and valid unique IDs', async () => {
   const html = page('/projects/kwiztorya/');
-  assert.match(html, /data-picture-deck[^>]*aria-label="Kwiztorya Screenshots"/);
-  assert.equal((html.match(/data-deck-card/g) || []).length, 4);
-  assert.match(html, /data-deck-controls hidden/);
+  assert.match(html, /aria-label="Kwiztorya Project Image"/);
+  assert.equal((html.match(/data-deck-card/g) || []).length, 1);
+  assert.doesNotMatch(html, /data-picture-deck|data-deck-controls/);
   assert.doesNotMatch(html, /data-deck-card hidden/);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(ids.length, new Set(ids).size);
   for (const match of html.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));
   const kwiz = projects.find(item => item.id === 'kwiztorya');
-  assert.equal(kwiz.previewScreens.length, 4);
+  assert.equal(kwiz.previewScreens.length, 1);
   for (const screen of kwiz.previewScreens) {
     assert.ok(screen.width > 0 && screen.height < screen.width);
     assert.ok(screen.alt && screen.caption && screen.explanation);
     const bytes = await readFile(new URL(`..${screen.src}`, import.meta.url));
-    assert.equal(bytes.subarray(8, 12).toString(), 'WEBP');
+    assert.equal(bytes.subarray(1, 4).toString(), 'PNG');
   }
 });
 
