@@ -227,3 +227,28 @@ Original SHA-256 fingerprints:
 Current revision: STI selects the four 1920 × 1080 `sti-vio-log-mockup-*-v3.webp` compositions (960 × 540 thumbnails), with the authentic live-site logo and masked public sign-in captures over the cool-white office background. Kwiztorya retains the four original supplied 1536 × 1024 compositions and original screenshot popup. PNG masters/backgrounds are in `design/project-showcase/`; raw live captures stay in ignored `.qa/`. See the current-revision section of `docs/PROJECT-SHOWCASE.md` for provenance, privacy masks, and verification. The following paragraph records the earlier version.
 
 Home, Projects and both case-study galleries now use the eight owner-approved landscape compositions. STI combines the nine supplied transparent devices and the supplied desktop landing image over four AI-generated studio background plates. UI pixels are supplied imagery, with account/student identifiers masked before native-browser PNG export. Kwiztorya uses four supplied phone/tablet presentation compositions unchanged. These are labeled presentation mockups, not unmodified device screenshots. PNG masters and generated backgrounds are outside the published assets, in design/project-showcase/. Full provenance, generation prompts, composition groupings and QA are documented in docs/PROJECT-SHOWCASE.md. Existing source assets remain unchanged; unredacted new source captures are not published.
+
+## Portrait branding refresh — 27 October 2026
+
+The owner-supplied `formal pic.jpg` (728 × 1092, SHA-256 `46192a34196936010a5c673ce6d57492f27808ea16f0628025b1f37dd2b5effe`) supplies the header/footer avatar and favicons. At the owner's request, the wider upper-body crop `(0,0)` to `(728,728)` replaces the earlier close face crop. Lanczos downsampling and a circular alpha mask preserve the original photo, with more shoulders and suit visible. No generative retouching is present in the shipped files. The source photograph and larger portfolio portraits remain unchanged. EXIF metadata is not copied.
+
+| Asset | Dimensions | PNG bytes |
+| --- | --- | --- |
+| `brand/ej-formal-wide-avatar.png` | 192 × 192 | 41,122 |
+| `brand/ej-formal-wide-favicon-32.png` | 32 × 32 | 2,486 |
+| `brand/ej-formal-wide-favicon-48.png` | 48 × 48 | 4,670 |
+
+Distinct filenames refresh browser caches. All three PNGs have verified transparent corners. Existing portrait/social-preview assets retain their earlier sources.
+
+The real Taguig map retains MapLibre/OpenFreeMap and its required linked credits, now available through the compact information control. All 36 public technical skills use their existing local icon sources in both the continuous strip and interactive globe; the internal Node test runner entry is excluded. No new third-party imagery or dependency was added.
+
+## Branded globe icons — 27 October 2026
+
+The globe now includes only technologies with their own product logo, plus the five AI tools. TypeScript and Tailwind CSS use original colored SVGs from the same pinned Devicon revision already used by the site (`6a37858047b0e8d9c9c0e68f4a071fc410652e89`):
+
+- `icons/typescript.svg`: [TypeScript original SVG](https://github.com/devicons/devicon/blob/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/typescript/typescript-original.svg), 943 bytes.
+- `icons/tailwind.svg`: [Tailwind CSS original SVG](https://github.com/devicons/devicon/blob/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/tailwindcss/tailwindcss-original.svg), 689 bytes.
+
+The original SVGs are unmodified and served locally; the existing `icons/Devicon-LICENSE` applies, with product trademarks retained by their owners. Both files were checked for a viewBox and absence of scripts, event handlers and JavaScript links. Their logo references also replace generic code symbols in the skills list, strip and detailed Skills page. No new technology claim or dependency was added.
+
+All 36 public technical skills remain in the text list and scrolling strip. The globe contains 26 branded technologies plus five AI tools (31 items). Ten entries represented only by generic code/document/database symbols remain listed with their evidence links and no longer appear in the globe. This supersedes the earlier all-skills globe count.

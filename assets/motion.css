@@ -26,7 +26,6 @@
 @media print{[data-card-hover]{translate:none!important;scale:none!important}[data-card-hover]::after,.scroll-progress,.motion-toggle{display:none}}
 .motion-mask{display:inline-block;overflow:clip;vertical-align:bottom;padding-bottom:.12em;margin-bottom:-.12em}
 [data-motion-piece]{display:inline-block}
-.reference-heading h2[data-motion-words]::before{content:none}
 .motion-ghost-text{display:block;transform:translateX(var(--ghost-shift,0%))}
 .hero-heading{translate:var(--hero-pointer-x,0px) calc(var(--hero-name-shift,0px) + var(--hero-pointer-y,0px));transition:translate 500ms var(--motion-ease)}
 .hero-portrait{translate:var(--hero-pointer-x,0px) calc(var(--hero-photo-shift,0px) + var(--hero-pointer-y,0px));transition:translate 650ms var(--motion-ease)}

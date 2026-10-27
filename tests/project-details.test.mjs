@@ -12,7 +12,7 @@ test('overview pages use one shared project-details dialog outside filterable ro
     for(const row of rows){assert.doesNotMatch(row,/<dialog/);assert.match(row,/aria-controls="project-details-viewer"/);}
     assert.ok(html.indexOf('data-project-viewer')>html.lastIndexOf('</article>'));
     assert.ok(html.includes('data-project-panel="sti-vio-log"'));assert.ok(html.includes('data-project-panel="kwiztorya"'));assert.match(html,/More Work/);assert.doesNotMatch(html,/data-project-switch/);
-    assert.ok(html.includes('href="https://stiviolog.com/" >stiviolog.com'));
+    assert.ok(html.includes('href="https://stiviolog.com/" >Live Site'));
     assert.match(html,/preview-ambient/);assert.match(html,/Close Project Details/);
   }
 });
@@ -27,7 +27,7 @@ test('project views omit full-image links and popups recommend the other project
       assert.equal((dialog.match(/class="project-more-work"/g)||[]).length,1);
       assert.equal((dialog.match(/class="more-project"/g)||[]).length,1);
       const footer=dialog.match(/<footer class="project-more-work">[\s\S]*?<\/footer>/)[0];
-      assert.match(footer,/>Up Next</);assert.match(footer,/>\/More Work</);
+      assert.match(footer,/>Up Next</);assert.match(footer,/>More Work</);
       assert.ok(footer.includes(`href="${other.previewScreens[0].src}"`));
       assert.ok(footer.includes(`data-details-open data-project-id="${other.id}"`));
       assert.ok(footer.includes(`src="${other.previewScreens[0].srcSmall}"`));
@@ -96,7 +96,7 @@ test('reopening resets saved scroll after the dialog becomes visible',t=>{
 test('public image descriptions explain the projects and STI live links use the requested domain',()=>{
   for(const page of renderPages({profile,projects,technologies})){
     assert.doesNotMatch(page.content,/Owner-Supplied Mockup|owner-supplied presentation|QR payload|device perspectives|not an unmodified|sti-vio-log\.vercel\.app|>Live Preview<|>Live App<|>Open Live Platform</i);
-    for(const match of page.content.matchAll(/<a[^>]*href="https:\/\/stiviolog\.com\/"[^>]*>([\s\S]*?)<\/a>/g))assert.match(match[1],/^stiviolog\.com/);
+    for(const match of page.content.matchAll(/<a[^>]*href="https:\/\/stiviolog\.com\/"[^>]*>([\s\S]*?)<\/a>/g))assert.match(match[1],/^Live Site/);
   }
   assert.equal(projects[0].liveUrl,'https://stiviolog.com/');
   assert.deepEqual(projects.map(p=>p.previewScreens[0].caption),[

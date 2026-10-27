@@ -216,7 +216,7 @@
     "id": "python",
     "name": "Python",
     "category": "Programming Languages",
-    "description": "Additional programming language experience listed in my résumé.",
+    "description": "Additional programming language experience listed in my resume.",
     "projects": [],
     "label": "Additional familiarity",
     "evidenceUrl": "/resume/#skills"
@@ -225,7 +225,7 @@
     "id": "php",
     "name": "PHP",
     "category": "Programming Languages",
-    "description": "Additional programming language experience listed in my résumé.",
+    "description": "Additional programming language experience listed in my resume.",
     "projects": [],
     "label": "Additional familiarity",
     "evidenceUrl": "/resume/#skills"
@@ -234,7 +234,7 @@
     "id": "csharp",
     "name": "C#",
     "category": "Programming Languages",
-    "description": "Additional programming language experience listed in my résumé.",
+    "description": "Additional programming language experience listed in my resume.",
     "projects": [],
     "label": "Additional familiarity",
     "evidenceUrl": "/resume/#skills"
@@ -275,9 +275,9 @@
     "id": "vscode",
     "name": "Visual Studio Code",
     "category": "Tools and Workflow",
-    "description": "Code editing and development tooling listed in my résumé.",
+    "description": "Code editing and development tooling listed in my resume.",
     "projects": [],
-    "label": "Listed in my résumé",
+    "label": "Listed in my resume",
     "evidenceUrl": "/resume/#skills"
   },
   {
@@ -306,10 +306,9 @@
     "id": "typescript",
     "name": "TypeScript",
     "category": "Programming Languages",
-    "description": "Listed in my updated résumé; developing my TypeScript practice.",
+    "description": "Listed in my updated resume; developing my TypeScript practice.",
     "projects": [],
-    "label": "Listed in my résumé",
-    "iconId": "code",
+    "label": "Listed in my resume",
     "evidenceUrl": "/resume/#skills"
   },
   {
@@ -318,8 +317,7 @@
     "category": "Frontend",
     "description": "Utility-based interface styling included in my technical skill set.",
     "projects": [],
-    "label": "Listed in my résumé",
-    "iconId": "code",
+    "label": "Listed in my resume",
     "evidenceUrl": "/resume/#skills"
   },
   {
@@ -328,7 +326,7 @@
     "category": "Frontend",
     "description": "Responsive layout and accessible interface development.",
     "projects": [],
-    "label": "Listed in my résumé",
+    "label": "Listed in my resume",
     "iconId": "code",
     "evidenceUrl": "/resume/#skills"
   },

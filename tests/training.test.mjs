@@ -14,7 +14,7 @@ test('compact Home navigation preserves direct training, résumé and contact ro
     const html = shell(page, { profile });
     const header = html.match(/<nav class="main-nav"[^>]*>(.*?)<\/nav>/s)[1];
     const labels = [...header.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(match => match[1]);
-    assert.deepEqual(labels, page.route === '/' ? ['About', 'Tech Stack', 'Projects', 'Experience', 'Certificates', 'Contact'] : ['Home', 'About', 'Projects', 'Skills', 'Certificates', 'Resume', 'Contact']);
+    assert.deepEqual(labels, page.route === '/' ? ['About', 'Projects', 'Experience', 'Skills', 'Certificates', 'Contacts'] : ['Home', 'About', 'Projects', 'Skills', 'Certificates', 'Resume', 'Contact']);
     const footer = html.match(/<nav class="footer-pages"[^>]*>(.*?)<\/nav>/s)[1];
     for (const route of ['/training/', '/resume/', '/contact/']) assert.ok(footer.includes(`href="${route}"`));
     assert.match(html, /class="button header-contact" href="\/contact\/"/);
@@ -58,7 +58,7 @@ test('Education retains its preview and the hero location retains a map fallback
   assert.match(home,/\/assets\/education\/sti-global-city.jpg/);
   assert.match(home,/data-location-map/);
   assert.match(home,/data-map-status/);
-  assert.match(home,/OpenStreetMap/);
+  assert.match(home,/aria-label="Interactive map of Taguig City"/);
   assert.match(home,/data-calendar-section/);
 });
 

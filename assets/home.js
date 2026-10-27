@@ -8,11 +8,13 @@ export function spherePoints(count) {
     return { x: Math.cos(angle) * radius, y, z: Math.sin(angle) * radius };
   });
 }
-export function projectPoint(point, angle) {
+export function projectPoint(point, angle, tilt = 0) {
   const x = point.x * Math.cos(angle) + point.z * Math.sin(angle);
-  const z = point.z * Math.cos(angle) - point.x * Math.sin(angle);
+  const depth = point.z * Math.cos(angle) - point.x * Math.sin(angle);
+  const y = point.y * Math.cos(tilt) - depth * Math.sin(tilt);
+  const z = point.y * Math.sin(tilt) + depth * Math.cos(tilt);
   const scale = 2.5 / (2.5 - z * .5);
-  return { x: x * scale, y: point.y * scale, z, scale };
+  return { x: x * scale, y: y * scale, z, scale };
 }
 
 export function sphereMesh() {
@@ -38,9 +40,16 @@ export function initHome() {
   const sphere = document.querySelector('[data-sphere]');
   const presentation = sphere?.querySelector('[data-sphere-presentation]');
   const strip = document.querySelector('[data-moving-strip]');
-  let frame = 0, last = 0, angle = 0;
+  let frame = 0, last = 0, angle = 0, tilt = 0;
   const visible = new Map([presentation,strip].filter(Boolean).map(element=>[element,false]));
   const running = element => motionAllowed({ hidden: document.hidden, visible: visible.get(element), interacting: false }) && document.documentElement.dataset.motion!=='reduced';
+  if(strip){
+    const group=strip.querySelector('.bento-tools');
+    const measure=()=>{if(group?.offsetWidth)strip.style.setProperty('--tool-duration',`${group.offsetWidth/45}s`);};
+    measure();
+    if(group)new ResizeObserver(measure).observe(group);
+    document.fonts?.ready.then(measure);
+  }
 
   const gallery = document.querySelector('[data-gallery]');
   const photos = [...(gallery?.querySelectorAll('[data-gallery-frame]') || [])];
@@ -70,7 +79,10 @@ export function initHome() {
   const mesh = sphereMesh();
   const images = sphereItems.map(item=>{const image=new Image();image.src=item.querySelector('img').src;image.onload=()=>draw();return image;});
   const name = sphere?.querySelector('[data-sphere-name]');
-  let pointer = null, projected = [];
+  let pointer = null, projected = [], hover = null, drag = null, focused = false;
+  let velocityX = 0, velocityY = 0;
+  const clampTilt = value => Math.max(-Math.PI/3,Math.min(Math.PI/3,value));
+  const rotating = () => running(presentation) && !drag && !focused;
   function draw() {
     if(!context)return;
     const width = canvas.clientWidth || 640, height = width * 520/640;
@@ -81,13 +93,13 @@ export function initHome() {
     const dark=document.documentElement.dataset.theme==='dark';
     context.strokeStyle=dark?'#c4adfa':'#9176c1';context.lineWidth=.65;
     for(const line of mesh){
-      const a=projectPoint(line[0],angle),b=projectPoint(line[1],angle);
+      const a=projectPoint(line[0],angle,tilt),b=projectPoint(line[1],angle,tilt);
       context.globalAlpha=(dark?.04:.025)+((a.z+b.z)/2+1)*(dark?.065:.05);
       context.beginPath();context.moveTo(width/2+a.x*radius,height/2+a.y*radius);
       context.lineTo(width/2+b.x*radius,height/2+b.y*radius);context.stroke();
     }
     context.globalAlpha=dark?.22:.17;context.beginPath();context.arc(width/2,height/2,radius*1.021,0,Math.PI*2);context.stroke();
-    projected = points.map((p,i)=>({ ...projectPoint(p,angle), index:i }));
+    projected = points.map((p,i)=>({ ...projectPoint(p,angle,tilt), index:i }));
     projected.sort((a,b)=>a.z-b.z);
     let closest = null, distance = 32;
     for(const p of projected){
@@ -105,21 +117,67 @@ export function initHome() {
     presentation.hidden=false;
     new ResizeObserver(draw).observe(canvas);
     new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-    canvas.addEventListener('pointermove',event=>{const rect=canvas.getBoundingClientRect();pointer={x:event.clientX-rect.left,y:event.clientY-rect.top};draw();});
-    canvas.addEventListener('pointerleave',()=>{pointer=null;draw();});
+    canvas.addEventListener('pointerdown',event=>{
+      if(event.button!==0 || drag)return;
+      drag={id:event.pointerId,x:event.clientX,y:event.clientY,time:event.timeStamp,touch:event.pointerType==='touch'};
+      focused=false;hover=null;velocityX=velocityY=0;
+      canvas.dataset.dragging='true';canvas.setPointerCapture(event.pointerId);sync();
+    });
+    canvas.addEventListener('pointermove',event=>{
+      const rect=canvas.getBoundingClientRect();
+      pointer={x:event.clientX-rect.left,y:event.clientY-rect.top};
+      if(drag){
+        if(event.pointerId!==drag.id)return;
+        const sensitivity=4/(canvas.clientWidth||640),elapsed=Math.max(1,event.timeStamp-drag.time);
+        const dx=(event.clientX-drag.x)*sensitivity,dy=drag.touch?0:(event.clientY-drag.y)*sensitivity;
+        angle+=dx;tilt=clampTilt(tilt+dy);
+        velocityX=Math.max(-.01,Math.min(.01,dx/elapsed));velocityY=Math.max(-.01,Math.min(.01,dy/elapsed));
+        drag.x=event.clientX;drag.y=event.clientY;drag.time=event.timeStamp;
+      }else if(event.pointerType!=='touch'){
+        hover={x:Math.max(-1,Math.min(1,pointer.x/rect.width*2-1)),y:Math.max(-1,Math.min(1,pointer.y/rect.height*2-1))};
+      }
+      draw();
+    });
+    const release=(event,spin)=>{
+      if(!drag || event.pointerId!==drag.id)return;
+      if(!spin || event.timeStamp-drag.time>100)velocityX=velocityY=0;
+      drag=null;canvas.dataset.dragging='false';pointer=null;hover=null;
+      if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
+      sync();draw();
+    };
+    canvas.addEventListener('pointerup',event=>release(event,true));
+    canvas.addEventListener('pointercancel',event=>release(event,false));
+    canvas.addEventListener('lostpointercapture',event=>release(event,false));
+    canvas.addEventListener('pointerleave',()=>{pointer=null;hover=null;draw();});
+    canvas.addEventListener('focus',()=>{focused=!drag;hover=null;sync();});
+    canvas.addEventListener('blur',()=>{focused=false;sync();});
+    canvas.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;
+      event.preventDefault();focused=true;hover=null;velocityX=velocityY=0;sync();
+      if(event.key==='ArrowLeft')angle-=.15;
+      if(event.key==='ArrowRight')angle+=.15;
+      if(event.key==='ArrowUp')tilt=clampTilt(tilt-.15);
+      if(event.key==='ArrowDown')tilt=clampTilt(tilt+.15);
+      draw();
+    });
     draw();
   }
 
   function tick(time) {
     frame = 0;
     const delta = last ? Math.min(time-last,64) : 0; last = time;
-    if(context && running(presentation)){angle+=delta*Math.PI*2/52000;draw();}
-    if(context && running(presentation)) frame=requestAnimationFrame(tick);
+    if(context && rotating()){
+      angle+=delta*(Math.PI*2/52000+(hover?.x||0)*.0007+velocityX);
+      tilt=clampTilt(tilt+delta*((hover?.y||0)*.00045+velocityY));
+      velocityX*=Math.exp(-delta/350);velocityY*=Math.exp(-delta/350);draw();
+      frame=requestAnimationFrame(tick);
+    }
   }
   function sync() {
     if(strip)strip.dataset.running=String(running(strip));
     if(frame)cancelAnimationFrame(frame);frame=0;last=0;
-    if(context && running(presentation))frame=requestAnimationFrame(tick);
+    if(!running(presentation)){velocityX=velocityY=0;hover=null;}
+    if(context && rotating())frame=requestAnimationFrame(tick);
   }
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)visible.set(entry.target,entry.isIntersecting);sync();},{threshold:.1});
   for(const element of visible.keys())observer.observe(element);

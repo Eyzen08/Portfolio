@@ -7,12 +7,10 @@ const [profile, projects, technologies] = await Promise.all(['profile', 'project
 const pages = renderPages({ profile, projects, technologies });
 const home = pages.find(page => page.route === '/');
 
-test('the single map lives behind the hero with accessible controls and an external fallback', () => {
+test('the single map lives behind the hero without the removed text actions', () => {
   const hero=home.content.slice(0,home.content.indexOf('id="about"'));
   assert.match(hero,/class="hero-map" data-location-map/);
-  assert.match(hero,/id="hero-map-controls"[^>]*hidden/);
-  assert.match(hero,/data-map-toggle[^>]*aria-expanded="false"[^>]*aria-controls="hero-map-controls"[^>]*hidden/);
-  assert.match(hero,/Open Full Map/);
+  assert.doesNotMatch(hero,/hero-map-controls|data-map-toggle|Explore map|Open Full Map/);
   assert.match(hero,/Philippine Standard Time/);
   assert.doesNotMatch(home.content,/about-extras|data-background-deck|Explore my background|A Little Background/);
   assert.doesNotMatch(home.content.slice(home.content.indexOf('id="about"')),/data-location-map/);
@@ -21,14 +19,12 @@ test('the single map lives behind the hero with accessible controls and an exter
 test('Home opens with the complete professional overview and renders each interactive component once', () => {
   const overview = home.content.slice(0, home.content.indexOf('id="projects"'));
   for (const text of [profile.name, profile.role, profile.aboutSummary, profile.goal, profile.intro, 'About Me']) assert.ok(overview.includes(text), text);
-  for (const marker of ['data-gallery', 'data-location-map', 'data-moving-strip']) {
-    assert.ok(overview.includes(marker), `${marker} belongs in the overview`);
-    assert.equal([...home.content.matchAll(new RegExp(`${marker}(?=[\\s>])`, 'g'))].length, 1, `${marker} is not duplicated below the overview`);
-  }
+  for (const marker of ['data-gallery', 'data-location-map']) assert.ok(overview.includes(marker), `${marker} belongs in the overview`);
+  for (const marker of ['data-gallery', 'data-location-map', 'data-moving-strip']) assert.equal([...home.content.matchAll(new RegExp(`${marker}(?=[\\s>])`, 'g'))].length, 1, `${marker} is rendered once`);
   assert.doesNotMatch(home.content, /editorial-hero|hero-project|data-hobby-/);
   const ids = [...home.content.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(ids.length, new Set(ids).size);
-  const positions = ['top', 'about', 'education', 'skills', 'projects', 'experience', 'training', 'ai', 'github', 'contact'].map(id => ids.indexOf(id));
+  const positions = ['top', 'about', 'education', 'projects', 'experience', 'skills', 'training', 'ai', 'github', 'contact'].map(id => ids.indexOf(id));
   assert.ok(positions.every(index => index >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
   assert.match(overview, /fetchpriority="high"/);
@@ -39,7 +35,8 @@ test('Home menu scrolls to existing sections while detailed pages and footer ret
     const html = shell(page, { profile });
     const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)[0];
     const hrefs = [...nav.matchAll(/href="([^"]+)"/g)].map(match => match[1]);
-    assert.deepEqual(hrefs, page.route === '/' ? ['#about', '#skills', '#projects', '#experience', '#training', '#contact'] : ['/', '/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/']);
+    assert.deepEqual(hrefs, page.route === '/' ? ['#about', '#projects', '#experience', '#skills', '#training', '#contact'] : ['/', '/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/']);
+    if(page.route==='/')assert.deepEqual([...nav.matchAll(/data-section-link="[^"]+">([^<]+)</g)].map(match=>match[1]),['About','Projects','Experience','Skills','Certificates','Contacts']);
     if (page.route === '/') for (const href of hrefs.filter(href => href.startsWith('#'))) assert.ok(home.content.includes(`id="${href.slice(1)}"`));
     const footer = html.match(/<nav class="footer-pages"[\s\S]*?<\/nav>/)[0];
     for (const href of ['/about/', '/projects/', '/stack/', '/training/', '/resume/', '/contact/', '/activity/']) assert.ok(footer.includes(`href="${href}"`));

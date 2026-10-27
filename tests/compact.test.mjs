@@ -39,6 +39,9 @@ test('globe mesh is finite, connected on the sphere and rotates through the exis
  assert.equal(lines.length,840);
  for(const line of lines)for(const p of line){assert.ok(Math.abs(Math.hypot(p.x,p.y,p.z)-1)<1e-9);assert.ok(Number.isFinite(projectPoint(p,.7).x));}
  const point=lines.find(l=>Math.abs(l[0].x)>.1)[0];assert.notDeepEqual(projectPoint(point,0),projectPoint(point,.4));
+ const tilted=projectPoint({x:0,y:1,z:0},0,Math.PI/2);
+ assert.ok(Math.abs(tilted.y)<1e-9);assert.ok(Math.abs(tilted.z-1)<1e-9);
+ assert.deepEqual(projectPoint(point,.4),projectPoint(point,.4,0),'Two-argument projection stays compatible');
 });
 
 test('single supplied Kwiz showcase preserves the documented release status',()=>{

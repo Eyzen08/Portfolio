@@ -201,7 +201,7 @@ export function initMotion() {
   for(const heading of document.querySelectorAll('.reference-heading h2')){
     const text=heading.getAttribute('aria-label')||heading.textContent.trim();
     heading.setAttribute('aria-label',text);heading.dataset.motionWords='true';
-    const pieces=split(heading,text.split(/\s+/).map((word,i)=>`${i===0?'/':''}${word}${i<text.split(/\s+/).length-1?'\u00a0':''}`));
+    const pieces=split(heading,text.split(/\s+/).map((word,i)=>`${word}${i<text.split(/\s+/).length-1?'\u00a0':''}`));
     register(heading,()=>pieces.forEach((piece,i)=>playMotion(piece,'word',{delay:Math.min(i*60,240)})));
   }
   for(const ghost of document.querySelectorAll('.reference-heading .heading-ghost')){

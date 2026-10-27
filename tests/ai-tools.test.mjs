@@ -7,17 +7,19 @@ const [profile, projects, technologies] = await Promise.all(['profile', 'project
 const pages = renderPages({ profile, projects, technologies });
 const page = route => pages.find(page => page.route === route).content;
 
-test('AI tools render once after the technical stack with complete static content and local logos', async () => {
+test('AI tools render once inside Skills with complete static content and local logos', async () => {
   const home = page('/');
   assert.equal((home.match(/id="ai"/g) || []).length, 1);
   assert.ok(home.indexOf('id="skills"') < home.indexOf('id="ai"'));
   assert.ok(home.indexOf('id="about"') < home.indexOf('id="skills"'));
   assert.ok(home.indexOf('id="training"') < home.indexOf('id="ai"'));
-  const section = home.match(/<section[^>]*id="ai"[\s\S]*?<\/section>/)[0];
+  const section = home.slice(home.indexOf('id="skills"'),home.indexOf('id="training"'));
+  const workflow = home.match(/<section[^>]*id="ai"[\s\S]*?<\/section>/)[0];
+  assert.equal((home.match(/class="ai-tool-list"/g)||[]).length,1);
   assert.match(section, /<h3[^>]*>AI Tools I Use<\/h3>/);
-  assert.match(section, /I review and test AI-generated suggestions/);
+  assert.doesNotMatch(workflow,/AI Tools I Use|class="ai-tool-list"|aria-labelledby="ai-title"/);
   assert.deepEqual(profile.aiTools.map(tool => tool.name), ['Google Gemini', 'ChatGPT', 'OpenAI Codex', 'Claude', 'GitHub Copilot']);
-  const tools = [...section.matchAll(/<li><img[^>]*>[\s\S]*?<\/li>/g)].map(match => match[0]);
+  const tools = [...section.matchAll(/<li[^>]*><img[^>]*>[\s\S]*?<\/li>/g)].map(match => match[0]);
   assert.equal(tools.length, 5);
   for (const [index, tool] of profile.aiTools.entries()) {
     assert.ok(tools[index].includes(tool.name));
@@ -25,13 +27,13 @@ test('AI tools render once after the technical stack with complete static conten
     assert.match(tools[index], /alt=""/);
     await access(new URL(`..${tool.logo}`, import.meta.url));
   }
-  for (const text of [profile.aiApproach, profile.aiLearning, 'I review and test AI-generated suggestions']) assert.ok(section.includes(text));
+  for (const text of [profile.aiApproach, profile.aiLearning, 'I review and test AI-generated suggestions']) assert.ok(workflow.includes(text));
   assert.doesNotMatch(page('/stack/'), /AI Tools I Use|Google Gemini|OpenAI Codex/);
   assert.ok(profile.aiTools.every(tool => !technologies.some(tech => tech.name === tool.name)));
 });
 
 test('UI headings and actions use Title Case while prose, official names, and destinations survive', () => {
-  for (const text of ['About', 'Tech Stack', 'Projects', 'Experience', 'Certificates', 'Workflow', 'Activity', 'Let’s Build Together', 'Open Full Map', 'All Certificates']) assert.ok(page('/').includes(text), text);
+  for (const text of ['About', 'Skills', 'Projects', 'Experience', 'Certificates', 'Workflow', 'Activity', 'Let’s Build Together', 'All Certificates']) assert.ok(page('/').includes(text), text);
   for (const project of projects) assert.ok(page('/projects/').includes(`${project.title} Project Image`));
   assert.match(page('/projects/'), /View Project/);
   assert.match(page('/projects/sti-vio-log/'), /Tools around the Core Workflow/);

@@ -40,6 +40,20 @@ test('manual reduced motion skips spatial entrances',t=>{
   assert.equal(playMotion(f.node),null);assert.equal(f.calls.length,0);
 });
 
+test('animated headings preserve their words without adding a slash',t=>{
+  const f=fixture(t),attributes={};
+  const heading={...f.node,textContent:'Tech Stack',
+    getAttribute:name=>attributes[name],setAttribute(name,value){attributes[name]=value;},
+    replaceChildren(...children){this.textContent=children.map(mask=>mask.firstElementChild.textContent).join('');}
+  };
+  document.querySelectorAll=selector=>selector==='.reference-heading h2'?[heading]:[];
+  document.createElement=()=>({dataset:{},setAttribute(){},append(child){this.firstElementChild=child;}});
+  f.cleanup(initMotion());
+  assert.equal(heading.textContent,'Tech\u00a0Stack');
+  assert.equal(attributes['aria-label'],'Tech Stack');
+  assert.equal(heading.dataset.motionWords,'true');
+});
+
 test('viewport reveals run once regardless of OS preference',t=>{
   const f=fixture(t);
   const cleanup=initMotion();f.cleanup(cleanup);

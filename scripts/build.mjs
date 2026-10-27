@@ -19,7 +19,7 @@ export async function buildSite({ outDir = join(root, 'public'), release = false
   if (release) {
     const missing = [];
     if (!profile.portrait) missing.push('updated portrait');
-    if (!profile.resumePdf) missing.push('updated résumé PDF');
+    if (!profile.resumePdf) missing.push('updated resume PDF');
     if (!profile.contentApproved) missing.push('owner-approved content and project imagery');
     if (!profile.contactVerified) missing.push('confirmed contact inbox delivery');
     if (!canonicalOrigin) missing.push('SITE_URL HTTPS origin');

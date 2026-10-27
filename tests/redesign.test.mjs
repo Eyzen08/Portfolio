@@ -27,12 +27,18 @@ test('Home and About keep the portrait and photo branding without the old workfl
   for (const item of pages) {
     const html = shell(item, { profile });
     assert.equal((html.match(/class="logo-avatar"/g) || []).length, 2, 'Header and footer use the photo logo');
-    assert.match(html, /rel="icon" href="\/assets\/brand\/favicon-32.png"/);
+    assert.match(html, /rel="icon" href="\/assets\/brand\/ej-formal-wide-favicon-32.png"/);
+    assert.equal((html.match(/src="\/assets\/brand\/ej-formal-wide-avatar.png"/g)||[]).length,2);
     assert.doesNotMatch(html, /\/assets\/brand\/ej.svg/);
   }
   for (const name of ['ej-portrait.webp', 'ej-portrait-400.webp', 'ej-avatar.webp']) {
     const bytes = await readFile(new URL(`../assets/personal/${name}`, import.meta.url));
     assert.equal(bytes.subarray(8, 12).toString(), 'WEBP');
+  }
+  for(const [name,size] of [['ej-formal-wide-avatar',192],['ej-formal-wide-favicon-32',32],['ej-formal-wide-favicon-48',48]]){
+    const bytes=await readFile(new URL(`../assets/brand/${name}.png`,import.meta.url));
+    assert.equal(bytes.readUInt32BE(16),size);assert.equal(bytes.readUInt32BE(20),size);
+    assert.equal(bytes[25],6,'PNG keeps its alpha channel');
   }
 });
 
@@ -44,7 +50,7 @@ test('summary overview retains factual background, professional summary and read
   assert.equal(ids.length,new Set(ids).size);
   for(const match of home.matchAll(/aria-controls="([^"]+)"/g)) assert.ok(ids.includes(match[1]));
   for(const anchor of ['top','about','skills','projects','experience','education','contact']) assert.ok(ids.includes(anchor));
-  const order=['summary-grid','sphere-section','featured-section','home-background','home-training','home-ai','home-contact'].map(name=>home.indexOf(name));
+  const order=['summary-grid','featured-section','home-background','sphere-section','home-training','home-ai','home-contact'].map(name=>home.indexOf(name));
   assert.deepEqual(order,[...order].sort((a,b)=>a-b));
 });
 
