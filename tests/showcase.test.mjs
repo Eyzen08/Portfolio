@@ -66,7 +66,7 @@ test('case studies are static and old project images are absent from rendered vi
   for(const project of projects){
     const html=pages.find(page=>page.route===`/projects/${project.id}/`).content;
     assert.doesNotMatch(html,/data-picture-deck|data-deck-kind="project"|data-deck-controls|data-deck-select/);
-    assert.ok(html.includes(`href="${project.previewScreens[0].src}"`));
+    assert.ok(html.includes(`src="${project.previewScreens[0].src}"`));
   }
   for(const page of pages)assert.doesNotMatch(page.content,/sti-vio-log-mockup-(?:signin|dashboard|workflows)-v3|kwiztorya-mockup-(?:home|quiz|story|settings)/);
 });

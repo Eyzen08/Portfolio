@@ -16,6 +16,32 @@ test('overview pages use one shared project-details dialog outside filterable ro
     assert.match(html,/preview-ambient/);assert.match(html,/Close Project Details/);
   }
 });
+test('project views omit full-image links and popups recommend the other project once',()=>{
+  const pages=renderPages({profile,projects,technologies});
+  for(const page of pages)assert.doesNotMatch(page.content,/View Full Image|class="(?:picture-image-links|preview-full-image)"/);
+  for(const route of ['/','/projects/']){
+    const html=pages.find(page=>page.route===route).content;
+    for(const project of projects){
+      const id=project.id==='sti-vio-log'?'project-details-viewer':'preview-kwiztorya';
+      const dialog=[...html.matchAll(/<dialog[\s\S]*?<\/dialog>/g)].map(match=>match[0]).find(dialog=>dialog.includes(`id="${id}"`));
+      const other=projects.find(other=>other.id!==project.id);
+      assert.equal((dialog.match(/class="project-more-work"/g)||[]).length,1);
+      assert.equal((dialog.match(/class="more-project"/g)||[]).length,1);
+      const footer=dialog.match(/<footer class="project-more-work">[\s\S]*?<\/footer>/)[0];
+      assert.match(footer,/>Up Next</);assert.match(footer,/>\/More Work</);
+      assert.ok(footer.includes(`href="/projects/${other.id}/"`));
+      assert.ok(footer.includes(`src="${other.previewScreens[0].srcSmall}"`));
+      assert.ok(!footer.includes(`href="/projects/${project.id}/"`));
+      assert.ok(html.includes(`class="project-screenshot-link" href="${project.previewScreens[0].src}"`));
+    }
+  }
+  for(const project of projects){
+    const html=pages.find(page=>page.route===`/projects/${project.id}/`).content;
+    const other=projects.find(other=>other.id!==project.id);
+    assert.doesNotMatch(html,/class="project-more-work"/);
+    assert.ok(html.includes(`href="/projects/${other.id}/">Next Case Study`));
+  }
+});
 function element(dataset={}){return {dataset,hidden:false,listeners:{},attributes:{},style:{},textContent:'',addEventListener(k,fn){this.listeners[k]=fn;},setAttribute(k,v){this.attributes[k]=v;},focus(){document.activeElement=this;this.focuses=(this.focuses||0)+1;},closest(){return null;}};}
 function fixture(t,{supported=true,throws=false,count=4,navigation=true}={}){
   const original=Object.getOwnPropertyDescriptor(globalThis,'document');t.after(()=>original?Object.defineProperty(globalThis,'document',original):delete globalThis.document);

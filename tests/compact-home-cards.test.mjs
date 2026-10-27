@@ -19,7 +19,7 @@ test('each complete Home project card contains its information and one image wit
     assert.doesNotMatch(gallery, /data-preview-prev|data-preview-next|data-preview-select|data-preview-count/);
     for (const screen of project.previewScreens) {
       assert.ok(gallery.includes(`id="preview-${project.id}-${screen.id}"`));
-      assert.ok(gallery.includes(`href="${screen.src}"`));
+      assert.ok(gallery.includes(`src="${screen.src}"`));
       if (screen.originalSrc) assert.ok(gallery.includes(`href="${screen.originalSrc}"`));
       if (screen.presentationLabel) assert.ok(gallery.includes(screen.presentationLabel));
     }

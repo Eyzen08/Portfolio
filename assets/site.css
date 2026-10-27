@@ -198,9 +198,6 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 .picture-panel figcaption { padding: 22px 8px 8px; }
 .picture-panel figcaption h3 { font-size: 22px; margin: 0 0 10px; }
 .picture-panel figcaption p { max-width: 68ch; margin: 0 0 10px; }
-.picture-image-links { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 12px; }
-.picture-image-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; color: var(--accent); }
-.picture-image-links .icon { width: 14px; }
 .picture-deck[data-enhanced] .picture-stage { display: grid; grid-template-rows: var(--picture-height) auto; isolation: isolate; }
 .picture-media .monitor-frame { width: min(100%,calc((var(--picture-height) - 120px) * 1.91)); }
 .picture-deck[data-enhanced] .picture-panel { display: contents; }
