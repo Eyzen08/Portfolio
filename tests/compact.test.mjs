@@ -27,7 +27,9 @@ test('Home and Activity expose a contribution card with a GitHub fallback link',
   assert.match(html,/href="https:\/\/github.com\/Eyzen08\?tab=overview"[^>]*>View on GitHub/);
   assert.match(html,/data-calendar-section hidden/);
   assert.match(html,/class="calendar-scroll" tabindex="0" role="region" aria-label="Contribution calendar"/);
-  assert.match(html,/<table class="sr-only"><caption>Daily contribution counts<\/caption>/);
+  assert.match(html,/<div class="sr-only"><table><caption>Daily contribution counts<\/caption>/);
+  assert.match(html,/<tbody data-calendar-days><\/tbody><\/table><\/div>/);
+  assert.doesNotMatch(html,/<table class="sr-only"/);
   assert.match(html,/data-calendar-label role="status">View contribution history on GitHub\./);
   assert.doesNotMatch(html,/data-github-stats|data-events|data-github-retry|A Public Record of the Work|Refresh Activity/);
  }
