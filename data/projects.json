@@ -168,6 +168,99 @@
     ]
   },
   {
+    "id": "toyota-heritage-ph",
+    "title": "Toyota Heritage PH",
+    "platform": "Web",
+    "year": 2026,
+    "summary": "An interactive automotive website exploring Toyota’s heritage in the Philippines through editorial storytelling, a searchable vehicle catalogue, and vehicle comparison.",
+    "role": "Web Designer & Developer",
+    "roleDetail": "I designed and developed Toyota Heritage PH as a client project for Katrina Guillermo and Trish Stephanie Cahanding, creating the responsive interface and interactive automotive experience with HTML, CSS, and vanilla JavaScript.",
+    "sourceUrl": "https://github.com/Eyzen08/toyota-heritage-ph",
+    "liveUrl": "https://toyota-heritage-ph.vercel.app/",
+    "status": "Client project · Live site",
+    "technologies": ["html5", "css3", "javascript", "git", "github", "vercel"],
+    "cardTechnologies": ["html5", "css3", "javascript", "vercel"],
+    "category": "Automotive Heritage and Vehicle Exploration",
+    "context": "Client Project",
+    "contribution": "Designed and developed the responsive website and its interactive storytelling, catalogue, and comparison features.",
+    "features": [
+      "Searchable 22-model catalogue with seven category filters",
+      "Vehicle specifications and side-by-side comparison of up to three vehicles",
+      "Interactive heritage timeline, editorial stories, and data visualisations",
+      "Keyboard-navigable gallery, responsive navigation, and light/dark themes"
+    ],
+    "previewScreens": [
+      {
+        "id": "overview",
+        "label": "Website Overview",
+        "src": "/assets/projects/toyota-heritage-ph-portfolio-preview.png",
+        "srcSmall": "/assets/projects/toyota-heritage-ph-portfolio-preview-small.webp",
+        "smallWidth": 960,
+        "width": 1600,
+        "height": 900,
+        "kind": "desktop",
+        "deviceFrame": true,
+        "alt": "Toyota Heritage PH client project presentation with overlapping browser views of the Fortuner hero, Toyota history story, and vehicle catalogue on a dark red background.",
+        "caption": "An interactive client website combining Toyota heritage storytelling, a searchable vehicle catalogue, and side-by-side comparison.",
+        "explanation": "An interactive client website combining Toyota heritage storytelling, a searchable vehicle catalogue, and side-by-side comparison."
+      }
+    ],
+    "sections": [
+      {
+        "id": "context",
+        "title": "An Automotive Story for the Web",
+        "paragraphs": [
+          "Toyota Heritage PH is a client project for Katrina Guillermo and Trish Stephanie Cahanding. It presents Toyota’s heritage in the Philippines through an editorial, scroll-driven website that connects brand storytelling with vehicle exploration.",
+          "The experience combines immersive photography, historical narratives, and interactive catalogue tools. It is an independent automotive web design project; Toyota commissioning, endorsement, and measured business outcomes are not claimed."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "contribution",
+        "title": "My Contribution",
+        "paragraphs": [
+          "Designed & Developed by EJ Christian Medilo.",
+          "I created the visual interface and implemented the responsive layouts, navigation, heritage storytelling, vehicle search and comparison, charts, image gallery, and theme controls using HTML, CSS, and vanilla JavaScript. The project is deployed as a static website on Vercel."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "features",
+        "title": "From Heritage to Vehicle Exploration",
+        "paragraphs": [
+          "The 22-model catalogue supports live search, seven category filters, vehicle specification modals, and comparison of up to three vehicles side by side. Visitors can move from the broader Toyota story to the details of a particular model.",
+          "A six-era heritage timeline and six-slide narrative organise the history, while animated counters, a model-popularity chart, and a category chart present the Philippines section. Innovation panels and campaign detail modals provide further paths through the content."
+        ],
+        "bullets": [
+          "Explore · Search and filter the catalogue, inspect specifications, and compare vehicles.",
+          "Discover · Navigate the heritage timeline, stories, innovation panels, and campaign details.",
+          "View · Browse a 12-image gallery with arrow-key navigation and Escape to close the lightbox.",
+          "Adapt · Use responsive mobile navigation, a persisted light/dark theme, and reduced-motion styling."
+        ]
+      },
+      {
+        "id": "architecture",
+        "title": "A Self-Contained Static Website",
+        "paragraphs": [
+          "The interface, styles, and interaction logic live in a single index.html file, supported by self-hosted photography and fonts in assets. HTML defines the content, CSS handles layout and visual states, and vanilla JavaScript drives the catalogue, comparison tray, timelines, charts, gallery, and navigation.",
+          "The project uses no framework, application dependencies, API, database, or build step. Vercel serves the static files. Theme preference is saved in localStorage; catalogue and narrative content are bundled with the page."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "credits",
+        "title": "Credits and Licensing",
+        "paragraphs": [
+          "Designed & Developed by EJ Christian Medilo.",
+          "The ‘Behind the journey’ section presents the two client profiles credited on the project: Katrina Guillermo and Trish Stephanie Cahanding.",
+          "Photography is sourced from Wikimedia Commons and used under Creative Commons licences. The repository records original image filenames in _source/image-map.json so attribution can be traced; the project README documents the credits and licensing.",
+          "Toyota Heritage PH is an independent project. It is not affiliated with, endorsed by, or sponsored by Toyota Motor Corporation or Toyota Motor Philippines. All vehicle names and trademarks belong to their respective owners; ‘Toyota’ and ‘Let’s Go Places’ are trademarks of Toyota Motor Corporation."
+        ],
+        "bullets": []
+      }
+    ]
+  },
+  {
     "id": "kwiztorya",
     "title": "Kwiztorya",
     "platform": "Mobile",

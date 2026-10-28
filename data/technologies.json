@@ -3,9 +3,10 @@
     "id": "javascript",
     "name": "JavaScript",
     "category": "Programming Languages",
-    "description": "Application logic in the web interface and Node API.",
+    "description": "Browser interactions for Toyota Heritage PH and the web interface and Node API of STI Vio-Log.",
     "projects": [
-      "sti-vio-log"
+      "sti-vio-log",
+      "toyota-heritage-ph"
     ],
     "label": "Used in a project"
   },
@@ -23,17 +24,21 @@
     "id": "html5",
     "name": "HTML5",
     "category": "Frontend",
-    "description": "Semantic, statically generated pages in this portfolio.",
-    "projects": [],
-    "label": "Used in this portfolio"
+    "description": "Semantic page structure for Toyota Heritage PH and this portfolio.",
+    "projects": [
+      "toyota-heritage-ph"
+    ],
+    "label": "Used in a project"
   },
   {
     "id": "css3",
     "name": "CSS3",
     "category": "Frontend",
     "description": "Responsive layouts, themes, and motion without a UI framework.",
-    "projects": [],
-    "label": "Used in this portfolio"
+    "projects": [
+      "toyota-heritage-ph"
+    ],
+    "label": "Used in a project"
   },
   {
     "id": "react",
@@ -141,10 +146,11 @@
     "id": "git",
     "name": "Git",
     "category": "Tools and Workflow",
-    "description": "Version history and development branches across both projects.",
+    "description": "Version history and development branches across the projects.",
     "projects": [
       "sti-vio-log",
-      "kwiztorya"
+      "kwiztorya",
+      "toyota-heritage-ph"
     ],
     "label": "Used in a project"
   },
@@ -155,7 +161,8 @@
     "description": "Source repositories, documentation, and public project history.",
     "projects": [
       "sti-vio-log",
-      "kwiztorya"
+      "kwiztorya",
+      "toyota-heritage-ph"
     ],
     "label": "Used in a project",
     "monochrome": true
@@ -164,9 +171,10 @@
     "id": "vercel",
     "name": "Vercel",
     "category": "Deployment and DevOps",
-    "description": "Frontend deployment for STI Vio-Log.",
+    "description": "Static-site hosting for Toyota Heritage PH and frontend deployment for STI Vio-Log.",
     "projects": [
-      "sti-vio-log"
+      "sti-vio-log",
+      "toyota-heritage-ph"
     ],
     "label": "Used in a project",
     "monochrome": true

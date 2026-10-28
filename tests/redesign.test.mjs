@@ -107,14 +107,15 @@ test('project cards retain searchable evidence and genuine case-study destinatio
   for (const route of ['/projects/']) {
     const html = page(route);
     const cards = [...html.matchAll(/<article class="project-card[\s\S]*?<\/article>/g)].map(match => match[0]);
-    assert.equal(cards.length, 2);
+    assert.equal(cards.length, projects.length);
     assert.match(cards[0], /PostgreSQL/);
     assert.match(cards[0], /Full-Stack Developer/);
     assert.match(cards[0], /class="project-status"/);
     assert.match(page('/projects/sti-vio-log/'), /PostgreSQL/);
-    assert.match(cards[1], /kwiztorya-history-showcase.png/);
-    assert.match(cards[1], /href="\/projects\/kwiztorya\/"/);
-    assert.doesNotMatch(cards[1], /welcome-art/);
+    const kwizCard=cards.find(card=>card.includes('href="/projects/kwiztorya/"'));
+    assert.match(kwizCard, /kwiztorya-history-showcase.png/);
+    assert.match(kwizCard, /href="\/projects\/kwiztorya\/"/);
+    assert.doesNotMatch(kwizCard, /welcome-art/);
   }
 });
 

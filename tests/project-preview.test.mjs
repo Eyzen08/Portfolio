@@ -4,14 +4,14 @@ import { readFile } from 'node:fs/promises';
 import { renderPages } from '../scripts/templates.mjs';
 const [profile,projects,technologies]=await Promise.all(['profile','projects','technologies'].map(async name=>JSON.parse(await readFile(new URL(`../data/${name}.json`,import.meta.url)))));
 
-test('Projects exposes both cards, separate preview and case actions, and complete project descriptions',()=>{
+test('Projects exposes all cards, separate preview and case actions, and complete project descriptions',()=>{
   const html=renderPages({profile,projects,technologies}).find(page=>page.route==='/projects/').content;
   assert.match(html,/<h1>Projects<\/h1>/);
   assert.match(html,/data-project-grid/);assert.doesNotMatch(html,/data-project-rail/);
   const cards=[...html.matchAll(/<article class="project-card[\s\S]*?<\/article>/g)].map(match=>match[0]);
-  assert.equal(cards.length,2);
+  assert.equal(cards.length,projects.length);
   for(const [index,project] of projects.entries()){
-    const card=cards[index];assert.ok(card.includes(project.role));assert.match(card,/class="tags"/);
+    const card=cards[index];assert.ok(card.includes(project.role.replaceAll('&','&amp;')));assert.match(card,/class="tags"/);
     assert.match(card,/View Project/);assert.match(card,/Case Study/);
     assert.ok(card.includes(`href="/projects/${project.id}/"`));
     assert.ok(card.includes(`href="${project.previewScreens[0].src}"`),'Preview retains its no-JS image destination');

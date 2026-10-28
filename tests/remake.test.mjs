@@ -11,8 +11,8 @@ test('Home retains projects, resources and complete no-JS evidence', () => {
   for (const marker of ['data-home', 'data-gallery', 'skill-categories', 'id="training"']) assert.ok(home.content.includes(marker), marker);
   assert.doesNotMatch(home.content, /data-hobby-|\/assets\/hobbies\/|Artwork Credits/);
   assert.doesNotMatch(home.content,/data-background-card/);
-  assert.equal((home.content.match(/<article class="project-feature/g)||[]).length,2);
-  assert.ok(home.content.includes(projects[1].previewScreens[0].src));
+  assert.equal((home.content.match(/<article class="project-feature/g)||[]).length,projects.length);
+  assert.ok(home.content.includes(projects.find(project=>project.id==='kwiztorya').previewScreens[0].src));
   assert.doesNotMatch(home.content,/hobby-art|highlight-tabs|STI Vio-Log workflow/);
   assert.equal((home.content.match(/<h1/g)||[]).length,1);
   for(const page of pages){

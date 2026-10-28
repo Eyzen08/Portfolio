@@ -24,12 +24,12 @@ test('invalid theme preferences use the system setting', () => {
   assert.equal(interactions.resolveTheme(null, false), 'light');
 });
 
-test('build produces ten substantive routes with working local links and no chatbot', async () => {
+test('build produces eleven substantive routes with working local links and no chatbot', async () => {
   assert.equal(typeof builder?.buildSite, 'function', 'Static generation is not implemented yet');
   const directory = await mkdtemp(join(tmpdir(), 'ej-portfolio-test-'));
   try {
     await builder.buildSite({ outDir: directory });
-    const routes = ['', 'about', 'projects', 'activity', 'stack', 'training', 'resume', 'contact', 'projects/sti-vio-log', 'projects/kwiztorya'];
+    const routes = ['', 'about', 'projects', 'activity', 'stack', 'training', 'resume', 'contact', 'projects/sti-vio-log', 'projects/toyota-heritage-ph', 'projects/kwiztorya'];
     for (const route of routes) {
       const html = await readFile(join(directory, route, 'index.html'), 'utf8');
       assert.match(html, /<main\b/);

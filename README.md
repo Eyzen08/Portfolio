@@ -1,8 +1,16 @@
 # EJ Christian Medilo — Portfolio
 
-A responsive software developer portfolio showcasing practical software systems and web development. Vanilla HTML, CSS, and JavaScript; one native Node build generates eight main pages and two case studies. No chatbot.
+A responsive software developer portfolio showcasing practical software systems and web development. Vanilla HTML, CSS, and JavaScript; one native Node build generates eight main pages and three case studies. No chatbot.
 
 Public portfolio: [ejmedilo.vercel.app](https://ejmedilo.vercel.app/). Vercel runs `npm ci` and `npm run build:release`, serving `public/` and the existing GitHub API function. Set `SITE_URL=https://ejmedilo.vercel.app` for release generation. Configure a dedicated server-side `GITHUB_TOKEN` with `read:user` in Production and Preview for contribution-calendar access including anonymous private counts; direct GitHub links remain available without it. Production releases require explicit owner approval.
+
+## Toyota Heritage PH client project — 28 October 2026
+
+Projects appear in the order **STI Vio-Log → Toyota Heritage PH → Kwiztorya**, with STI remaining featured. Toyota is included on Home, Projects, the shared preview dialog, the résumé, GitHub activity, and linked technology evidence. Case-study navigation cycles through all three projects; each preview recommends the other two. Project artwork uses matching 16:9 frames across cards, dialogs, recommendations, and case studies; Kwiztorya’s outer background is trimmed in CSS while both devices remain visible. More Work recommendations sit side by side on wider screens and stack on phones.
+
+[Toyota Heritage PH](https://toyota-heritage-ph.vercel.app/) is a client project designed and developed by EJ Christian Medilo for Katrina Guillermo and Trish Stephanie Cahanding. Its case study at `/projects/toyota-heritage-ph/` covers the 22-model catalogue, search and category filters, comparison of up to three vehicles, heritage storytelling, gallery, responsive interface, and themes. The implementation uses HTML, CSS, and vanilla JavaScript with self-hosted assets and static hosting on Vercel; no framework, API, database, or build step is required.
+
+The supplied 1600 × 900 PNG is preserved unchanged at `assets/projects/toyota-heritage-ph-portfolio-preview.png`, with a 960 × 540 WebP thumbnail. The case study credits the two client profiles in “Behind the journey” and links to the [source README](https://github.com/Eyzen08/toyota-heritage-ph/blob/main/README.md) for credits and Creative Commons photography licensing. The project is independent and is not affiliated with, endorsed by, or sponsored by Toyota Motor Corporation or Toyota Motor Philippines. The display year defaults to 2026; client dates and business outcomes are not verified.
 
 ## Current visual direction — 27 October 2026
 
@@ -14,7 +22,7 @@ The supplied formal PNG is unchanged; the original casual portrait and photo log
 
 The [cinematic motion refinement](docs/MOTION-UPGRADE.md) retains that layout while adding an authored hero entrance, selective card tilt, neutral cursor lighting, restrained CTA magnetism and scroll progress. A saved footer Full/Reduced control governs decorative motion; Full is the default regardless of the OS preference. Tests cover the preference, frame batching, cached pointer geometry and cleanup.
 
- The [project showcase update](docs/PROJECT-SHOWCASE.md) uses one photo per project everywhere: the completed STI v8 4K PNG and the supplied Kwiztorya Philippine History composition. Both projects retain image popups and matching responsive Home/Projects rows; case-study artwork is static. Preview controls are removed, while filters, case studies and source/live links remain available. The current update preserves the existing card grid with six steps under “Let’s Build Together,” labels the Home project anchor “Projects,” and keeps all seven certificates as static previews with signatures redacted in the published pixels. Original certificate documents and unblurred previews remain in a Git-ignored private archive, outside published assets; no certificate-opening controls are rendered. Each experience still has six bullets in its own desktop three-row, two-column list, stacking below 1024px; Education retains only STI College Global City and Moreh Academy. Older dated reports describe previous layouts and motion policies. The restored globe and grouped skills remain unchanged. Production publishing requires owner approval.
+ The [project showcase update](docs/PROJECT-SHOWCASE.md) uses one photo per project everywhere: the completed STI v8 4K PNG, the supplied Toyota Heritage PH preview, and the Kwiztorya Philippine History composition. All three projects retain image popups and matching responsive Home/Projects rows; case-study artwork is static. Preview controls are removed, while filters, case studies and source/live links remain available. The current update preserves the existing card grid with six steps under “Let’s Build Together,” labels the Home project anchor “Projects,” and keeps all seven certificates as static previews with signatures redacted in the published pixels. Original certificate documents and unblurred previews remain in a Git-ignored private archive, outside published assets; no certificate-opening controls are rendered. Each experience still has six bullets in its own desktop three-row, two-column list, stacking below 1024px; Education retains only STI College Global City and Moreh Academy. Older dated reports describe previous layouts and motion policies. The restored globe and grouped skills remain unchanged. Production publishing requires owner approval.
 
 ## Motion — 26 October 2026
 
@@ -42,6 +50,7 @@ The preview is deliberately a noindex draft. The supplied portrait is installed 
 | /about/ | Professional background, working style, AI-assisted development and learning AI Engineering |
 | /projects/ | Searchable responsive project cards with expanded screenshot viewers |
 | /projects/sti-vio-log/ | Full-stack capstone case study |
+| /projects/toyota-heritage-ph/ | Client automotive website case study |
 | /projects/kwiztorya/ | Native Android case study |
 | /stack/ | Searchable technology with project evidence |
 | /activity/ | Public GitHub activity and configured contribution calendar |

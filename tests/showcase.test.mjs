@@ -8,7 +8,7 @@ test('Home and Projects share static composed covers, one Featured project and c
   for(const route of ['/','/projects/']){
     const html=pages.find(page=>page.route===route).content;
     const rows=[...html.matchAll(/<article class="(?:project-feature|project-card)[\s\S]*?<\/article>/g)].map(m=>m[0]);
-    assert.equal(rows.length,2);
+    assert.equal(rows.length,projects.length);
     assert.equal((html.match(/class="featured-badge"/g)||[]).length,1);
     rows.forEach((row,i)=>{
       assert.match(row,/class="showcase-cover[ "]/);
@@ -25,13 +25,14 @@ test('Home and Projects share static composed covers, one Featured project and c
   }
 });
 test('each project selects one original PNG with a matching optimized thumbnail',async()=>{
-  assert.deepEqual(projects.map(p=>p.previewScreens.length),[1,1]);
+  assert.ok(projects.every(project=>project.previewScreens.length===1));
   for(const project of projects)for(const screen of project.previewScreens){
-    assert.equal(screen.width,project.id==='sti-vio-log'?3840:1536);assert.equal(screen.height,project.id==='sti-vio-log'?2160:1024);
+    const dimensions={'sti-vio-log':[3840,2160],'toyota-heritage-ph':[1600,900],kwiztorya:[1536,1024]};
+    assert.deepEqual([screen.width,screen.height],dimensions[project.id]);
     if(project.id==='sti-vio-log'){
       assert.equal(screen.src,'/assets/projects/sti-vio-log-overview-v8-4k.png');
       assert.equal(screen.srcSmall,'/assets/projects/sti-vio-log-mockup-overview-v8-small.webp');
-    }else{
+    }else if(project.id==='kwiztorya'){
       assert.equal(screen.src,'/assets/projects/kwiztorya-history-showcase.png');
       assert.equal(screen.srcSmall,'/assets/projects/kwiztorya-history-showcase-small.webp');
     }

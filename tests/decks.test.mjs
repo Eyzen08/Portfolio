@@ -7,7 +7,7 @@ const projects=JSON.parse(await readFile(new URL('../data/projects.json',import.
 const technologies=JSON.parse(await readFile(new URL('../data/technologies.json',import.meta.url)));
 const pages=renderPages({profile,projects,technologies});
 test('project contexts retain static complete images before JS',()=>{
-  for(const [route,count] of [['/',0],['/projects/',0],['/projects/sti-vio-log/',0],['/projects/kwiztorya/',0]]){
+  for(const [route,count] of [['/',0],['/projects/',0],...projects.map(project=>[`/projects/${project.id}/`,0])]){
     const html=pages.find(p=>p.route===route).content;
     assert.equal((html.match(/data-picture-deck/g)||[]).length,count,route);
     assert.ok(!html.includes('phone-trio'));
@@ -19,8 +19,8 @@ test('project contexts retain static complete images before JS',()=>{
     else assert.ok(!html.includes('data-rail-controls'));
   }
 });
-test('both single project images have complete local records',async()=>{
-  assert.deepEqual(projects.map(p=>p.previewScreens.length),[1,1]);
+test('all single project images have complete local records',async()=>{
+  assert.ok(projects.every(project=>project.previewScreens.length===1));
   for(const project of projects)for(const screen of project.previewScreens){
     assert.equal(screen.kind,'desktop');assert.equal(screen.deviceFrame,true);
     assert.ok(screen.label&&screen.alt&&screen.caption&&screen.explanation);

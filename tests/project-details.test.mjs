@@ -16,28 +16,31 @@ test('overview pages use one shared project-details dialog outside filterable ro
     assert.match(html,/preview-ambient/);assert.match(html,/Close Project Details/);
   }
 });
-test('project views omit full-image links and popups recommend the other project once',()=>{
+test('project views omit full-image links and popups recommend every other project once',()=>{
   const pages=renderPages({profile,projects,technologies});
   for(const page of pages)assert.doesNotMatch(page.content,/View Full Image|class="(?:picture-image-links|preview-full-image)"/);
   for(const route of ['/','/projects/']){
     const html=pages.find(page=>page.route===route).content;
     for(const project of projects){
       const dialog=html.match(new RegExp(`<section data-project-panel="${project.id}"[\\s\\S]*?</section>`))[0];
-      const other=projects.find(other=>other.id!==project.id);
+      const others=projects.filter(other=>other.id!==project.id);
       assert.equal((dialog.match(/class="project-more-work"/g)||[]).length,1);
-      assert.equal((dialog.match(/class="more-project"/g)||[]).length,1);
+      assert.equal((dialog.match(/class="more-project"/g)||[]).length,projects.length-1);
       const footer=dialog.match(/<footer class="project-more-work">[\s\S]*?<\/footer>/)[0];
       assert.match(footer,/>Up Next</);assert.match(footer,/>More Work</);
-      assert.ok(footer.includes(`href="${other.previewScreens[0].src}"`));
-      assert.ok(footer.includes(`data-details-open data-project-id="${other.id}"`));
-      assert.ok(footer.includes(`src="${other.previewScreens[0].srcSmall}"`));
+      for(const other of others){
+        assert.ok(footer.includes(`href="${other.previewScreens[0].src}"`));
+        assert.ok(footer.includes(`data-details-open data-project-id="${other.id}"`));
+        assert.ok(footer.includes(`src="${other.previewScreens[0].srcSmall}"`));
+        assert.equal((footer.match(new RegExp(`data-project-id="${other.id}"`,'g'))||[]).length,1);
+      }
       assert.ok(!footer.includes(`href="/projects/${project.id}/"`));
       assert.ok(html.includes(`class="project-screenshot-link" href="${project.previewScreens[0].src}"`));
     }
   }
   for(const project of projects){
     const html=pages.find(page=>page.route===`/projects/${project.id}/`).content;
-    const other=projects.find(other=>other.id!==project.id);
+    const other=projects[(projects.indexOf(project)+1)%projects.length];
     assert.doesNotMatch(html,/class="project-more-work"/);
     assert.ok(html.includes(`href="/projects/${other.id}/">Next Case Study`));
   }
@@ -71,18 +74,18 @@ test('STI details wraps images, traps focus and restores its external opener',t=
  f.close.listeners.click();assert.equal(f.dialog.open,false);assert.equal(f.classes.size,0);assert.equal(document.activeElement,f.links[0]);
 });
 
-test('More Work switches both details in place and closing restores the original external opener',t=>{
+test('More Work switches all details in place and closing restores the original external opener',t=>{
   const f=fixture(t,{count:1,navigation:false});
-  assert.equal(click(f.links[1]),true);assert.equal(f.title.textContent,'Kwiztorya');assert.equal(f.featured.hidden,true);
-  for(const index of [0,1,0,1]){
+  assert.equal(click(f.links[1]),true);assert.equal(f.title.textContent,projects[1].title);assert.equal(f.featured.hidden,true);
+  for(const index of [0,2,1,2,0,1]){
     f.dialog.scrollTop=300;
     assert.equal(click(f.switches[index]),true);
     assert.equal(f.dialog.open,true);assert.equal(f.dialog.opens,1);
     assert.equal(f.title.textContent,projects[index].title);assert.equal(f.thumb.src,f.panels[index].image.src);
-    assert.equal(f.featured.hidden,index!==0);assert.equal(f.panels[index].hidden,false);assert.equal(f.panels[1-index].hidden,true);
+    assert.equal(f.featured.hidden,index!==0);assert.equal(f.panels[index].hidden,false);f.panels.forEach((panel,i)=>assert.equal(panel.hidden,i!==index));
     assert.equal(f.dialog.scrollTop,0);assert.equal(document.activeElement,f.close);
   }
-  assert.equal(click(f.switches[0],{ctrlKey:true}),false);assert.equal(f.title.textContent,'Kwiztorya');
+  assert.equal(click(f.switches[0],{ctrlKey:true}),false);assert.equal(f.title.textContent,projects[1].title);
   f.close.listeners.click();assert.equal(document.activeElement,f.links[1]);assert.equal(f.classes.size,0);
 });
 
@@ -101,6 +104,7 @@ test('public image descriptions explain the projects and STI live links use the 
   assert.equal(projects[0].liveUrl,'https://stiviolog.com/');
   assert.deepEqual(projects.map(p=>p.previewScreens[0].caption),[
     'Student violation records, QR-based community-service attendance, and clearance tracking in one platform.',
+    'An interactive client website combining Toyota heritage storytelling, a searchable vehicle catalogue, and side-by-side comparison.',
     'An Android application for learning Philippine history through interactive quizzes, story-based lessons, and saved progress.'
   ]);
 });

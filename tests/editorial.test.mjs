@@ -15,9 +15,9 @@ test('summary Home puts the professional overview before project evidence',()=>{
   assert.match(home,/href="#projects"/);assert.match(home,/href="\/resume\/"[^>]*>View Resume/);
   assert.doesNotMatch(home,/class="bento-grid"|data-project-rail/);
   const features=[...home.matchAll(/<article class="project-feature[\s\S]*?<\/article>/g)].map(match=>match[0]);
-  assert.equal(features.length,2);
+  assert.equal(features.length,projects.length);
   projects.forEach((project,i)=>{
-    assert.ok(features[i].includes(project.title));assert.ok(features[i].includes(project.role));
+    assert.ok(features[i].includes(project.title));assert.ok(features[i].includes(project.role.replaceAll('&','&amp;')));
     assert.ok(features[i].includes(`href="/projects/${project.id}/"`));
     assert.ok(features[i].includes(`href="${project.sourceUrl}"`));
     assert.match(features[i],/class="tags"/);
