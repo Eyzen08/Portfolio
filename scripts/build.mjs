@@ -51,6 +51,17 @@ export async function buildSite({ outDir = join(root, 'public'), release = false
   const technologyIds = new Set(technologies.map(tech => tech.id));
   for (const project of projects) {
     if ([...project.technologies, ...project.cardTechnologies].some(id => !technologyIds.has(id))) throw new Error(`Unknown technology in ${project.title}.`);
+    for (const section of project.sections) {
+      for (const image of section.images || []) {
+        if (typeof image.src !== 'string' || !image.src.startsWith('/assets/projects/') || image.src.includes('..') || image.src.includes('\\') || image.src.includes('?') || image.src.includes('#') || !Number.isInteger(image.width) || !Number.isInteger(image.height) || image.width <= 0 || image.height <= 0 || !image.alt || !image.caption) throw new Error('Invalid case study image.');
+        await access(join(root, image.src.slice(1)));
+      }
+      for (const link of section.links || []) {
+        let url;
+        try { url = new URL(link.href); } catch { throw new Error('Invalid case study link.'); }
+        if (url.protocol !== 'https:' || url.username || url.password || typeof link.label !== 'string' || !link.label.trim()) throw new Error('Invalid case study link.');
+      }
+    }
     for (const screen of project.previewScreens || []) {
       if (screen.presentationLabel !== undefined && (typeof screen.presentationLabel !== 'string' || screen.presentationLabel.length > 64)) throw new Error('Invalid preview presentation label.');
       if (!screen.src.startsWith('/assets/') || screen.src.includes('..') || screen.src.includes('\\') || !Number.isInteger(screen.width) || !Number.isInteger(screen.height) || screen.width <= 0 || screen.height <= 0) throw new Error('Invalid project preview asset.');

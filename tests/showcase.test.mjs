@@ -27,7 +27,7 @@ test('Home and Projects share static composed covers, one Featured project and c
 test('each project selects one original PNG with a matching optimized thumbnail',async()=>{
   assert.ok(projects.every(project=>project.previewScreens.length===1));
   for(const project of projects)for(const screen of project.previewScreens){
-    const dimensions={'sti-vio-log':[3840,2160],'toyota-heritage-ph':[1600,900],kwiztorya:[1536,1024]};
+    const dimensions={'sti-vio-log':[3840,2160],'toyota-heritage-ph':[1600,900],memochro:[2400,1350],kwiztorya:[1536,1024]};
     assert.deepEqual([screen.width,screen.height],dimensions[project.id]);
     if(project.id==='sti-vio-log'){
       assert.equal(screen.src,'/assets/projects/sti-vio-log-overview-v8-4k.png');

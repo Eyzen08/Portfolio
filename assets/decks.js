@@ -88,6 +88,7 @@ export function initProjectPreviews() {
   const title=dialog.querySelector('[data-project-title]');
   const thumbnail=dialog.querySelector('[data-project-thumbnail]');
   const featured=dialog.querySelector('[data-project-featured]');
+  const updateMoreWork=new Map();
   let panel,active=0,opener;
   const select=index=>{
     const slides=[...panel.querySelectorAll('[data-preview-slide]')];
@@ -115,8 +116,44 @@ export function initProjectPreviews() {
     }
     event.preventDefault();
     document.documentElement.classList.add('preview-open');close.focus();dialog.scrollTop=0;
+    const track=panel.querySelector('[data-more-work-track]');
+    if(track)track.scrollLeft=0;
+    updateMoreWork.get(panel)?.();
   }));
   panels.forEach(item=>{
+    const track=item.querySelector('[data-more-work-track]');
+    const previous=item.querySelector('[data-more-work-prev]');
+    const next=item.querySelector('[data-more-work-next]');
+    if(track && previous && next){
+      const sync=()=>{
+        const maximum=track.scrollWidth-track.clientWidth;
+        const overflow=maximum>1;
+        previous.hidden=next.hidden=!overflow;
+        previous.setAttribute('aria-disabled',String(!overflow || track.scrollLeft<=1));
+        next.setAttribute('aria-disabled',String(!overflow || maximum-track.scrollLeft<=1));
+        if(!overflow && (document.activeElement===previous || document.activeElement===next))track.focus({preventScroll:true});
+      };
+      for(const [control,direction] of [[previous,-1],[next,1]])control.addEventListener('click',()=>{
+        if(control.getAttribute('aria-disabled')==='true')return;
+        const step=track.children.length>1?track.children[1].offsetLeft-track.children[0].offsetLeft:track.clientWidth;
+        track.scrollBy({left:direction*step,behavior:document.documentElement.dataset.motion==='reduced'?'instant':'smooth'});
+      });
+      track.addEventListener('scroll',sync,{passive:true});
+      new ResizeObserver(sync).observe(track);
+      updateMoreWork.set(item,sync);sync();
+    }
+    track?.addEventListener('wheel',event=>{
+      if(!event.cancelable || event.ctrlKey || event.metaKey || event.shiftKey || Math.abs(event.deltaX)>=Math.abs(event.deltaY))return;
+      const maximum=track.scrollWidth-track.clientWidth;
+      if(maximum<=0)return;
+      // Browser zoom can leave a fractional gap against integer scroll dimensions.
+      if((event.deltaY>0 && maximum-track.scrollLeft<=1) || (event.deltaY<0 && track.scrollLeft<=1))return;
+      const unit=event.deltaMode===1?16:event.deltaMode===2?track.clientWidth:1;
+      const next=Math.max(0,Math.min(maximum,track.scrollLeft+event.deltaY*unit));
+      if(next===track.scrollLeft)return;
+      event.preventDefault();
+      track.scrollLeft=next;
+    },{passive:false});
     item.querySelectorAll('[data-preview-select]').forEach(button=>button.addEventListener('click',()=>select(Number(button.dataset.previewIndex))));
     item.querySelector('[data-preview-prev]')?.addEventListener('click',()=>select(active-1));
     item.querySelector('[data-preview-next]')?.addEventListener('click',()=>select(active+1));
@@ -128,9 +165,9 @@ export function initProjectPreviews() {
     if(event.clientX<bounds.left || event.clientX>bounds.right || event.clientY<bounds.top || event.clientY>bounds.bottom)dialog.close();
   });
   dialog.addEventListener('keydown',event=>{
-    if(panel?.querySelectorAll('[data-preview-slide]').length>1 && (event.key==='ArrowLeft'||event.key==='ArrowRight')){event.preventDefault();select(active+(event.key==='ArrowLeft'?-1:1));}
+    if(!event.target?.closest('[data-more-work-track]') && panel?.querySelectorAll('[data-preview-slide]').length>1 && (event.key==='ArrowLeft'||event.key==='ArrowRight')){event.preventDefault();select(active+(event.key==='ArrowLeft'?-1:1));}
     if(event.key!=='Tab')return;
-    const controls=[...dialog.querySelectorAll('a[href],button:not([disabled])')].filter(node=>!node.closest('[hidden]'));
+    const controls=[...dialog.querySelectorAll('a[href],button:not([disabled]),[tabindex="0"]')].filter(node=>!node.closest('[hidden]'));
     const first=controls[0],last=controls.at(-1);
     if((event.shiftKey&&document.activeElement===first)||(!event.shiftKey&&document.activeElement===last)){
       event.preventDefault();(event.shiftKey?last:first).focus();

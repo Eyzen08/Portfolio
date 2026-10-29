@@ -53,7 +53,7 @@ test('globe shows branded technologies and AI tools while all skills retain thei
   assert.match(skills,/class="skills-layout"/);
   assert.match(skills,/<canvas width="640" height="520" tabindex="0" role="group" aria-label="Interactive technology globe" aria-describedby="sphere-instructions"><\/canvas>/);
   const globeItems=[...skills.matchAll(/<li data-sphere-item data-name="([^"]+)">([\s\S]*?)<\/li>/g)];
-  assert.equal(globeItems.length,31);
+  assert.equal(globeItems.length,32);
   for(const [,name,item] of globeItems)assert.doesNotMatch(item,/src="\/assets\/icons\/(?:code|document|database)\.svg"/,name);
   for(const [name,id] of [['TypeScript','typescript'],['Tailwind CSS','tailwind']]){
     const item=globeItems.find(item=>item[1]===name);assert.ok(item,name);

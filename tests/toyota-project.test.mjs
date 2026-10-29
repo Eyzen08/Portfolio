@@ -8,7 +8,7 @@ const pages=renderPages({profile,projects,technologies});
 const page=route=>pages.find(page=>page.route===route);
 
 test('Toyota is the second client project and appears throughout the portfolio',()=>{
-  assert.deepEqual(projects.map(project=>project.id),['sti-vio-log','toyota-heritage-ph','kwiztorya']);
+  assert.deepEqual(projects.map(project=>project.id),['sti-vio-log','toyota-heritage-ph','memochro','kwiztorya']);
   const toyota=projects.find(project=>project.id==='toyota-heritage-ph');
   assert.equal(toyota.role,'Web Designer & Developer');
   assert.equal(toyota.context,'Client Project');
@@ -16,8 +16,8 @@ test('Toyota is the second client project and appears throughout the portfolio',
   assert.equal(toyota.sourceUrl,'https://github.com/Eyzen08/toyota-heritage-ph');
   assert.equal(toyota.liveUrl,'https://toyota-heritage-ph.vercel.app/');
   for(const route of ['/','/projects/','/resume/','/activity/','/stack/'])assert.ok(page(route).content.includes(toyota.title),route);
-  assert.match(page('/').content,/Selected <sup>03<\/sup>/);
-  assert.match(page('/').content,/Selected academic and client work/);
+  assert.match(page('/').content,/Selected <sup>04<\/sup>/);
+  assert.match(page('/').content,/Selected academic, client, and personal work/);
   assert.ok(page('/projects/').description.includes(toyota.title));
   for(const id of ['html5','css3','javascript','git','github','vercel'])assert.ok(technologies.find(tech=>tech.id===id).projects.includes(toyota.id),id);
 });
@@ -59,7 +59,7 @@ test('case-study navigation cycles through the displayed project order',()=>{
 test('all project artwork uses matching filled 16:9 frames',async()=>{
   for(const route of ['/','/projects/']){
     const covers=[...page(route).content.matchAll(/<span class="showcase-cover([^\"]*)">/g)].map(match=>match[1]);
-    assert.deepEqual(covers,['','','']);
+    assert.deepEqual(covers,projects.map(()=>''));
   }
   const css=await readFile(new URL('../assets/redesign.css',import.meta.url),'utf8');
   assert.match(css,/\.showcase-cover\{[^}]*aspect-ratio:16\/9/);

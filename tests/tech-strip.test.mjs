@@ -9,7 +9,7 @@ test('tech strip repeats every public skill with decorative, matching copies',as
  const lists=[...home.matchAll(/<ul class="bento-tools"[^>]*>([\s\S]*?)<\/ul>/g)];
  assert.equal(lists.length,2);
  const skills=technologies.filter(tech=>tech.name!=='Node test runner');
- assert.equal(skills.length,36);
+ assert.equal(skills.length,39);
  for(const list of lists){
   assert.equal((list[1].match(/<li>/g)||[]).length,skills.length);
   for(const tech of skills){

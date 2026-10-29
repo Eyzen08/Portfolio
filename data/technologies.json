@@ -34,9 +34,10 @@
     "id": "css3",
     "name": "CSS3",
     "category": "Frontend",
-    "description": "Responsive layouts, themes, and motion without a UI framework.",
+    "description": "Responsive layouts, themes, and motion in Toyota Heritage PH and MemoChro.",
     "projects": [
-      "toyota-heritage-ph"
+      "toyota-heritage-ph",
+      "memochro"
     ],
     "label": "Used in a project"
   },
@@ -44,9 +45,10 @@
     "id": "react",
     "name": "React",
     "category": "Frontend",
-    "description": "Component-based interfaces for the discipline workflow.",
+    "description": "Component-based interfaces for STI Vio-Log and MemoChro.",
     "projects": [
-      "sti-vio-log"
+      "sti-vio-log",
+      "memochro"
     ],
     "label": "Used in a project"
   },
@@ -85,9 +87,10 @@
     "id": "postgresql",
     "name": "PostgreSQL",
     "category": "Databases",
-    "description": "Relational storage for records, attendance, and service workflows.",
+    "description": "Relational application records for STI Vio-Log and account-owned memories in MemoChro.",
     "projects": [
-      "sti-vio-log"
+      "sti-vio-log",
+      "memochro"
     ],
     "label": "Used in a project"
   },
@@ -95,9 +98,10 @@
     "id": "supabase",
     "name": "Supabase",
     "category": "Databases",
-    "description": "Managed PostgreSQL hosting for STI Vio-Log.",
+    "description": "Managed PostgreSQL for STI Vio-Log; authentication, PostgreSQL, and private photo storage for MemoChro.",
     "projects": [
-      "sti-vio-log"
+      "sti-vio-log",
+      "memochro"
     ],
     "label": "Used in a project"
   },
@@ -171,10 +175,11 @@
     "id": "vercel",
     "name": "Vercel",
     "category": "Deployment and DevOps",
-    "description": "Static-site hosting for Toyota Heritage PH and frontend deployment for STI Vio-Log.",
+    "description": "Hosting for this portfolio, Toyota Heritage PH, STI Vio-Log, and MemoChro.",
     "projects": [
       "sti-vio-log",
-      "toyota-heritage-ph"
+      "toyota-heritage-ph",
+      "memochro"
     ],
     "label": "Used in a project",
     "monochrome": true
@@ -314,10 +319,11 @@
     "id": "typescript",
     "name": "TypeScript",
     "category": "Programming Languages",
-    "description": "Listed in my updated resume; developing my TypeScript practice.",
-    "projects": [],
-    "label": "Listed in my resume",
-    "evidenceUrl": "/resume/#skills"
+    "description": "Typed application code and validation in MemoChro.",
+    "projects": [
+      "memochro"
+    ],
+    "label": "Used in a project"
   },
   {
     "id": "tailwind",
@@ -385,5 +391,37 @@
     "label": "Used in a project",
     "iconId": "code",
     "evidenceUrl": "/resume/#skills"
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "category": "Frontend",
+    "description": "App Router pages and server-side application flows in MemoChro.",
+    "projects": [
+      "memochro"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "sharp",
+    "name": "Sharp",
+    "category": "Tools and Workflow",
+    "description": "Validated image previews and original-photo export in MemoChro.",
+    "projects": [
+      "memochro"
+    ],
+    "label": "Used in a project",
+    "iconId": "code"
+  },
+  {
+    "id": "playwright",
+    "name": "Playwright",
+    "category": "Tools and Workflow",
+    "description": "Browser checks for private archive flows, sample content, and responsive layouts in MemoChro.",
+    "projects": [
+      "memochro"
+    ],
+    "label": "Used in a project",
+    "iconId": "code"
   }
 ]
