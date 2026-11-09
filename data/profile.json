@@ -1,1 +1,342 @@
-PLACEHOLDER
+{
+  "name": "EJ Christian Medilo",
+  "shortName": "EJ Medilo",
+  "role": "Aspiring Software Developer",
+  "location": "Taguig City, Philippines",
+  "email": "ejchristianmedilo12@gmail.com",
+  "github": "Eyzen08",
+  "aboutSummary": "I’m EJ Christian Medilo, a fourth-year BSIT student at STI College Global City and an aspiring software developer. I build full-stack web and Android applications, learning through practical projects.",
+  "aboutIntroHeading": "Building Ideas with Code, Creativity, and AI.",
+  "aboutIntroText": "I build practical web applications and thoughtful digital experiences by combining software development skills with AI-powered tools. I use AI to explore solutions, troubleshoot code, improve workflows, and accelerate development while continuously strengthening my own technical knowledge and problem-solving abilities.",
+  "aiApproach": "I use AI to support development planning, code analysis, troubleshooting, research, implementation, and learning.",
+  "aiLearning": "I’m exploring AI engineering and building my foundations through study and practical experimentation.",
+  "intro": "I build web and Android applications that connect clear interfaces, useful workflows, and reliable data.",
+  "summary": "I am a fourth-year BSIT student and aspiring software developer with hands-on experience building full-stack web and Android applications. I developed STI Vio-Log, a student discipline and community service management system, and led development of Kwiztorya, a Philippine history learning application. My experience includes React, Node.js, Express.js, PostgreSQL, Java, API integration, and application security, with a growing interest in AI engineering.",
+  "goal": "I’m strengthening my full-stack development practice: designing clear interfaces, building reliable APIs, and deploying applications that solve practical problems. I’m also exploring how AI can support useful software experiences.",
+  "interests": "I’m interested in AI and emerging technologies: discovering new tools, experimenting with AI-assisted development, and understanding how technology can improve software and user experiences.",
+  "hobbies": "Outside development, I enjoy online games, movies, and anime. Gaming gives me a mix of competitive and collaborative experiences; movies and anime let me explore different stories, characters, and creative worlds.",
+  "workWithMe": "I’m open to software development opportunities and collaboration on practical web and Android projects. I enjoy working with other developers, learning through real problems, and exploring emerging technology.",
+  "portrait": "/assets/personal/ej-portrait.webp",
+  "resumePdf": "/assets/resume/ej-christian-medilo-resume.pdf",
+  "contentApproved": true,
+  "contactVerified": true,
+  "formspree": "https://formspree.io/f/xnjekjdq",
+  "socials": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/Eyzen08"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ej-christian-medilo-a09049426/"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://www.instagram.com/ej.eyzen/"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/share/19J8Z4wfW6/?mibextid=wwXIfr"
+    }
+  ],
+  "strengths": [
+    {
+      "title": "Ownership",
+      "text": "Led full-stack system development for STI Vio-Log within a team capstone."
+    },
+    {
+      "title": "Collaboration",
+      "text": "Led development in academic teams while distinguishing engineering responsibilities from the wider team’s work."
+    },
+    {
+      "title": "Problem Solving",
+      "text": "Worked across interfaces, APIs, data, and application workflows rather than stopping at a single screen."
+    }
+  ],
+  "experience": [
+    {
+      "title": "54-Hour NSTP OJT Trainee — Media and Information Technology (MIT) Department",
+      "organization": "Moreh Academy",
+      "period": "2024",
+      "location": "Upper Bicutan, Taguig City",
+      "bullets": [
+        "Assisted with basic computer and software troubleshooting to address routine technical issues.",
+        "Supported computer and peripheral setup to prepare devices for departmental activities.",
+        "Responded to basic IT requests to support the department's day-to-day operations.",
+        "Organized digital files and departmental documents to improve access and information retrieval.",
+        "Processed graduate portraits to prepare images for school-related materials.",
+        "Refined graduate portraits and image assets to maintain consistent quality and professional presentation."
+      ]
+    },
+    {
+      "title": "80-Hour Work Immersion Trainee",
+      "organization": "BCiS Power Technologies Corp.",
+      "period": "2023",
+      "location": "South Cembo, Makati City",
+      "bullets": [
+        "Coordinated administrative tasks to support daily office operations.",
+        "Assisted with routine office activities to support established administrative workflows.",
+        "Maintained workplace records to meet documentation requirements.",
+        "Organized administrative records to make information easier to retrieve.",
+        "Responded to assigned technical requests from supervisors to support operational needs.",
+        "Handled assigned operational requests to help maintain smooth daily operations."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Bachelor of Science in Information Technology (BSIT)",
+      "organization": "STI College Global City",
+      "period": "2023–Present",
+      "preview": {
+        "src": "/assets/education/sti-global-city.jpg",
+        "width": 1200,
+        "height": 825,
+        "alt": "STI College Global City Academic Center campus building",
+        "sourceUrl": "https://www.sti.edu/campuses-details.asp?campus_id=R0xP",
+        "credit": "STI College · official Global City campus photograph",
+        "description": "Official STI College Global City campus photograph."
+      }
+    },
+    {
+      "title": "Information and Communications Technology (ICT) Strand, Senior High School",
+      "organization": "Moreh Academy",
+      "period": "2021–2023"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "AWS Academy Graduate – Cloud Foundations",
+      "organization": "AWS Academy",
+      "period": "2026",
+      "status": "pending",
+      "preview": {
+        "src": "/assets/certifications/aws-academy-cloud-foundations.jpg",
+        "width": 1500,
+        "height": 1007,
+        "alt": "AWS Academy Graduate – Cloud Foundations certificate preview for EJ Christian Medilo (portfolio preview only, pending school issuance)"
+      }
+    },
+    {
+      "title": "Ethical Hacking Essentials (EHE)",
+      "organization": "Ethical Hacking Training",
+      "period": "2026",
+      "status": "pending",
+      "preview": {
+        "src": "/assets/certifications/ethical-hacking-essentials.jpg",
+        "width": 1500,
+        "height": 1007,
+        "alt": "Ethical Hacking Essentials (EHE) certificate preview for EJ Christian Medilo (portfolio preview only, pending school issuance)"
+      }
+    },
+    {
+      "title": "SAP S/4HANA – Enterprise Resource Planning (ERP) Academic Training",
+      "organization": "SAP Academic Training",
+      "period": "2026",
+      "status": "pending",
+      "preview": {
+        "src": "/assets/certifications/sap-s4hana-erp-academic-training.jpg",
+        "width": 1500,
+        "height": 1007,
+        "alt": "SAP S/4HANA – Enterprise Resource Planning (ERP) Academic Training certificate preview for EJ Christian Medilo (portfolio preview only, pending school issuance)"
+      }
+    },
+    {
+      "title": "Microsoft Artificial Intelligence Course: Azure AI Fundamentals",
+      "organization": "TESDA Online Program",
+      "period": "October 2026",
+      "preview": {
+        "src": "/assets/certifications/azure-ai-fundamentals.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Microsoft Artificial Intelligence Course: Azure AI Fundamentals certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "Introduction to Modern AI",
+      "organization": "DICT-ITU DTC Initiative through Cisco Networking Academy",
+      "period": "October 2026",
+      "preview": {
+        "src": "/assets/certifications/introduction-to-modern-ai.webp",
+        "width": 1100,
+        "height": 746,
+        "alt": "Introduction to Modern AI certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "Fundamentals of Artificial Intelligence",
+      "organization": "TESDA Online Program",
+      "period": "October 2026",
+      "preview": {
+        "src": "/assets/certifications/fundamentals-of-artificial-intelligence.webp",
+        "width": 1100,
+        "height": 778,
+        "alt": "Fundamentals of Artificial Intelligence certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "Cyber Threat Management",
+      "organization": "Cisco Networking Academy",
+      "period": "August 2026",
+      "preview": {
+        "src": "/assets/certifications/cyber-threat-management-redacted.png",
+        "width": 1100,
+        "height": 850,
+        "alt": "Cyber Threat Management certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "Cybersecurity Quality Assurance: Detect, Test, Secure",
+      "organization": "Ethel Programming Computer Programming Services",
+      "period": "August 2026",
+      "preview": {
+        "src": "/assets/certifications/cybersecurity-quality-assurance-redacted.png",
+        "width": 1100,
+        "height": 778,
+        "alt": "Cybersecurity Quality Assurance: Detect, Test, Secure certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "Code to Success: Mastering Software Development Cycle for IS Professionals",
+      "organization": "JPCS Clarendon College",
+      "period": "August 2026",
+      "preview": {
+        "src": "/assets/certifications/code-to-success-redacted.png",
+        "width": 1100,
+        "height": 778,
+        "alt": "Code to Success: Mastering Software Development Cycle for IS Professionals certificate awarded to EJ Christian Medilo"
+      }
+    },
+    {
+      "title": "LEGO Educational Robotics and Computer Technical Training",
+      "organization": "University of the East–Manila Campus",
+      "period": "June 2018",
+      "preview": {
+        "src": "/assets/certifications/lego-robotics-training-redacted.png",
+        "width": 1100,
+        "height": 871,
+        "alt": "LEGO Educational Robotics and Computer Technical Training certificate awarded to EJ Christian Medilo"
+      }
+    }
+  ],
+  "hobbyCards": [
+    {
+      "id": "naruto",
+      "label": "Naruto / Naruto Uzumaki",
+      "category": "Anime",
+      "description": "Naruto Uzumaki is my favorite anime character.",
+      "src": "/assets/hobbies/naruto.webp",
+      "width": 454,
+      "height": 640,
+      "alt": "Naruto Uzumaki with Team 7 in official Naruto promotional artwork",
+      "credit": "NARUTO official site · Masashi Kishimoto / Shueisha / TV Tokyo / Pierrot",
+      "sourceUrl": "https://naruto-official.com/en/anime/naruto1"
+    },
+    {
+      "id": "mlbb",
+      "label": "Mobile Legends: Bang Bang",
+      "category": "Mobile Gaming",
+      "description": "Mobile gaming is one of the ways I unwind.",
+      "src": "/assets/hobbies/mlbb.webp",
+      "width": 480,
+      "height": 252,
+      "alt": "Mobile Legends: Bang Bang official gold emblem on a blue background",
+      "credit": "MOONTON · Mobile Legends: Bang Bang",
+      "sourceUrl": "https://www.mobilelegends.com/gallery"
+    },
+    {
+      "id": "valorant",
+      "label": "Valorant",
+      "category": "PC Gaming",
+      "description": "Competitive PC gaming, teamwork, and a change of pace.",
+      "src": "/assets/hobbies/valorant.webp",
+      "width": 480,
+      "height": 270,
+      "alt": "Official Valorant promotional wallpaper featuring an agent",
+      "credit": "Riot Games · VALORANT media",
+      "sourceUrl": "https://playvalorant.com/en-us/media/"
+    },
+    {
+      "id": "spiderman",
+      "label": "Spider-Man",
+      "category": "Movies",
+      "description": "I enjoy Spider-Man and the stories around the character.",
+      "src": "/assets/hobbies/spiderman.webp",
+      "width": 427,
+      "height": 640,
+      "alt": "Official Spider-Man theatrical poster featuring Spider-Man",
+      "credit": "Sony Pictures / Marvel · representative franchise artwork",
+      "sourceUrl": "https://www.sonypictures.com/movies/spiderman"
+    },
+    {
+      "id": "thrillers",
+      "label": "Thrillers",
+      "category": "Movie Genre",
+      "description": "Suspense, mystery, and stories that keep me guessing.",
+      "src": "/assets/hobbies/thrillers.webp",
+      "width": 467,
+      "height": 640,
+      "alt": "Illustrative thriller artwork: The Lodger 1927 theatrical poster",
+      "credit": "E. McKnight Kauffer · public domain via Wikimedia Commons; genre illustration, not a claimed favorite film",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Lodger_(1927_film_poster).jpg"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "portrait",
+      "label": "EJ Christian Medilo",
+      "description": "My portrait, wearing a cap and black hoodie.",
+      "src": "/assets/personal/ej-portrait.webp",
+      "width": 800,
+      "height": 1067,
+      "alt": "EJ Christian Medilo wearing a cap and black hoodie",
+      "credit": "Personal photograph supplied by EJ Christian Medilo"
+    }
+  ],
+  "aiTools": [
+    {
+      "name": "Google Gemini",
+      "logo": "/assets/icons/gemini.svg",
+      "category": "AI Research and Technical Learning",
+      "description": "I use Gemini to explore technical concepts, research potential solutions, learn new technologies, and generate ideas for development tasks."
+    },
+    {
+      "name": "ChatGPT",
+      "logo": "/assets/icons/chatgpt.svg",
+      "category": "Development Planning and Technical Assistance",
+      "description": "I use ChatGPT to plan features, understand code, troubleshoot issues, organize documentation, and evaluate different implementation approaches."
+    },
+    {
+      "name": "OpenAI Codex",
+      "logo": "/assets/icons/codex.png",
+      "category": "AI-Assisted Coding and Development",
+      "description": "I use Codex to assist with repository analysis, code implementation, debugging, reviewing changes, and development workflows."
+    },
+    {
+      "name": "Claude",
+      "logo": "/assets/icons/claude.svg",
+      "category": "Code Analysis and Technical Reasoning",
+      "description": "I use Claude to analyze code, explore alternative solutions, reason through technical problems, and assist with documentation."
+    },
+    {
+      "name": "GitHub Copilot",
+      "logo": "/assets/icons/github.svg",
+      "category": "AI-Assisted Development",
+      "description": "I use GitHub Copilot for coding suggestions, then review, understand, and test the code I keep."
+    }
+  ],
+  "positioning": "Aspiring Software Developer | Full-Stack Web Development | Exploring AI Engineering",
+  "heroPortrait": {
+    "src": "/assets/personal/ej-formal-cutout.png",
+    "width": 1024,
+    "height": 1536,
+    "alt": "EJ Christian Medilo wearing a black suit, white shirt and tie",
+    "description": "Owner-supplied formal portrait with transparent background.",
+    "credit": "Personal photograph supplied by EJ Christian Medilo",
+    "sha256": "0b05a2f36c1fe08f815e57294d70105fb41d30b251b63aae7040ccbb65a1d3de"
+  }
+}
