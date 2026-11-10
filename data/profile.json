@@ -327,6 +327,24 @@
       "logo": "/assets/icons/github.svg",
       "category": "AI-Assisted Development",
       "description": "I use GitHub Copilot for coding suggestions, then review, understand, and test the code I keep."
+    },
+    {
+      "name": "DeepSeek",
+      "logo": "/assets/icons/deepseek.svg",
+      "category": "AI Research and Technical Learning",
+      "description": "I use DeepSeek to explore technical ideas, reason through implementation options, and compare approaches while learning new concepts."
+    },
+    {
+      "name": "Groq",
+      "logo": "/assets/icons/groq.svg",
+      "category": "Fast Inference and Experimentation",
+      "description": "I use Groq to experiment with fast model inference and iterate on prompts and small integration checks during development."
+    },
+    {
+      "name": "Cursor",
+      "logo": "/assets/icons/cursor.svg",
+      "category": "AI-Assisted Development",
+      "description": "I use Cursor for IDE-assisted editing, refactoring, codebase navigation, and keeping project changes consistent across files."
     }
   ],
   "positioning": "Aspiring Software Developer | Full-Stack Web Development | Exploring AI Engineering",

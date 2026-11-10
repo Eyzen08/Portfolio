@@ -18,9 +18,10 @@ test('AI tools render once inside Skills with complete static content and local 
   assert.equal((home.match(/class="ai-tool-list"/g)||[]).length,1);
   assert.match(section, /<h3[^>]*>AI Tools I Use<\/h3>/);
   assert.doesNotMatch(workflow,/AI Tools I Use|class="ai-tool-list"|aria-labelledby="ai-title"/);
-  assert.deepEqual(profile.aiTools.map(tool => tool.name), ['Google Gemini', 'ChatGPT', 'OpenAI Codex', 'Claude', 'GitHub Copilot']);
+  assert.deepEqual(profile.aiTools.map(tool => tool.name), ['Google Gemini', 'ChatGPT', 'OpenAI Codex', 'Claude', 'GitHub Copilot', 'DeepSeek', 'Groq', 'Cursor']);
   const tools = [...section.matchAll(/<li[^>]*><img[^>]*>[\s\S]*?<\/li>/g)].map(match => match[0]);
-  assert.equal(tools.length, 5);
+  assert.equal(tools.length, 8);
+  assert.doesNotMatch(section, /I review and validate the code I use/);
   for (const [index, tool] of profile.aiTools.entries()) {
     assert.ok(tools[index].includes(tool.name));
     assert.ok(tools[index].includes(`src="${tool.logo}"`));

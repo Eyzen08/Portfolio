@@ -10,7 +10,7 @@ test('updated résumé facts reach Home, training, résumé and metadata', () =>
   assert.equal(profile.role, 'Aspiring Software Developer');
   assert.equal(profile.positioning, 'Aspiring Software Developer | Full-Stack Web Development | Exploring AI Engineering');
   assert.equal(profile.certifications.length, 10);
-  assert.equal(profile.aiTools.length, 5);
+  assert.equal(profile.aiTools.length, 8);
   assert.match(profile.summary, /fourth-year BSIT/i);
   for (const route of ['/', '/resume/']) {
     const html = pages.find(page => page.route === route).content;

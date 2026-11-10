@@ -23,6 +23,14 @@ These marks identify tools used in EJ's workflow; they do not imply ownership, s
 
 Downloaded brand kits and source-page evidence remain in ignored `.qa/ai-tools/sources/`; only the four selected files are published.
 
+### 10 November 2026 — additional AI workflow tools
+
+| Local file | Source | Notice |
+| --- | --- | --- |
+| `icons/deepseek.svg` | Unmodified SVG from [Simple Icons](https://github.com/simple-icons/simple-icons/blob/develop/icons/deepseek.svg) (`simple-icons@develop`, CC0). | DeepSeek trademark; follow vendor guidelines. |
+| `icons/groq.svg` | Unmodified `favicon.svg` from [https://groq.com/favicon.svg](https://groq.com/favicon.svg) as linked on the public site. | Groq is a trademark of Groq LLC and/or its affiliates; portfolio use is nominative identification of a tool in the owner's workflow, not sponsorship. |
+| `icons/cursor.svg` | Unmodified SVG from [Simple Icons](https://github.com/simple-icons/simple-icons/blob/develop/icons/cursor.svg) (`simple-icons@develop`, CC0). | Cursor trademark; follow vendor guidelines. |
+
 Retrieved 13 October 2026. Original downloads are kept unmodified. Lossless WebP derivatives of the STI login captures and Kwiztorya welcome artwork reduce transfer size without changing pixels. Fonts, logos, and project images are served locally so the site does not depend on an image or font CDN at runtime.
 
 ## Fonts — current remake

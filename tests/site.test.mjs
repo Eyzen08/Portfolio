@@ -35,7 +35,7 @@ test('build produces thirteen substantive routes with working local links and no
       assert.match(html, /<main\b/);
       assert.match(html, /<h1\b/);
       assert.match(html, /name="robots" content="noindex/);
-      assert.doesNotMatch(html, /Ask EJ|chatbot|groq|upstash|href="#"/i);
+      assert.doesNotMatch(html, /Ask EJ|chatbot|upstash|href="#"/i);
       for (const match of html.matchAll(/(?:href|src)="(\/[^"#]*)(?:#[^"]*)?"/g)) {
         const pathname = decodeURIComponent(match[1]);
         if (pathname.startsWith('/api/')) continue;
