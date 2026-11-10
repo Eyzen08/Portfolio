@@ -256,3 +256,14 @@ The globe now includes only technologies with their own product logo, plus the f
 The original SVGs are unmodified and served locally; the existing `icons/Devicon-LICENSE` applies, with product trademarks retained by their owners. Both files were checked for a viewBox and absence of scripts, event handlers and JavaScript links. Their logo references also replace generic code symbols in the skills list, strip and detailed Skills page. No new technology claim or dependency was added.
 
 All 36 public technical skills remain in the text list and scrolling strip. The globe contains 26 branded technologies plus five AI tools (31 items). Ten entries represented only by generic code/document/database symbols remain listed with their evidence links and no longer appear in the globe. This supersedes the earlier all-skills globe count.
+
+## Epicyclic device mockup — 10 November 2026
+
+Owner-supplied presentation artwork showing Epicyclic on one landscape tablet and two smartphones (home and catalog views). The file delivered in chat is a JPEG payload saved with a `.png` extension; pixels are not retouched, upscaled, or AI-regenerated.
+
+| Asset | Dimensions | Notes |
+| --- | --- | --- |
+| `projects/epicyclic-devices-showcase.png` | 1024 × 682 | PNG master exported from the supplied image without content changes |
+| `projects/epicyclic-devices-showcase-small.webp` | 960 × 640 | Lanczos downsample, WebP quality 89 / method 6, for cards and dialog thumbnails |
+
+The three-device composition and original ~3:2 aspect ratio are preserved in the master; portfolio 16:9 showcase frames may crop the sides slightly with `object-fit: cover`.

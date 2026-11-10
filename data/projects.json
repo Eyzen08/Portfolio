@@ -430,6 +430,145 @@
     ]
   },
   {
+    "id": "epicyclic",
+    "title": "Epicyclic",
+    "platform": "Mobile",
+    "year": 2026,
+    "summary": "A Flutter e-commerce application for gaming peripherals and desk gear, focused on a clean catalog, cart, and checkout experience with a Philippine-market storefront and a responsive interface across phone, tablet, and web demo.",
+    "role": "Full-Stack Developer",
+    "roleDetail": "I am building Epicyclic as a personal learning project, connecting the Flutter interface, Riverpod state layer, demo and optional Supabase backends, and the published web demo on Vercel.",
+    "sourceUrl": "https://github.com/Eyzen08/Epicyclic",
+    "liveUrl": "https://epicyclic-store.vercel.app/",
+    "status": "Personal learning project · Live demo",
+    "technologies": [
+      "flutter",
+      "dart",
+      "riverpod",
+      "go_router",
+      "supabase",
+      "sharedpreferences",
+      "android",
+      "git",
+      "github",
+      "vercel"
+    ],
+    "cardTechnologies": [
+      "flutter",
+      "dart",
+      "supabase",
+      "vercel"
+    ],
+    "category": "E-Commerce Application",
+    "context": "Personal learning project",
+    "contribution": "Designed and developed the storefront interface, application architecture, state management, catalog and checkout flows, and optional backend integration.",
+    "features": [
+      "39-product catalog across seven categories with search, filters, and sorting",
+      "Product detail, wishlist, cart, promo codes, and Philippine-peso checkout",
+      "Orders, account profile, and settings with light/dark/system themes",
+      "Demo mode (local storage) and an optional Supabase-backed deployment path"
+    ],
+    "previewScreens": [
+      {
+        "id": "overview",
+        "label": "Responsive Storefront",
+        "src": "/assets/projects/epicyclic-devices-showcase.png",
+        "srcSmall": "/assets/projects/epicyclic-devices-showcase-small.webp",
+        "smallWidth": 960,
+        "width": 1024,
+        "height": 682,
+        "kind": "desktop",
+        "deviceFrame": true,
+        "alt": "Epicyclic e-commerce presentation with the home screen on a landscape tablet and catalog views on two smartphones.",
+        "caption": "A Flutter storefront for gaming peripherals with catalog browsing, search, and a responsive layout across tablet and phone screens.",
+        "explanation": "A Flutter storefront for gaming peripherals with catalog browsing, search, and a responsive layout across tablet and phone screens."
+      }
+    ],
+    "sections": [
+      {
+        "id": "context",
+        "title": "A Storefront Built to Learn",
+        "paragraphs": [
+          "Epicyclic is a personal learning project: a Flutter e-commerce application for gaming accessories and desk equipment. It gives shoppers a focused path from discovery through cart and checkout, with prices and addresses formatted for a Philippine storefront.",
+          "The published web build on Vercel runs in demo mode without requiring an account. The repository documents an optional Supabase path for authentication and PostgreSQL-backed orders; that live integration has not been verified against a hosted project during development. The project is ongoing learning work, not a commercial product release."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "contribution",
+        "title": "My Contribution",
+        "paragraphs": [
+          "I designed and developed the application end to end: screen layouts from supplied mockups, feature-first project structure, Riverpod controllers, go_router navigation, catalog and checkout logic, and both demo and Supabase repository implementations.",
+          "The work covers product discovery, search, cart math, wishlist persistence, account screens, and settings. Documented tests and analyzer checks in the repository record the current quality gate; physical Android device QA remains a follow-up step."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "features",
+        "title": "Shopping Flow in the Repository",
+        "paragraphs": [
+          "The source implements a full browse-to-order loop: hero and curated collections on the home screen, category browsing with price filters and sorting, search across product metadata, product detail with variants and stock-aware quantity, wishlist, cart with promo codes, checkout with Philippine address fields, order history, and order tracking.",
+          "Authentication includes sign-in, sign-up, password recovery, and session restoration. Profile, saved addresses, notifications, and settings—including theme and notification preferences—round out the account experience. Checkout records payment-method labels only; the app does not capture card data, charge e-wallets, or process real payments."
+        ],
+        "bullets": [
+          "Discover · Hero banner, collections, featured products, and category entry points.",
+          "Browse · Catalog, filters, sorting, and search with empty-state handling.",
+          "Purchase · Cart, promo codes, checkout review, and order confirmation.",
+          "Account · Auth, profile, orders, wishlist, and app settings."
+        ]
+      },
+      {
+        "id": "architecture",
+        "title": "Flutter Layers and Two Runtime Modes",
+        "paragraphs": [
+          "The codebase uses a feature-first layout under lib/: data repositories, domain models, and presentation screens per feature, with shared widgets and providers in lib/shared/. go_router defines routes in lib/core/router/app_router.dart; design tokens live in AppPalette and AppTheme.",
+          "Demo mode is the default: all shopping state persists locally through SharedPreferences with bundled catalog data. Supabase mode requires explicit dart-defines for the project URL and anon key; missing credentials show a blocking setup screen rather than silently falling back. Orders in Supabase mode are intended to use a security-definer create_order RPC with client write protection documented in the migrations."
+        ],
+        "bullets": [
+          "Client · Flutter 3.47, Dart 3.13, Material layout, and responsive grid breakpoints.",
+          "State · Riverpod controllers separate UI from repository calls and loading/error states.",
+          "Demo persistence · SharedPreferences and assets/data/catalog.json.",
+          "Optional backend · Supabase Auth, PostgreSQL, RLS policies, and seed data in supabase/."
+        ]
+      },
+      {
+        "id": "testing",
+        "title": "What the Repository Verifies",
+        "paragraphs": [
+          "The README records 66 passing automated tests, a clean flutter analyze run, and a successful debug APK build. Coverage described in the repository includes cart math and persistence, wishlist toggling, demo auth, catalog integrity, order validation, Philippine peso formatting, responsive breakpoints, shared widgets, and navigation.",
+          "Those results are documented project evidence, not application tests rerun for this portfolio. Runtime verification on a physical Android device or emulator, and end-to-end exercise of a hosted Supabase project, remain separate checks."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "deployment",
+        "title": "Demo Hosting and Source",
+        "paragraphs": [
+          "The live web demo is published at epicyclic-store.vercel.app through Vercel, using the repository’s web target and vercel.json configuration. Demo sign-in credentials and a sample promo code are documented in the README for exploration without a personal account setup.",
+          "No Play Store or App Store release is claimed. Release signing in the repository currently uses debug keys. The GitHub repository is the authoritative source for setup, architecture notes, and known limitations."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "outcomes",
+        "title": "What the Project Demonstrates",
+        "paragraphs": [
+          "Epicyclic shows end-to-end mobile application structure: catalog UX, state management, local and optional cloud persistence, checkout modeling for a regional market, and honest separation between demo labels and real payment integrations.",
+          "Product photography is incomplete for many catalog items—several products use branded placeholders. Live Supabase paths are written but unverified without hosted credentials. The project demonstrates learning depth in Flutter e-commerce patterns rather than a finished commercial launch."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "takeaways",
+        "title": "Design Takeaways",
+        "paragraphs": [
+          "Keeping demo and Supabase modes explicit prevents silent failures when credentials are missing. Repository boundaries make it easier to test cart and catalog rules without rebuilding screens.",
+          "The next iteration should verify the Supabase migration and order RPC on a real project, run the app on Android hardware, and extend tests across multi-step checkout and auth flows."
+        ],
+        "bullets": []
+      }
+    ]
+  },
+  {
     "id": "kwiztorya",
     "title": "Kwiztorya",
     "platform": "Mobile",

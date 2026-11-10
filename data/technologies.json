@@ -98,10 +98,11 @@
     "id": "supabase",
     "name": "Supabase",
     "category": "Databases",
-    "description": "Managed PostgreSQL for STI Vio-Log; authentication, PostgreSQL, and private photo storage for MemoChro.",
+    "description": "Managed PostgreSQL for STI Vio-Log; authentication, PostgreSQL, and private photo storage for MemoChro; optional Auth and orders for Epicyclic.",
     "projects": [
       "sti-vio-log",
-      "memochro"
+      "memochro",
+      "epicyclic"
     ],
     "label": "Used in a project"
   },
@@ -119,9 +120,10 @@
     "id": "android",
     "name": "Android SDK",
     "category": "Mobile Development",
-    "description": "Native Java/XML application screens and Android lifecycle behavior.",
+    "description": "Native Java/XML screens in Kwiztorya and the Flutter Android target in Epicyclic.",
     "projects": [
-      "kwiztorya"
+      "kwiztorya",
+      "epicyclic"
     ],
     "label": "Used in a project"
   },
@@ -154,7 +156,9 @@
     "projects": [
       "sti-vio-log",
       "kwiztorya",
-      "toyota-heritage-ph"
+      "toyota-heritage-ph",
+      "memochro",
+      "epicyclic"
     ],
     "label": "Used in a project"
   },
@@ -166,7 +170,9 @@
     "projects": [
       "sti-vio-log",
       "kwiztorya",
-      "toyota-heritage-ph"
+      "toyota-heritage-ph",
+      "memochro",
+      "epicyclic"
     ],
     "label": "Used in a project",
     "monochrome": true
@@ -175,11 +181,12 @@
     "id": "vercel",
     "name": "Vercel",
     "category": "Deployment and DevOps",
-    "description": "Hosting for this portfolio, Toyota Heritage PH, STI Vio-Log, and MemoChro.",
+    "description": "Hosting for this portfolio, Toyota Heritage PH, STI Vio-Log, MemoChro, and the Epicyclic web demo.",
     "projects": [
       "sti-vio-log",
       "toyota-heritage-ph",
-      "memochro"
+      "memochro",
+      "epicyclic"
     ],
     "label": "Used in a project",
     "monochrome": true
@@ -278,9 +285,10 @@
     "iconId": "code",
     "name": "SharedPreferences",
     "category": "Mobile Development",
-    "description": "Local quiz progression, story completion, and settings.",
+    "description": "Local quiz progression in Kwiztorya and demo-mode shopping state in Epicyclic.",
     "projects": [
-      "kwiztorya"
+      "kwiztorya",
+      "epicyclic"
     ],
     "label": "Used in a project"
   },
@@ -423,5 +431,49 @@
     ],
     "label": "Used in a project",
     "iconId": "code"
+  },
+  {
+    "id": "flutter",
+    "iconId": "code",
+    "name": "Flutter",
+    "category": "Mobile Development",
+    "description": "Cross-platform UI toolkit for the Epicyclic storefront and navigation layers.",
+    "projects": [
+      "epicyclic"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "dart",
+    "iconId": "code",
+    "name": "Dart",
+    "category": "Programming Languages",
+    "description": "Application language for Epicyclic models, repositories, and screen logic.",
+    "projects": [
+      "epicyclic"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "riverpod",
+    "iconId": "code",
+    "name": "Riverpod",
+    "category": "Mobile Development",
+    "description": "State management and dependency wiring in Epicyclic.",
+    "projects": [
+      "epicyclic"
+    ],
+    "label": "Used in a project"
+  },
+  {
+    "id": "go_router",
+    "iconId": "code",
+    "name": "go_router",
+    "category": "Mobile Development",
+    "description": "Declarative routing and deep links in Epicyclic.",
+    "projects": [
+      "epicyclic"
+    ],
+    "label": "Used in a project"
   }
 ]

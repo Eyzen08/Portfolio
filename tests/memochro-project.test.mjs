@@ -23,7 +23,7 @@ test('MemoChro preserves the supplied master and publishes its optimized thumbna
 });
 
 test('MemoChro is a personal project after Toyota, with separate case study and preview actions',()=>{
-  assert.deepEqual(projects.map(p=>p.id),['sti-vio-log','toyota-heritage-ph','memochro','kwiztorya']);
+  assert.deepEqual(projects.map(p=>p.id),['sti-vio-log','toyota-heritage-ph','memochro','epicyclic','kwiztorya']);
   const project=projects.find(p=>p.id==='memochro');
   assert.equal(project.context,'Personal project');
   assert.equal(project.status,'Personal project');

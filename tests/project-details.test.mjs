@@ -212,6 +212,7 @@ test('public image descriptions explain the projects and STI live links use the 
     'Student violation records, QR-based community-service attendance, and clearance tracking in one platform.',
     'An interactive client website combining Toyota heritage storytelling, a searchable vehicle catalogue, and side-by-side comparison.',
     'A private digital chronicle for photographs, people, places, and the stories behind everyday moments.',
+    'A Flutter storefront for gaming peripherals with catalog browsing, search, and a responsive layout across tablet and phone screens.',
     'An Android application for learning Philippine history through interactive quizzes, story-based lessons, and saved progress.'
   ]);
 });

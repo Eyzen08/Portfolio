@@ -8,7 +8,7 @@ const pages=renderPages({profile,projects,technologies});
 const page=route=>pages.find(page=>page.route===route);
 
 test('Toyota is the second client project and appears throughout the portfolio',()=>{
-  assert.deepEqual(projects.map(project=>project.id),['sti-vio-log','toyota-heritage-ph','memochro','kwiztorya']);
+  assert.deepEqual(projects.map(project=>project.id),['sti-vio-log','toyota-heritage-ph','memochro','epicyclic','kwiztorya']);
   const toyota=projects.find(project=>project.id==='toyota-heritage-ph');
   assert.equal(toyota.role,'Web Designer & Developer');
   assert.equal(toyota.context,'Client Project');
@@ -16,7 +16,7 @@ test('Toyota is the second client project and appears throughout the portfolio',
   assert.equal(toyota.sourceUrl,'https://github.com/Eyzen08/toyota-heritage-ph');
   assert.equal(toyota.liveUrl,'https://toyota-heritage-ph.vercel.app/');
   for(const route of ['/','/projects/','/resume/','/activity/','/stack/'])assert.ok(page(route).content.includes(toyota.title),route);
-  assert.match(page('/').content,/Selected <sup>04<\/sup>/);
+  assert.match(page('/').content,/Selected <sup>05<\/sup>/);
   assert.match(page('/').content,/Selected academic, client, and personal work/);
   assert.ok(page('/projects/').description.includes(toyota.title));
   for(const id of ['html5','css3','javascript','git','github','vercel'])assert.ok(technologies.find(tech=>tech.id===id).projects.includes(toyota.id),id);
