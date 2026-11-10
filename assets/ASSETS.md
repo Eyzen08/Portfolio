@@ -1,5 +1,9 @@
 # Asset sources
 
+## Academic portfolio preview certificates — November 2026
+
+Three additional static JPEG previews in `certifications/` support completed STI academic courses whose official school certificates are not yet issued: `aws-academy-cloud-foundations-preview.jpg`, `ethical-hacking-essentials-preview.jpg`, and `sap-s4hana-academic-training-preview.jpg`. These owner-supplied images are published unchanged (watermark, blur, and disclaimer baked in). They are portfolio presentation previews only and are not presented as issued credentials.
+
 ## Certificate privacy previews — 27 October 2026
 
 This entry supersedes earlier public-original and image-viewer descriptions below. Only seven static certificate previews are published. Eight signature regions, including the Code to Success digital-signature annotation, are blurred directly in four lossless `*-redacted.png` images. Pixel comparisons verify that every pixel outside those regions is unchanged. The three unsigned WebP previews are byte-identical to their prior versions.

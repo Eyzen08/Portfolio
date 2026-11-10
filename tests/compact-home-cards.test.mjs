@@ -26,10 +26,11 @@ test('each complete Home project card contains its information and one image wit
   });
 });
 
-test('Home retains all seven credentials and all seven supplied document previews', () => {
+test('Home retains all nine recent credentials and all ten supplied document previews', () => {
   const training = home.slice(home.indexOf('id="training"'), home.indexOf('id="ai"'));
   const cards = [...training.matchAll(/<article class="home-certificate card"[\s\S]*?<\/article>/g)].map(match => match[0]);
-  assert.equal(cards.length, 7);
+  const recentCount = profile.certifications.filter(item => item.period !== 'June 2018').length;
+  assert.equal(cards.length, recentCount + 1);
   for (const item of profile.certifications) {
     const card = cards.find(card => card.includes(escaped(item.title)));
     assert.ok(card, item.title);
@@ -37,7 +38,9 @@ test('Home retains all seven credentials and all seven supplied document preview
     if (item.preview) { assert.ok(card.includes(item.preview.src)); assert.doesNotMatch(card,/data-certificate-open|data-certificate-original/); }
     else { assert.match(card, /Certificate preview unavailable/); assert.doesNotMatch(card, /class="certificate-preview"/); }
   }
-  assert.equal((training.match(/class="certificate-preview"/g) || []).length, 7);
+  assert.equal((training.match(/class="certificate-preview"/g) || []).length, recentCount + 1);
+  assert.match(training, new RegExp(`Professional development · ${recentCount} entries`));
+  assert.match(training, new RegExp(`all ${recentCount} entries`));
   assert.match(training, /tabindex="0" role="region"/);
   assert.match(training, /Earlier training/);
 });

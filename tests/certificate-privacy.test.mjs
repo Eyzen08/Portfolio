@@ -27,10 +27,10 @@ test('public signature-redacted PNGs retain the verified image pixels and dimens
   }
 });
 
-test('all seven certificates are static previews without original-document destinations',()=>{
+test('all ten certificates are static previews without original-document destinations',()=>{
   for(const route of ['/','/training/']){
     const html=pages.find(page=>page.route===route).content;
-    assert.equal((html.match(/<figure class="certificate-preview">/g)||[]).length,7);
+    assert.equal((html.match(/<figure class="certificate-preview">/g)||[]).length,profile.certifications.length);
     assert.doesNotMatch(html,/data-certificate-(?:open|viewer|original)|href="\/assets\/certifications\//);
     for(const item of profile.certifications){
       assert.equal(item.documentUrl,undefined);

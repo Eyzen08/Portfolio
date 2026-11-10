@@ -78,7 +78,7 @@ test('résumé offers the supplied PDF, responsibilities, and a readable skills 
   assert.match(html, /80-Hour Work Immersion/);
   assert.match(html, /Bachelor of Science in Information Technology \(BSIT\)/);
   assert.match(html, /Information and Communications Technology \(ICT\) Strand, Senior High School/);
-  assert.equal(profile.certifications.length, 7);
+  assert.equal(profile.certifications.length, 10);
   assert.doesNotMatch(html, /IT Support Volunteer|MySQL/);
   assert.match(html, /id="skills"/);
   assert.match(html, /Introduction to Modern AI/);

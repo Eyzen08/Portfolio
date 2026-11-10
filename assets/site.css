@@ -160,6 +160,9 @@ th, td { padding: 8px; border-bottom: 1px solid var(--line); }
 .certificate-placeholder .icon { width: 30px; height: 30px; }
 .certificate-details { padding: 24px; flex: 1; }
 .certificate-meta { color: var(--muted); font-size: 13px; min-height: 3.3em; margin-bottom: 10px; }
+.certificate-status { margin: 0 0 10px; line-height: 1.4; }
+.certificate-status-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #8a6a1f; background: #f6efd8; border: 1px solid #e8d9a8; border-radius: 999px; padding: 5px 10px; }
+:root[data-theme='dark'] .certificate-status-badge { color: #e8cb75; background: #2a2418; border-color: #4a3d22; }
 .certificate-details h2 { font-size: clamp(20px, 2vw, 26px); line-height: 1.35; margin-bottom: 0; }
 @media (max-width: 767px) { .certification-grid { grid-template-columns: 1fr; }.certificate-details { padding: 20px; } }
 .home-activity .github-panel { padding: 26px; }.contact-cta { margin-block: 45px 85px; }.contact-cta h2 { font-size: 36px; letter-spacing: -.045em; }

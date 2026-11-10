@@ -58,7 +58,7 @@ function githubBlock(compact = false) {
 }
 
 function timeline(entries, headingLevel = 3) {
-  return `<div class="timeline">${entries.map(item => `<article><span class="timeline-date">${esc(item.period)}</span><div><h${headingLevel}>${esc(item.title)}</h${headingLevel}>${item.organization ? `<p class="organization">${esc(item.organization)}</p>` : ''}${item.location ? `<p class="small">${esc(item.location)}</p>` : ''}${item.text ? `<p>${esc(item.text)}</p>` : ''}${item.bullets?.length ? `<ul class="experience-bullets">${item.bullets.map(text => `<li>${esc(text)}</li>`).join('')}</ul>` : ''}</div></article>`).join('')}</div>`;
+  return `<div class="timeline">${entries.map(item => `<article><span class="timeline-date">${esc(item.period)}</span><div><h${headingLevel}>${esc(item.title)}</h${headingLevel}>${item.organization ? `<p class="organization">${esc(item.organization)}</p>` : ''}${certificateStatusBadge(item)}${item.location ? `<p class="small">${esc(item.location)}</p>` : ''}${item.text ? `<p>${esc(item.text)}</p>` : ''}${item.bullets?.length ? `<ul class="experience-bullets">${item.bullets.map(text => `<li>${esc(text)}</li>`).join('')}</ul>` : ''}</div></article>`).join('')}</div>`;
 }
 
 function filterControls(categories, noun) {
@@ -137,11 +137,17 @@ function certificatePreview(item) {
   return `<figure class="certificate-preview"><img src="${esc(item.preview.src)}" width="${item.preview.width}" height="${item.preview.height}" alt="${esc(item.preview.alt)}" loading="lazy"></figure>`;
 }
 
+function certificateStatusBadge(item) {
+  if(!item.status)return '';
+  return `<p class="certificate-status" role="status"><span class="certificate-status-badge">${esc(item.status)}</span></p>`;
+}
+
 function homeTraining(profile) {
   const recent=profile.certifications.filter(item=>item.period!=='June 2018').sort((a,b)=>Number(Boolean(b.preview))-Number(Boolean(a.preview)));
   const earlier=profile.certifications.filter(item=>item.period==='June 2018');
-  const card=item=>`<article class="home-certificate card">${certificatePreview(item)}<h3>${esc(item.title)}</h3><p class="certificate-meta">${item.organization?`${esc(item.organization)} · `:''}${esc(item.period)}</p></article>`;
-  return `<section class="section home-training" id="training">${sectionTitle('Certificates','Credentials')}<div class="certificate-group-heading"><p class="eyebrow">Professional development · 6 entries</p><a class="text-link" href="/training/">All Certificates ${icon('arrow')}</a></div><div class="home-certificates" tabindex="0" role="region" aria-label="Recent certificates, scroll horizontally">${recent.map(card).join('')}</div><p class="scroll-hint">Use your mouse wheel or swipe to explore. all six entries ↔</p><div class="earlier-training"><p class="eyebrow">Earlier training · 2018</p>${earlier.map(card).join('')}</div></section>`;
+  const recentCount=recent.length;
+  const card=item=>`<article class="home-certificate card">${certificatePreview(item)}<p class="certificate-meta">${item.organization?`${esc(item.organization)} · `:''}${esc(item.period)}</p>${certificateStatusBadge(item)}<h3>${esc(item.title)}</h3></article>`;
+  return `<section class="section home-training" id="training">${sectionTitle('Certificates','Credentials')}<div class="certificate-group-heading"><p class="eyebrow">Professional development · ${recentCount} entries</p><a class="text-link" href="/training/">All Certificates ${icon('arrow')}</a></div><div class="home-certificates" tabindex="0" role="region" aria-label="Recent certificates, scroll horizontally">${recent.map(card).join('')}</div><p class="scroll-hint">Use your mouse wheel or swipe to explore. all ${recentCount} entries ↔</p><div class="earlier-training"><p class="eyebrow">Earlier training · 2018</p>${earlier.map(card).join('')}</div></section>`;
 }
 
 function homePage(profile, projects, technologies) {
@@ -175,7 +181,7 @@ function homePage(profile, projects, technologies) {
 
 function trainingPage(profile) {
   const certifications = profile.certifications;
-  return `${intro('Training &amp;<br>Certifications.', 'Learning across software development, AI, cybersecurity, and robotics.')}<section class="certification-grid" aria-label="Training and certifications">${certifications.map(item => `<article class="certification-card card">${certificatePreview(item)}<div class="certificate-details"><p class="certificate-meta">${item.organization ? `${esc(item.organization)} <span aria-hidden="true">·</span> ` : ''}${esc(item.period)}</p><h2>${esc(item.title)}</h2></div></article>`).join('')}</section>`;
+  return `${intro('Training &amp;<br>Certifications.', 'Learning across software development, AI, cybersecurity, and robotics.')}<section class="certification-grid" aria-label="Training and certifications">${certifications.map(item => `<article class="certification-card card">${certificatePreview(item)}<div class="certificate-details"><p class="certificate-meta">${item.organization ? `${esc(item.organization)} <span aria-hidden="true">·</span> ` : ''}${esc(item.period)}</p>${certificateStatusBadge(item)}<h2>${esc(item.title)}</h2></div></article>`).join('')}</section>`;
 }
 
 export function renderPages(context) {

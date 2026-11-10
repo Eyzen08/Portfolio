@@ -176,6 +176,42 @@
       }
     },
     {
+      "title": "AWS Academy Graduate – Cloud Foundations",
+      "organization": "AWS Academy",
+      "period": "2026",
+      "status": "Certification Pending",
+      "preview": {
+        "src": "/assets/certifications/aws-academy-cloud-foundations-preview.jpg",
+        "width": 1024,
+        "height": 687,
+        "alt": "Portfolio preview of AWS Academy Graduate – Cloud Foundations for EJ Christian Medilo; official school certificate pending"
+      }
+    },
+    {
+      "title": "Ethical Hacking Essentials (EHE)",
+      "organization": "EC-Council",
+      "period": "2026",
+      "status": "Certification Pending",
+      "preview": {
+        "src": "/assets/certifications/ethical-hacking-essentials-preview.jpg",
+        "width": 1024,
+        "height": 687,
+        "alt": "Portfolio preview of Ethical Hacking Essentials (EHE) for EJ Christian Medilo; official school certificate pending"
+      }
+    },
+    {
+      "title": "SAP S/4HANA – Academic Training",
+      "organization": "SAP",
+      "period": "2026",
+      "status": "Certification Pending",
+      "preview": {
+        "src": "/assets/certifications/sap-s4hana-academic-training-preview.jpg",
+        "width": 1024,
+        "height": 687,
+        "alt": "Portfolio preview of SAP S/4HANA academic training for EJ Christian Medilo; official school certificate pending"
+      }
+    },
+    {
       "title": "LEGO Educational Robotics and Computer Technical Training",
       "organization": "University of the East–Manila Campus",
       "period": "June 2018",

@@ -26,12 +26,12 @@ test('compact Home navigation preserves direct training, résumé and contact ro
   }
 });
 
-test('Training shows seven credentials with accessible static previews', async () => {
+test('Training shows ten credentials with accessible static previews', async () => {
   const training = pages.find(page => page.route === '/training/');
   assert.ok(training, 'Training page must exist');
-  assert.equal((training.content.match(/class="certification-card card"/g) || []).length, 7);
+  assert.equal((training.content.match(/class="certification-card card"/g) || []).length, 10);
   const previews = [...training.content.matchAll(/<figure class="certificate-preview"[^>]*>.*?<\/figure>/gs)];
-  assert.equal(previews.length, 7);
+  assert.equal(previews.length, 10);
   for (const [index, preview] of previews.entries()) {
     assert.doesNotMatch(preview[0], /href=|data-certificate-open/);
     assert.match(preview[0], /<img [^>]*alt="[^"]+"/);
@@ -74,4 +74,24 @@ test('unsigned certificate previews remain unchanged and TESDA issuer remains ac
     assert.equal(createHash('sha256').update(image).digest('hex'),hash);
   }
   for(const title of ['Microsoft Artificial Intelligence Course: Azure AI Fundamentals','Fundamentals of Artificial Intelligence']) assert.equal(profile.certifications.find(item=>item.title===title).organization,'TESDA Online Program');
+});
+
+test('pending academic certificates show a status badge without changing issued credential cards', () => {
+  const training = pages.find(page => page.route === '/training/').content;
+  for (const title of [
+    'AWS Academy Graduate – Cloud Foundations',
+    'Ethical Hacking Essentials (EHE)',
+    'SAP S/4HANA – Academic Training'
+  ]) {
+    const card = training.match(new RegExp(`<article class="certification-card card">(?:(?!<\\/article>).)*${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:(?!<\\/article>).)*<\\/article>`, 's'))[0];
+    assert.match(card, /certificate-status-badge/);
+    assert.match(card, /Certification Pending/);
+  }
+  const issued = training.match(/<article class="certification-card card">(?:(?!<\/article>).)*Azure AI Fundamentals(?:(?!<\/article>).)*<\/article>/s)[0];
+  assert.doesNotMatch(issued, /certificate-status-badge/);
+  for (const preview of [
+    'aws-academy-cloud-foundations-preview.jpg',
+    'ethical-hacking-essentials-preview.jpg',
+    'sap-s4hana-academic-training-preview.jpg'
+  ]) assert.ok(training.includes(preview), preview);
 });
